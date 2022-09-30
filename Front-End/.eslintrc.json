@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "react",
+    "jsx-a11y"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/jsx-runtime"
+],
+  "rules": {
+
+  }
+}
