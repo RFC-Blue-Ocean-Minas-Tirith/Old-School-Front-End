@@ -5,6 +5,7 @@ import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 
 function VideoPage() {
+  // -----State-----
   const [video, setVideo] = useState({
     title: 'Fake Vid',
     description: 'This video is so silly and ridiculous you have no idea omg you should totally watch it it has cats.',
@@ -63,7 +64,12 @@ function VideoPage() {
       cloudName: 'demo',
     },
   });
-  const myVideo = cld.video('docs/walking_talking');
+
+  // -----UseEffect-----
+  useEffect(() => {
+
+  })
+  const myVideo = cld.video('docs/e_simulate_colorblind:tritanopia/walking_talking');
   myVideo.resize(pad().width(800));
 
   useEffect(() => {
@@ -71,11 +77,11 @@ function VideoPage() {
   }, [video]);
 
   return (
-    <Container>
-      <Row style={{marginTop: '30px'}}>
+    <Container style={{ height: '100%' }}>
+      <Row style={{ marginTop: '30px' }}>
         <Col>
           <div>
-            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls />
+            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" />
           </div>
           <h2>{video.title}</h2>
           <p>{video.date}</p>
@@ -100,11 +106,14 @@ function VideoPage() {
           </div>
         </Col>
         <Col>
-          <ListGroup style={{
-            overflowX: 'overflow',
-            overflowY: 'scroll',
-            maxHeight: '80%',
-          }}>
+          <ListGroup
+            variant="flush"
+            style={{
+              overflowX: 'overflow',
+              overflowY: 'scroll',
+              maxHeight: '90%',
+            }}
+          >
             {video.comments.map((comment) => (
               <ListGroup.Item as="li" key={comment.id}>
                 <h5>{comment.author}</h5>
@@ -113,7 +122,7 @@ function VideoPage() {
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button bg="primary">Add Comment</Button>
+          <Button style={{ width: '100%', height: '10%' }} bg="primary">Add Comment</Button>
         </Col>
       </Row>
     </Container>
