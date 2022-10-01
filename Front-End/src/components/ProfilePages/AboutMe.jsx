@@ -1,6 +1,13 @@
 /* eslint-disable prefer-template */
 /* eslint-disable react/prop-types */
-function AboutMe({ user }) {
+import axios from 'axios';
+
+function AboutMe({ user, currentUser }) {
+  //TODO: IMPLEMENT FAVORITE FUNC
+  function handleFave(user) {
+    axios.put('etcetera...');
+    return;
+  }
   return (
     <div className="container">
       <div className="row">
@@ -28,7 +35,7 @@ function AboutMe({ user }) {
         <p className="text-center">{user.bio}</p>
       </div>
       <div className="row">
-        <button type="button" className="btn btn-lg">Fave Button</button>
+        <button type="button" className="btn btn-lg" onClick={handleFave(user)}>Fave Button</button>
       </div>
     </div>
   );

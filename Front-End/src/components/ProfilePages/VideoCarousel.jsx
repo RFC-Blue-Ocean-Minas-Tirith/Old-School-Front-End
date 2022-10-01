@@ -42,12 +42,12 @@ function VideoCarousel({ videos }) {
     return (
       <div className="container">
         <h2 className="text-center"> Video Posts </h2>
+        <a className="next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
         <div className="vid-carousel">
           {currentVids.vids.map((video, index, vids) => (
             <VideoCarouselEntry video={video} index={index} vids={vids} />
           ))}
         </div>
-        <a className="col next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
       </div>
     );
   }
@@ -68,12 +68,12 @@ function VideoCarousel({ videos }) {
     <div className="container">
       <h2 className="text-center"> Video Posts </h2>
       <a className="prev" onClick={() => { sortThumbs(currentVids.place - 1) }}>&#10094;</a>
+      <a className="next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
       <div className="vid-carousel">
         {currentVids.vids.map((video, index, vids) => (
           <VideoCarouselEntry video={video} index={index} vids={vids} />
         ))}
       </div>
-      <a className="next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
     </div>
   );
 }

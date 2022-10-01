@@ -41,12 +41,12 @@ function BlogCarousel({ blogs }) {
     return (
       <div>
         <h2 className="text-center"> Blog Posts </h2>
+        <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
         <div className="vid-carousel">
           {currentBlgs.blgs.map((blog, index, blgs) => (
             <BlogCarouselEntry blog={blog} index={index} blgs={blgs} />
           ))}
         </div>
-        <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
       </div>
     );
   }
@@ -67,12 +67,12 @@ function BlogCarousel({ blogs }) {
     <div>
       <h2 className="text-center"> Blog Posts </h2>
       <a className="prev" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>&#10094;</a>
+      <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
       <div className="vid-carousel">
         {currentBlgs.blgs.map((blog, index, blgs) => (
           <BlogCarouselEntry blog={blog} index={index} blgs={blgs} />
         ))}
       </div>
-      <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
     </div>
   );
 }

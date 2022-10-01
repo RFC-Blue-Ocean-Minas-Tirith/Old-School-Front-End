@@ -17,18 +17,15 @@
 	font-size: 18px;
 	transition: 0.6s ease;
 	user-select: none;
-  height: 20%;
   align-items: center;
 }
 
 .prev {
-  /* top: 30%; */
   left: 34%;
 }
 
 .next {
-  left: 34%;
-  bottom: 45%;
+  right: 1%;
 }
 
 .prev:hover,
