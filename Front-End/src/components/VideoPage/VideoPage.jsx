@@ -11,7 +11,7 @@ function VideoPage({ video }) {
     title: 'Fake Vid',
     description: 'This video is so silly and ridiculous you have no idea omg you should totally watch it it has cats.',
     username: 'Grumpycat',
-    date_Uploaded: '10/1/2022',
+    dateUploaded: '10/1/2022',
     comments: [{
       id: 1,
       author: 'Alice',
@@ -117,7 +117,7 @@ function VideoPage({ video }) {
             <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" />
           </div>
           <h2>{currentVid.title}</h2>
-          <p>{currentVid.date}</p>
+          <p>{currentVid.dateUploaded}</p>
           <div className="videoMetaData">
             <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
