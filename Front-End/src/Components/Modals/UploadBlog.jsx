@@ -9,18 +9,21 @@ function UploadBlog(props) {
   const [isPrivate, setIsPrivate] = useState(false);
 
   function handleChange(event) {
-    setComment(event.target.value);
+    setBody(event.target.value);
   }
 
   function handleAdd(event) {
-    console.log(event.timeStamp);
-    console.log(comment);
+    // console.log(event.timeStamp);
+    // console.log(comment);
     // const body = {
     //   'author' : props.username,
-    //   'comment' : comment,
-    //   'date' : event.timeStamp
+    //   'title' : title;
+    //   'body' : body,
+    //   'date' : event.timeStamp,
+    //   'keywords' : keywords,
+    //   'private' : isPrivate
     //  };
-    // axios.post('/comment', body)
+    // axios.post('/blog', body)
     //   .then((results) => {
     //     console.log(results);
     //   })
@@ -46,16 +49,16 @@ function UploadBlog(props) {
       <Modal.Body>
         <form>
           <label>Title:
-          <input type="text" placeholder="Title" />
-          </label>
-          <label> Blog Post:
-          <textarea rows="4" cols="50" placeholder="Write your post here..." onChange={handleChange}/>
-          </label>
-          <label>Keywords:
-          <input type="text" data-role="taginput" data-tag-trigger="Space"></input>
-          </label>
-          <label>Private
-          <input type="checkbox"></input>
+            <input type="text" placeholder="Title" />
+            </label>
+            <label> Blog Post:
+            <textarea rows="4" cols="50" placeholder="Write your post here..." onChange={handleChange}/>
+            </label>
+            <label>Keywords:
+            <input type="text" data-role="taginput" data-tag-trigger="Space"></input>
+            </label>
+            <label>Private
+            <input type="checkbox"></input>
           </label>
         </form>
       </Modal.Body>

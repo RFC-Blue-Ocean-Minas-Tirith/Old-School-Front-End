@@ -4,6 +4,9 @@ import Navbar from './components/Navbar/Navbar';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
+import AddComment from './components/Modals/AddComment';
+import Blog from './components/Modals/Blog';
+import Upload from './components/Modals/Upload';
 
 function App() {
   // const [state, setState] = useState(0)

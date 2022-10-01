@@ -13,8 +13,8 @@ function AddComment() {
   }
 
   function handleAdd(event) {
-    console.log(event.timeStamp);
-    console.log(comment);
+    // console.log(event.timeStamp);
+    // console.log(comment);
     // const body = {
     //   'author' : props.username,
     //   'comment' : comment,
