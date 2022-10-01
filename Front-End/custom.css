@@ -1,0 +1,10 @@
+.btn-primary {
+  color: #fff;
+  background-color: pink;
+  border-color: palevioletred /*set the color you want here*/
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  color: palevioletred;
+  background-color: pink;
+  border-color: palevioletred; /*set the color you want here*/
+}
