@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { AdvancedVideo } from '@cloudinary/react';
+import { pad } from '@cloudinary/url-gen/actions/resize';
 
 function VideoPage() {
   const [video, setVideo] = useState({
@@ -10,15 +13,33 @@ function VideoPage() {
     comments: [{
       id: 1,
       author: 'Alice',
-      comment: 'Pretty dope brah, that cat is siiiiiick!',
+      comment: 'Is that Jake from State Farm?!',
       date: '10/1/2022',
     },
     {
       id: 2,
       author: 'Adam',
-      comment: 'Would be cooler if it was a dog',
-      data: '10/1/2022',
+      comment: 'Jealous of those beards...',
+      date: '10/1/2022',
     },
+    {
+      id: 3,
+      author: 'Vicki',
+      comment: 'Look at these bros....',
+      date: '10/1/2022',
+    },
+    {
+      id: 4,
+      author: 'Melissa',
+      comment: 'Is the Colonel Mustard?',
+      date: '10/1/2022',
+    },
+    {
+      id: 5,
+      author: 'Zach',
+      comment: 'Where are they walking though...',
+      date: '10/1/2022',
+    }
     ],
     URL: 'http://www.google.com',
     votes: {
@@ -37,6 +58,13 @@ function VideoPage() {
     },
     private: false,
   });
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'demo',
+    },
+  });
+  const myVideo = cld.video('docs/walking_talking');
+  myVideo.resize(pad().width(800));
 
   useEffect(() => {
     setVideo(video);
@@ -44,9 +72,11 @@ function VideoPage() {
 
   return (
     <Container>
-      <Row>
+      <Row style={{marginTop: '30px'}}>
         <Col>
-          <div>Placeholder for Video Player</div>
+          <div>
+            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls />
+          </div>
           <h2>{video.title}</h2>
           <p>{video.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -70,10 +100,15 @@ function VideoPage() {
           </div>
         </Col>
         <Col>
-          <ListGroup>
+          <ListGroup style={{
+            overflowX: 'overflow',
+            overflowY: 'scroll',
+            maxHeight: '80%',
+          }}>
             {video.comments.map((comment) => (
               <ListGroup.Item as="li" key={comment.id}>
                 <h5>{comment.author}</h5>
+                <h6>{comment.date}</h6>
                 <p>{comment.comment}</p>
               </ListGroup.Item>
             ))}
