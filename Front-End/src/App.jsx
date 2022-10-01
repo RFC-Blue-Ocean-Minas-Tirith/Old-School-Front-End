@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      Main App
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="profile_page" element={<ProfilePage />} />
