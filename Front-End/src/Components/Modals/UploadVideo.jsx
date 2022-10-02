@@ -34,6 +34,10 @@ function UploadVideo(props) {
     myWidget.open();
   }
 
+  function handleChange(event) {
+    console.log(event.target);
+  }
+
   return (
     <Modal
       show={props.videoModalShow}
@@ -47,7 +51,21 @@ function UploadVideo(props) {
           Video
         </Modal.Title>
         <Modal.Body>
-          <button onClick={showWidget}>Upload Video</button>
+          <form>
+            <label>Title:
+              <input type="text" placeholder="Title" />
+              </label>
+              <label> Description:
+              <textarea rows="4" cols="50" placeholder="Write your post here..." onChange={handleChange}/>
+              </label>
+              <label>Keywords:
+              <input type="text" data-role="taginput" data-tag-trigger="Space"></input>
+              </label>
+              <label>Private
+              <input type="checkbox"></input>
+            </label>
+            <button type="button" onClick={showWidget}>Upload Video</button>
+          </form>
         </Modal.Body>
       </Modal.Header>
     </Modal>

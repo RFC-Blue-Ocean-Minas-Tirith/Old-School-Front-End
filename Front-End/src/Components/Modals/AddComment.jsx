@@ -44,7 +44,9 @@ function AddComment() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <textarea rows="4" cols="50" placeholder="Write your comment here..." onChange={handleComment}/>
+          <form>
+            <textarea rows="4" cols="50" placeholder="Write your comment here..." onChange={handleComment}/>
+          </form>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleAdd}>Add</Button>
