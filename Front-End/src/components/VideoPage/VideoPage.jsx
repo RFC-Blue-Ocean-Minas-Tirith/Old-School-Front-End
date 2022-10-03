@@ -102,7 +102,7 @@ function VideoPage({ video, user }) {
       vid.votes[button].count += 1;
       vid.votes[button].usernames.push(currUser.username);
       setCurrentVid(vid);
-      axios.put('/video/vote', { videoID: currentVid.ObjectID, vote: button })
+      axios.put('http://localhost:8080/video/vote', { videoID: currentVid.objectID, vote: button, username: currUser.username })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -133,6 +133,19 @@ function VideoPage({ video, user }) {
     setShowModal(display);
   };
 
+  // FAKE FAKE for testing only
+  const FAKEUSER = {
+    firstName: 'Allie',
+    lastName: 'B.',
+    profilePicture: 'https://source.unsplash.com/oEcsvUfCr1c/384x192',
+    username: 'FAKE ALICE',
+    email: 'example@example.com',
+    password: 'xcddfc',
+    bio: 'I am a cool programmer and I do cool things.',
+    favorites: [],
+  };
+  // FAKE FAKE for testing only
+
   return (
     <Container style={{ height: '100%' }}>
       {/* <AddComment style={{ display: { showModal } }}
@@ -148,7 +161,7 @@ function VideoPage({ video, user }) {
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <Link to="/profile_page" > {/* TODO: pass creator name as props */}
+            <Link to="/profile_page" state={{ creator: FAKEUSER, user: currUser }}> {/* TODO: pass creator name as props */}
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
@@ -157,14 +170,17 @@ function VideoPage({ video, user }) {
           <div>
             <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
               Insightful
+              <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.usernames.length}</Badge>
             </Button>
             <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
               Informative
+              <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
             </Button>
             <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
               Funny
+              <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
             </Button>
           </div>
