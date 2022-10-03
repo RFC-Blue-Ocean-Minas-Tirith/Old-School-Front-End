@@ -4,6 +4,8 @@ import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
+import { Link } from 'react-router-dom';
+
 // import AddComment from '../Modals/AddComment.jsx';
 
 function VideoPage({ video, user }) {
@@ -141,7 +143,9 @@ function VideoPage({ video, user }) {
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
+            <Link to="/profile_page" userID={currentVid.username}>
+              <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
+            </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
           </div>
           <p>{currentVid.description}</p>
