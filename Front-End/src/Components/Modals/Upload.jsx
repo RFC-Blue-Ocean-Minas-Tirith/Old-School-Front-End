@@ -32,12 +32,12 @@ function Upload(props) {
       <UploadVideo
         videoModalShow={videoModalShow}
         setVideoModalShow={setVideoModalShow}
-        setModalShow={setModalShow} />
+        setModalShow={setModalShow} username={props.username}/>
       <UploadBlog
         blogModalShow={blogModalShow}
         setBlogModalShow={setBlogModalShow}
-        setModalShow={setModalShow} />
-      <Button variant="primary" onClick={() => setModalShow(true)}>Upload</Button>
+        setModalShow={setModalShow} username={props.username}/>
+      {/* <Button variant="primary" onClick={() => setModalShow(true)}>Upload</Button> */}
     </Theme>
   );
 }

@@ -69,7 +69,7 @@ function UploadVideo(props) {
     };
     const params = {
       params: {
-        username: 'vicki',
+        username: props.username,
         title: values.title,
         description: values.description,
         dateUploaded: new Date(),
