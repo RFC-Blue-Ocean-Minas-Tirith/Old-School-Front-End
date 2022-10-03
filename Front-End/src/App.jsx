@@ -4,9 +4,6 @@ import Navbar from './components/Navbar/Navbar';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
-import AddComment from './components/Modals/AddComment';
-import Upload from './components/Modals/Upload';
-import Blog from './components/Modals/Blog';
 
 function App() {
   // const [state, setState] = useState(0)
@@ -21,9 +18,6 @@ function App() {
         <Route path="video_page" element={<VideoPage />} />
       </Routes>
     </div>
-    <AddComment />
-    <Upload />
-    <Blog />
     </div>
   );
 }
