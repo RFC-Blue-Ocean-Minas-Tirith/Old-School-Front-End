@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 
-function VideoPage() {
+function VideoPage({ video }) {
   // -----State-----
-  const [video, setVideo] = useState({
+  const [currentVid, setCurrentVid] = useState({
     title: 'Fake Vid',
     description: 'This video is so silly and ridiculous you have no idea omg you should totally watch it it has cats.',
     username: 'Grumpycat',
@@ -32,7 +33,7 @@ function VideoPage() {
     {
       id: 4,
       author: 'Melissa',
-      comment: 'Is the Colonel Mustard?',
+      comment: 'Is that Colonel Mustard?',
       date: '10/1/2022',
     },
     {
@@ -64,44 +65,76 @@ function VideoPage() {
       cloudName: 'demo',
     },
   });
-
-  // -----UseEffect-----
-  useEffect(() => {
-
-  })
-  const myVideo = cld.video('docs/e_simulate_colorblind:tritanopia/walking_talking');
+  const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
+  // -----Video Formatting-----
+  const myVideo = cld.video('docs/walking_talking');
   myVideo.resize(pad().width(800));
 
-  useEffect(() => {
-    setVideo(video);
-  }, [video]);
+  // -----UseEffect-----
+  // useEffect(() => {
+  //   axios.get('/video', { video })
+  //     .then((response) => {
+  //       setCurrentVid(response);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [video]);
+
+  // -----Event Handlers-----
+  const updateVote = (e) => {
+    // TODO: add in Authentication by updating both local and DB username array on the vote value
+    // FIXME: why does this reload the video?
+    e.preventDefault();
+    const button = e.target.id;
+    const vid = { ...currentVid };
+    vid.votes[button].count += 1;
+    setCurrentVid(vid);
+    axios.put('/video/vote', { vote: button })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      });
+  };
+
+  const favorite = (e) => {
+    e.preventDefault();
+    let user = e.target.previousElementSibling.id;
+    if (favorited[0] === 'unfavorited') {
+      setFavorited(['favorited', 'This is one of your Favorite Creators']);
+      // TODO: put request to send to new favorited creator to current user's data
+    } else {
+      setFavorited(['unfavorited', 'Favorite this Creator!']);
+      //TODO: put request to removed favorited from current user's data
+    }
+  };
 
   return (
     <Container style={{ height: '100%' }}>
       <Row style={{ marginTop: '30px' }}>
-        <Col>
+        <Col xs={7}>
           <div>
             <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" />
           </div>
-          <h2>{video.title}</h2>
-          <p>{video.date}</p>
+          <h2>{currentVid.title}</h2>
+          <p>{currentVid.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <h5><strong>{video.username}</strong></h5>
-            <Badge pill bg="warning" text="dark">Favorite</Badge>
+            <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
+            <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
           </div>
-          <p>{video.description}</p>
+          <p>{currentVid.description}</p>
           <div>
-            <Button variant="primary">
+            <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
               Insightful
-              <Badge bg="secondary">{video.votes.insightful.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.count}</Badge>
             </Button>
-            <Button variant="primary">
+            <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
               Informative
-              <Badge bg="secondary">{video.votes.informative.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.count}</Badge>
             </Button>
-            <Button variant="primary">
+            <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
               Funny
-              <Badge bg="secondary">{video.votes.funny.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.count}</Badge>
             </Button>
           </div>
         </Col>
@@ -114,7 +147,7 @@ function VideoPage() {
               maxHeight: '90%',
             }}
           >
-            {video.comments.map((comment) => (
+            {currentVid.comments.map((comment) => (
               <ListGroup.Item as="li" key={comment.id}>
                 <h5>{comment.author}</h5>
                 <h6>{comment.date}</h6>
