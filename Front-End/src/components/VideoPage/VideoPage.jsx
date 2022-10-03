@@ -4,10 +4,12 @@ import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
+// import AddComment from '../Modals/AddComment.jsx';
 
-function VideoPage({ video }) {
+function VideoPage({ video, user }) {
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
+    objectID: 1,
     title: 'Fake Vid',
     description: 'This video is so silly and ridiculous you have no idea omg you should totally watch it it has cats.',
     username: 'Grumpycat',
@@ -66,20 +68,29 @@ function VideoPage({ video }) {
     },
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
+  const [userID, setUserID] = useState('');
+  const [showModal, setShowModal] = useState('none');
+
   // -----Video Formatting-----
   const myVideo = cld.video('docs/walking_talking');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
   // useEffect(() => {
-  //   axios.get('/video', { video })
+  //   /* don't use this one */axios.get('/video', { video })
   //     .then((response) => {
   //       setCurrentVid(response);
   //     })
   //     .catch((err) => {
   //       console.log(err);
   //     });
+  /* end of don't use */
+  // setCurrentVid(video);
   // }, [video]);
+
+  useEffect(() => {
+    setUserID(user);
+  }, [user]);
 
   // -----Event Handlers-----
   const updateVote = (e) => {
@@ -109,8 +120,19 @@ function VideoPage({ video }) {
     }
   };
 
+  const toggleModal = (e) => {
+    e.preventDefault();
+    const display = showModal === 'none' ? 'block' : 'none';
+    setShowModal(display);
+  };
+
   return (
     <Container style={{ height: '100%' }}>
+      {/* <AddComment style={{ display: { showModal } }}
+        toggleModal={toggleModal}
+        userID={userID}
+        videoID={currentVid.objectID}
+      /> */}
       <Row style={{ marginTop: '30px' }}>
         <Col xs={7}>
           <div>
@@ -149,13 +171,16 @@ function VideoPage({ video }) {
           >
             {currentVid.comments.map((comment) => (
               <ListGroup.Item as="li" key={comment.id}>
-                <h5>{comment.author}</h5>
-                <h6>{comment.date}</h6>
+                <div className="commentRow">
+                  <h5>{comment.author}</h5>
+                  <h6 className="date">{comment.date}</h6>
+                </div>
                 <p>{comment.comment}</p>
+                <h6 className="report">Report Comment</h6>
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button style={{ width: '100%', height: '10%' }} bg="primary">Add Comment</Button>
+          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
         </Col>
       </Row>
     </Container>
