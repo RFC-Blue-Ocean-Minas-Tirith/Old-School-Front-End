@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -10,7 +11,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle, getCurrentUser } from './firebase';
 
-function AppNavbar() {
+function AppNavbar({ setModalShow }) {
   // const isLoggedIn = getCurrentUser();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function AppNavbar() {
             </Form>
           </Nav>
           <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
-          <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Upload</Button>
+          <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
           {getCurrentUser()
             ? <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
             : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
