@@ -70,7 +70,7 @@ function VideoPage({ video, user }) {
     },
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const [userID, setUserID] = useState('');
+  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
   const [showModal, setShowModal] = useState('none');
 
   // -----Video Formatting-----
@@ -90,9 +90,9 @@ function VideoPage({ video, user }) {
   // setCurrentVid(video);
   // }, [video]);
 
-  useEffect(() => {
-    setUserID(user);
-  }, [user]);
+  // useEffect(() => {
+  //   setCurrUser(user);
+  // }, [user]);
 
   // -----Event Handlers-----
   const updateVote = (e) => {
@@ -100,25 +100,33 @@ function VideoPage({ video, user }) {
     // FIXME: why does this reload the video?
     e.preventDefault();
     const button = e.target.id;
-    const vid = { ...currentVid };
-    vid.votes[button].count += 1;
-    setCurrentVid(vid);
-    axios.put('/video/vote', { vote: button })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
+    if (currentVid.votes[button].usernames.indexOf(currUser.username) === -1) {
+      const vid = { ...currentVid };
+      vid.votes[button].count += 1;
+      vid.votes[button].usernames.push(currUser.username);
+      setCurrentVid(vid);
+      axios.put('/video/vote', { vote: button })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        });
+    }
   };
 
   const favorite = (e) => {
     e.preventDefault();
-    let user = e.target.previousElementSibling.id;
     if (favorited[0] === 'unfavorited') {
       setFavorited(['favorited', 'This is one of your Favorite Creators']);
-      // TODO: put request to send to new favorited creator to current user's data
+      axios.put('http://localhost:8080/userprofile', { currentUser: currUser.username, user: currentVid.username })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setFavorited(['unfavorited', 'Favorite this Creator!']);
-      //TODO: put request to removed favorited from current user's data
+      axios.put('http://localhost:8080/userprofilex', { currentUser: currUser.username, user: currentVid.username })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -143,7 +151,7 @@ function VideoPage({ video, user }) {
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <Link to="/profile_page" userID={currentVid.username}>
+            <Link to="/profile_page" > {/* TODO: pass creator name as props */}
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
