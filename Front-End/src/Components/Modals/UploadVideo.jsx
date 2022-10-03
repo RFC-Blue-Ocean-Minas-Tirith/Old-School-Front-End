@@ -2,7 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox, LargeButton } from './Modals.styled';
+import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
+import { cloudName, uploadPreset } from './config';
 
 const initialValues = {
   description: '',
@@ -37,8 +38,8 @@ function UploadVideo(props) {
 
   const myWidget = cloudinary.createUploadWidget(
     {
-      cloudName: 'dulhjtu0p',
-      uploadPreset: 'cxb3dbqr',
+      cloudName: cloudName,
+      uploadPreset: uploadPreset,
     },
     (error, result) => { checkUploadResult(result); },
   );

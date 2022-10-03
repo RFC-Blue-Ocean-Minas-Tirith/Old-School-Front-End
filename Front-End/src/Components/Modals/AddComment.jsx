@@ -18,7 +18,7 @@ function AddComment() {
       'comment': comment,
       date: new Date(),
     };
-    axios.patch('http://localhost:8080/comment', body)
+    axios.patch('http://localhost:8080/video', body)
       .then((results) => {
         console.log(results);
       })
