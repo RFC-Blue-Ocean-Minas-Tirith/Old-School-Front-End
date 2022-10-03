@@ -14,8 +14,18 @@ function App() {
     username: 'AllEyesBlank',
     email: 'example@example.com',
     password: 'xcddfc',
-    bio: 'I am a cool programmer and I do cool things.',
-    favorites: [],
+    aboutMe: 'I am a cool programmer and I do cool things.',
+    favCreator: [],
+  };
+  const currentUser = {
+    firstName: 'Walrus',
+    lastName: 'Gumbo',
+    profilePicture: 'https://source.unsplash.com/oEcsvUfCr1c/384x192',
+    username: 'Walrusington',
+    email: 'example@example.com',
+    password: 'xcddfc',
+    aboutMe: 'I am a walrus, it is pretty okay.',
+    favCreator: ['AllEyesBlank'],
   };
 
   return (
@@ -23,7 +33,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="profile_page" element={<ProfilePage user={user} />} />
+        <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
         <Route path="video_page" element={<VideoPage />} />
       </Routes>
     </div>

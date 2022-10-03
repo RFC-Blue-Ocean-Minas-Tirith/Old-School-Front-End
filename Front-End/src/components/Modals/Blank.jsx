@@ -5,9 +5,8 @@ function Name({show, toggle}) {
         Hello World
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 }
 
 export default Name;
