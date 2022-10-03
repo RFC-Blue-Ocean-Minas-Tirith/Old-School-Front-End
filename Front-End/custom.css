@@ -1,3 +1,4 @@
+
 .vote {
   margin: 5px;
   width: 30%
@@ -25,4 +26,38 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+.vid-carousel {
+  display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.prev,
+.next {
+	cursor: pointer;
+	width: auto;
+  position: absolute;
+	padding: 16px;
+	color: white;
+  background-color: rgb(7, 35, 8);
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	user-select: none;
+  align-items: center;
+}
+
+.prev {
+  left: 34%;
+}
+
+.next {
+  right: 1%;
+}
+
+.prev:hover,
+.next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
 }
