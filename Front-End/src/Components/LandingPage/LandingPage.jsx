@@ -21,6 +21,7 @@ const LandingPage = () => {
   const [videoData, setVideoData] = useState('');
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
+  const [button, setButton] = useState(true);
 
   useEffect(() => {
     //console.log('getting video from the client...')
@@ -39,7 +40,7 @@ const LandingPage = () => {
       axios.get(`http://localhost:8080/video/${sortOn}`)
       .then(res => {
         setVideoData(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch(err => {
         console.log(err)
@@ -60,8 +61,14 @@ const LandingPage = () => {
   useEffect(() => {
     //console.log('this is the videoData', videoData);
     if (videoData) {
-      console.log(videoData);
-      let temp = videoData.map(data => data.thumbnail);
+      //console.log(videoData);
+      //let temp = videoData.map(data => data.thumbnail);
+      let temp = [];
+      for(var i = 0; i < videoData.length; i++) {
+        if(videoData[i]) {
+          temp.push(videoData[i].thumbnail);
+        }
+      }
       setThumbnails(temp);
     }
   }, [videoData]);
@@ -70,6 +77,26 @@ const LandingPage = () => {
   //   //navigate('/video_page');
     console.log('navigating to VideoPage...')
   };
+
+  // useEffect(() => {
+  //   if()
+  // },[button])
+
+
+  const handleFavorite = () => {
+    setButton(false)
+    axios.put(`http://localhost:8080/video/${sortOn}`,
+      params = {
+        username: 'Michael_Scott',
+        creator: videoData[index].username
+      }
+    )
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+    }
+
+
+
 
   return (
     <div>
@@ -95,7 +122,9 @@ const LandingPage = () => {
           </Row>
           <Row>
             <Col><div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div> </Col>
-            <Col><Button variant="primary">Favorite</Button>{' '}</Col>
+            <Col>
+            {(button)?<Button onClick = {handleFavorite}variant="primary">Favorite</Button>:<div></div>}
+            </Col>
           </Row>
           <h5 class="border border-warning">{videoData[index].username}</h5>
           <h5 class="border border-dark">{videoData[index].description}</h5>
