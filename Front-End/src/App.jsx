@@ -26,7 +26,7 @@ function App() {
     <div>
       <div className="App">
         <AppNavbar setModalShow={setModalShow} modalShow={modalShow} />
-      <Upload setModalShow={setModalShow} modalShow={modalShow} />
+        <Upload setModalShow={setModalShow} modalShow={modalShow} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
