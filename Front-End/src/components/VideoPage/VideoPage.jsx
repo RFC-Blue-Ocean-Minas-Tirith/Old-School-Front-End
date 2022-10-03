@@ -12,9 +12,9 @@ function VideoPage({ video, user }) {
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
     objectID: 1,
-    title: 'Fake Vid',
-    description: 'This video is so silly and ridiculous you have no idea omg you should totally watch it it has cats.',
-    username: 'Grumpycat',
+    title: 'Jay Talking',
+    description: 'Jay Pritchett\'s complaints about goat cheese',
+    username: 'Jay',
     date_Uploaded: '10/1/2022',
     comments: [{
       id: 1,
@@ -47,7 +47,7 @@ function VideoPage({ video, user }) {
       date: '10/1/2022',
     },
     ],
-    URL: 'http://www.google.com',
+    URL: 'http://res.cloudinary.com/dulhjtu0p/raw/upload/v1664831615/whdt2ntpbmygnj14zqih',
     votes: {
       insightful: {
         usernames: ['john', 'jacob', 'jimmerheimer'],
@@ -61,14 +61,14 @@ function VideoPage({ video, user }) {
     },
     private: false,
   });
+  const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
+  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
+  const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'demo',
     },
   });
-  const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
-  const [showModal, setShowModal] = useState('none');
 
   // -----Video Formatting-----
   const myVideo = cld.video('docs/walking_talking');
@@ -129,28 +129,16 @@ function VideoPage({ video, user }) {
 
   const toggleModal = (e) => {
     e.preventDefault();
-    const display = showModal === 'none' ? 'block' : 'none';
+    const display = !showModal;
     setShowModal(display);
   };
 
-  // FAKE FAKE for testing only
-  const FAKEUSER = {
-    firstName: 'Allie',
-    lastName: 'B.',
-    profilePicture: 'https://source.unsplash.com/oEcsvUfCr1c/384x192',
-    username: 'FAKE ALICE',
-    email: 'example@example.com',
-    password: 'xcddfc',
-    bio: 'I am a cool programmer and I do cool things.',
-    favorites: [],
-  };
-  // FAKE FAKE for testing only
-
   return (
     <Container style={{ height: '100%' }}>
-      {/* <AddComment style={{ display: { showModal } }}
+      {/* <AddComment
+        style={{ show: showModal }}
         toggleModal={toggleModal}
-        userID={userID}
+        user={currUser}
         videoID={currentVid.objectID}
       /> */}
       <Row style={{ marginTop: '30px' }}>
@@ -161,7 +149,7 @@ function VideoPage({ video, user }) {
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <Link to="/profile_page" state={{ creator: FAKEUSER, user: currUser }}> {/* TODO: pass creator name as props */}
+            <Link to="/profile_page" state={{ creator: currentVid.username, user: currUser }}> {/* TODO: pass creator name as props */}
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
