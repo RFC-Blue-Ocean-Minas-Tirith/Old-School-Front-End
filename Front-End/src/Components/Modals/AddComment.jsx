@@ -14,7 +14,7 @@ function AddComment() {
 
   function handleAdd() {
     const body = {
-      author: props.username,
+      author: 'vicki',
       'comment': comment,
       date: new Date(),
     };
@@ -22,7 +22,7 @@ function AddComment() {
       .then((results) => {
         console.log(results);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
   }
