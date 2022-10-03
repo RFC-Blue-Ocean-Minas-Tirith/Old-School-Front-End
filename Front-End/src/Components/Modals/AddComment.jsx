@@ -12,15 +12,13 @@ function AddComment() {
     setComment(event.target.value);
   }
 
-  function handleAdd(event) {
-    // console.log(event.timeStamp);
-    // console.log(comment);
+  function handleAdd() {
     // const body = {
-    //   'author' : props.username,
-    //   'comment' : comment,
-    //   'date' : event.timeStamp
-    //  };
-    // axios.post('/comment', body)
+    //   author: props.username,
+    //   comment: comment,
+    //   date: new Date(),
+    // };
+    // axios.post('http://localhost:8080/comment', body)
     //   .then((results) => {
     //     console.log(results);
     //   })

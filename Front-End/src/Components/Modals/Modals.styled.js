@@ -7,7 +7,19 @@ export const Container = styled.div`
   padding: 30px;
 `;
 
-export const StyledButton = styled(Button)`
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+export const StyledButton = styled.button`
   color: palevioletred;
   font-size: 1em;
   margin: 1em;
@@ -16,9 +28,15 @@ export const StyledButton = styled(Button)`
   border-radius: 3px;
   background-color: pink;
   &:hover {
-    background-color: pink;
-    color: palevioletred;
+    background-color: red;
   }
+`;
+
+export const LargeButton = styled(Button)`
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
 `;
 
 export const Heading = styled.h1`
@@ -29,20 +47,11 @@ export const Heading = styled.h1`
 export const Tags = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: scroll;
   width: 100%;
   max-width: 100%;
   padding-left: 14px;
-  border: 1px grey solid;
-  border-radius: 5px;
   color: black;
 `;
-
-export const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`
 
 export const Input = styled.input`
   width: 100%;
@@ -63,7 +72,7 @@ export const Tag = styled.div`
   background-color: orange;
   white-space: nowrap;
   color: white;
-`
+`;
 
 export const TagButton = styled.button`
   display: flex;
@@ -72,4 +81,16 @@ export const TagButton = styled.button`
   background-color: unset;
   cursor: pointer;
   color: white;
+`;
+
+export const RightLabel = styled.label`
+  padding: 2% 2% 0% 10%;
+`;
+
+export const LeftLabel = styled.label`
+  padding: 2% 2% 2% 0%;
+`;
+
+export const Checkbox = styled.input`
+  width: 5%;
 `

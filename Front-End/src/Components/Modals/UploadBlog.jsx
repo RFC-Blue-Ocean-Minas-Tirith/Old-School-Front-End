@@ -1,18 +1,15 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Tags, Input, Tag, TagButton, Row } from './Modals.styled'
+import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
+import axios from 'axios';
 
 const initialValues = {
-  description: "",
-  title: "",
-}
+  description: '',
+  title: '',
+};
 
 function UploadBlog(props) {
-  // const [body, setBody] = useState();
-  // const [title, setTitle] = useState();
-  // const [keywords, setKeywords] = useState([]);
-  // const [isPrivate, setIsPrivate] = useState(false);
   const [values, setValues] = useState(initialValues);
   const [isPrivate, setIsPrivate] = useState(false);
   const [keyword, setKeyword] = useState('');
@@ -27,32 +24,34 @@ function UploadBlog(props) {
     });
   }
 
-  function handlePrivate(e) {
+  function handlePrivate() {
     setIsPrivate(!isPrivate);
   }
 
-  function handleKeywords(e) {
-    console.log(e);
-  }
-
   function handleAdd(event) {
-    // console.log(event.timeStamp);
-    // console.log(comment);
-    // const params = {
-    //   'author' : props.username,
-    //   'title' : values.title;
-    //   'description' : values.description,
-    //   'date' : event.timeStamp,
-    //   'keywords' : keywords,
-    //   'private' : isPrivate
-    //  };
-    // axios.post('/blog', params)
-    //   .then((results) => {
-    //     console.log(results);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
+    const params = {
+      params: {
+        username: props.username,
+        title: values.title,
+        description: values.description,
+        dateUploaded: new Date(),
+        keywords,
+        private: isPrivate,
+      }
+    };
+    axios.post('http://localhost:8080/blog', params)
+      .then((results) => {
+        console.log(results);
+        setValues(initialValues);
+        setIsPrivate(false);
+        setKeywords([]);
+        setKeyword('');
+        props.setBlogModalShow(false);
+        props.setModalShow(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const onChange = (e) => {
@@ -70,7 +69,7 @@ function UploadBlog(props) {
       setKeyword('');
     }
 
-    if (key === "Backspace" && !keyword.length && keywords.length) {
+    if (key === 'Backspace' && !keyword.length && keywords.length && isKeyReleased) {
       e.preventDefault();
       const keywordsCopy = [...keywords];
       const poppedTag = keywordsCopy.pop();
@@ -84,11 +83,11 @@ function UploadBlog(props) {
 
   const onKeyUp = () => {
     setIsKeyReleased(true);
-  }
+  };
 
   const deleteTag = (index) => {
-    setKeywords(prevState => prevState.filter((tag, i) => i !== index));
-  }
+    setKeywords((prevState) => prevState.filter((tag, i) => i !== index));
+  };
 
   return (
 
@@ -101,41 +100,56 @@ function UploadBlog(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Upload a Blog
+          Add a Blog Post
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-          <label>
-            Title:
-            <input type="text" placeholder="Title" name="title" value={values.title} onChange={handleInputChange} />
-          </label>
-          <label>
-            Private
-            <input type="checkbox" name="private" value={values.private} onChange={handlePrivate} />
-          </label>
-          <label>
-            Blog Post:
-            <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} />
-          </label>
-          <label>Keywords:</label>
-          <Input value={keyword} placeholder="Enter a keyword followed by a comma..." onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
-          {keywords.length > 0 && <Tags>
+        <Column>
+          <form>
             <Row>
-            {keywords.map((word, index) => (
-              <Tag key={index}>
-                {word}
-                <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
-            ))}
+              <LeftLabel>
+                Title:
+              </LeftLabel>
+              <input type="text" placeholder="Title" name="title" value={values.title} onChange={handleInputChange} />
+              <RightLabel>
+                Private
+              </RightLabel>
+              <Checkbox type="checkbox" name="private" value={values.private} onChange={handlePrivate} />
             </Row>
-          </Tags>}
+            <LeftLabel>
+              Blog Post:
+            </LeftLabel>
+            <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} />
+            <LeftLabel>Keywords:</LeftLabel>
+            <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+            {keywords.length > 0 && (
+            <Tags>
+              <Row>
+                {keywords.map((word, index) => (
+                  <Tag key={index}>
+                    {word}
+                    <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
+                ))}
+              </Row>
+            </Tags>
+            )}
+          </form>
+        </Column>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleAdd}>Add</Button>
-        <Button onClick={() => props.setBlogModalShow(false)}>Close</Button>
+        <Button onClick={() => {
+          setValues(initialValues);
+          setIsPrivate(false);
+          setKeywords([]);
+          setKeyword('');
+          props.setBlogModalShow(false);
+        }}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
-
-  )
+  );
 }
 
 export default UploadBlog;
