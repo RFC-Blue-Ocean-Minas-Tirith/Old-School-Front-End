@@ -1,15 +1,22 @@
 /* eslint-disable no-console */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { signInWithGoogle } from './firebase';
+import { signInWithGoogle, signOutGoogle, getCurrentUser } from './firebase';
 
 function AppNavbar() {
+  // const isLoggedIn = getCurrentUser();
+
+  useEffect(() => {
+    getCurrentUser();
+  });
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -33,9 +40,10 @@ function AppNavbar() {
             </Form>
           </Nav>
           <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
-          <Link to="/profile_page" className="btn btn-primary me-2" type="button">Upload</Link>
-          <Link to="/profile_page" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Link>
-          <Link to="/profile_page" className="btn btn-primary me-2" type="button">Signup</Link>
+          <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Upload</Button>
+          {getCurrentUser()
+            ? <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar>
