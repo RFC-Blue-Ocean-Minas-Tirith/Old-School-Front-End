@@ -20,6 +20,7 @@ function App() {
   };
 
   return (
+    <div>
     <div className="App">
       <Navbar />
       <Routes>
@@ -27,6 +28,7 @@ function App() {
         <Route path="profile_page" element={<ProfilePage user={user} />} />
         <Route path="video_page" element={<VideoPage />} />
       </Routes>
+    </div>
     </div>
   );
 }
