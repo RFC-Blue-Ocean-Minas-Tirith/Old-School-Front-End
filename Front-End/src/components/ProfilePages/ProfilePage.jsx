@@ -10,26 +10,33 @@ import AboutMe from './AboutMe';
 function ProfilePage({ user, currentUser }) {
   const [videos, setVideos] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [userObj, setUser] = useState({});
   const location = useLocation();
 
   useEffect(() => {
-    return axios.get(`http://localhost:8080/video/user/${user.username}`)
+    return axios.get(`http://localhost:8080/user/${user}`)
+      .then((data) => {
+        setUser(data.data);
+      })
+      .then(() => {
+        return axios.get(`http://localhost:8080/video/user/${user}`)
+      })
       .then((data) => {
         setVideos(data.data);
       })
       .then(() => {
-        return axios.get(`http://localhost:8080/blog/user/${user.username}`);
+        return axios.get(`http://localhost:8080/blog/user/${user}`);
       })
       .then((data) => {
         setBlogs(data.data);
       });
-  }, [user.username]);
+  }, [user]);
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4">
-          <AboutMe user={user} currentUser={currentUser} />
+          <AboutMe user={userObj} currentUser={currentUser} />
         </div>
         <div className="col-md-8">
           <VideoCarousel videos={videos} currentUser={currentUser} />

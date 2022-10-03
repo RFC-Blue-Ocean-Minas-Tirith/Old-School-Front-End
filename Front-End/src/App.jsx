@@ -8,16 +8,7 @@ import VideoPage from './components/VideoPage/VideoPage';
 
 function App() {
   // const [state, setState] = useState(0)
-  const user = {
-    firstName: 'Allie',
-    lastName: 'B.',
-    profilePicture: 'https://source.unsplash.com/oEcsvUfCr1c/384x192',
-    username: 'AllEyesBlank',
-    email: 'example@example.com',
-    password: 'xcddfc',
-    aboutMe: 'I am a cool programmer and I do cool things.',
-    favCreator: [],
-  };
+  const user = 'AllEyesBlank';
   const currentUser = {
     firstName: 'Walrus',
     lastName: 'Gumbo',

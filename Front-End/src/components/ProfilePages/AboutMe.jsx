@@ -50,7 +50,7 @@ function AboutMe({ user, currentUser }) {
       <div className="row">
       </div>
       <div className="row">
-        <p className="text-center">{user.bio}</p>
+        <p className="text-center">{user.aboutMe}</p>
       </div>
       <div className="row justify-content-center">
         <div className="col-md-5">
@@ -81,10 +81,9 @@ function AboutMe({ user, currentUser }) {
         <h1 className="text-center">{user.username}</h1>
       </div>
       <div className="row">
-        <h3 className="text-center">{user.firstName + ' ' + user.lastName}</h3>
       </div>
       <div className="row">
-        <p className="text-center">{user.bio}</p>
+        <p className="text-center">{user.aboutMe}</p>
       </div>
       <div className="row justify-content-center">
         <div className="col-md-5">
