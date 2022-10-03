@@ -45,21 +45,18 @@ function VideoPage({ video, user }) {
       author: 'Zach',
       comment: 'Where are they walking though...',
       date: '10/1/2022',
-    }
+    },
     ],
     URL: 'http://www.google.com',
     votes: {
       insightful: {
         usernames: ['john', 'jacob', 'jimmerheimer'],
-        count: 3,
       },
       funny: {
         usernames: ['john', 'jacob'],
-        count: 2,
       },
       informative: {
         usernames: ['john'],
-        count: 1,
       },
     },
     private: false,
@@ -105,7 +102,7 @@ function VideoPage({ video, user }) {
       vid.votes[button].count += 1;
       vid.votes[button].usernames.push(currUser.username);
       setCurrentVid(vid);
-      axios.put('/video/vote', { vote: button })
+      axios.put('/video/vote', { videoID: currentVid.ObjectID, vote: button })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -160,15 +157,15 @@ function VideoPage({ video, user }) {
           <div>
             <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
               Insightful
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.usernames.length}</Badge>
             </Button>
             <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
               Informative
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
             </Button>
             <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
               Funny
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.count}</Badge>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
             </Button>
           </div>
         </Col>
