@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Container, StyledButton } from './Modals.styled';
 
-function AddComment() {
+function AddComment(props) {
   const [modalShow, setModalShow] = useState(false);
   const [comment, setComment] = useState();
 
@@ -13,13 +13,15 @@ function AddComment() {
   }
 
   function handleAdd() {
-    const body = {
-      author: 'vicki',
-      'comment': comment,
-      date: new Date(),
-      url: ''
+    const params = {
+      params: {
+        username: props.user,
+        'comment': comment,
+        date: new Date(),
+        url: props.URL,
+      },
     };
-    axios.patch('http://localhost:8080/video', body)
+    axios.patch('http://localhost:8080/video', params)
       .then((results) => {
         console.log(results);
       })
@@ -44,15 +46,16 @@ function AddComment() {
         </Modal.Header>
         <Modal.Body>
           <form>
-            <textarea rows="4" cols="50" placeholder="Write your comment here..." onChange={handleComment}/>
+            <textarea rows="4" cols="50" placeholder="Write your comment here..." onChange={handleComment} />
           </form>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleAdd}>Add</Button>
-          <Button onClick={() => setModalShow(false)}>Close</Button>
+          {/* <Button onClick={() => setModalShow(false)}>Close</Button> */}
+          <Button onClick={props.toggleModal}>Close</Button>
         </Modal.Footer>
       </Modal>
-      <StyledButton variant="primary" onClick={() => setModalShow(true)}>Add Comment</StyledButton>
+      {/* <StyledButton variant="primary" onClick={() => setModalShow(true)}>Add Comment</StyledButton> */}
     </Container>
   );
 }
