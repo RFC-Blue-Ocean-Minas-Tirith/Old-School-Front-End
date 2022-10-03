@@ -1,3 +1,52 @@
+
+.vote {
+  margin: 5px;
+  width: 30%
+}
+
+.voteCount {
+  margin-left: 3px;
+}
+
+#unfavorited.bg-warning {
+  background-color: white !important;
+}
+
+.videoUser {
+  margin-bottom: 0px;
+  margin-right: 5px;
+}
+
+#favorited, #unfavorited {
+  cursor: pointer;
+}
+
+.commentRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: 10px;
+}
+
+.report {
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.report:hover {
+  color: red;
+}
+
+.videoMetaData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .vid-carousel {
   display: flex;
 	flex-direction: row;

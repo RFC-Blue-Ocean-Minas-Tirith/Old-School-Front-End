@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -29,6 +30,7 @@ function App() {
   };
 
   return (
+    <div>
     <div className="App">
       <Navbar />
       <Routes>
@@ -36,6 +38,7 @@ function App() {
         <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
         <Route path="video_page" element={<VideoPage />} />
       </Routes>
+    </div>
     </div>
   );
 }
