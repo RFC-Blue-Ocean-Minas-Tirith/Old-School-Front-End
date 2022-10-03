@@ -48,7 +48,6 @@ function AboutMe({ user, currentUser }) {
         <h1 className="text-center">{user.username}</h1>
       </div>
       <div className="row">
-        <h3 className="text-center">{user.firstName + ' ' + user.lastName}</h3>
       </div>
       <div className="row">
         <p className="text-center">{user.bio}</p>
