@@ -13,18 +13,18 @@ function AddComment() {
   }
 
   function handleAdd() {
-    // const body = {
-    //   author: props.username,
-    //   comment: comment,
-    //   date: new Date(),
-    // };
-    // axios.post('http://localhost:8080/comment', body)
-    //   .then((results) => {
-    //     console.log(results);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
+    const body = {
+      author: props.username,
+      'comment': comment,
+      date: new Date(),
+    };
+    axios.patch('http://localhost:8080/comment', body)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   return (
