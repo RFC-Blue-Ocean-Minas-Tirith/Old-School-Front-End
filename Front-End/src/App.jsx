@@ -1,13 +1,15 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
+import AppNavbar from './components/Navbar/AppNavbar';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePages/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
+import Upload from './components/Modals/Upload';
 
 function App() {
   // const [state, setState] = useState(0)
+  const [modalShow, setModalShow] = useState(false);
   const user = 'AllEyesBlank';
   const currentUser = {
     firstName: 'Walrus',
@@ -23,7 +25,8 @@ function App() {
   return (
     <div>
       <div className="App">
-        <Navbar />
+        <AppNavbar setModalShow={setModalShow} modalShow={modalShow} />
+      <Upload setModalShow={setModalShow} modalShow={modalShow} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
