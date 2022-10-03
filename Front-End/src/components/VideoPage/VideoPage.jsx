@@ -193,7 +193,7 @@ function VideoPage({ video, user }) {
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
+          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal} show={showModal}>Add Comment</Button>
         </Col>
       </Row>
     </Container>
