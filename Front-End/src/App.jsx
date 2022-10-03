@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
+import AppNavbar from './components/Navbar/AppNavbar';
 import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <AppNavbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="profile_page" element={<ProfilePage />} />
