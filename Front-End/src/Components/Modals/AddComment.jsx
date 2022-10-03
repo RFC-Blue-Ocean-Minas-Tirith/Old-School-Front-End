@@ -17,6 +17,7 @@ function AddComment() {
       author: 'vicki',
       'comment': comment,
       date: new Date(),
+      url: ''
     };
     axios.patch('http://localhost:8080/video', body)
       .then((results) => {

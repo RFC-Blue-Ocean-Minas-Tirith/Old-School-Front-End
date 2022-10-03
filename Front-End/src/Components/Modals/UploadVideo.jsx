@@ -53,12 +53,6 @@ function UploadVideo(props) {
   }
 
   function handleAdd(event) {
-    // am thinking that maybe comments should be an array ?
-    let commentsInfo = {
-      id: 0,
-      author: '',
-      date: null,
-    };
     let votesInfo = {
       insightful: {
         usernames: [],
@@ -75,7 +69,7 @@ function UploadVideo(props) {
     };
     const params = {
       params: {
-        username: props.username,
+        username: 'vicki',
         title: values.title,
         description: values.description,
         dateUploaded: new Date(),
@@ -83,8 +77,7 @@ function UploadVideo(props) {
         private: isPrivate,
         url: videoUrl,
         votes: votesInfo,
-        comments: commentsInfo,
-      }
+      },
     };
     axios.post('http://localhost:8080/video', params)
       .then((results) => {
