@@ -12,6 +12,7 @@
     "plugin:react/jsx-runtime"
 ],
   "rules": {
-
+    "no-unused-vars": 0,
+    "eslint": 0,
   }
 }
