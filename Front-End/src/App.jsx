@@ -1,9 +1,9 @@
 // import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
-import LandingPage from './Components/LandingPage/LandingPage';
-import ProfilePage from './Components/ProfilePage/ProfilePage';
-import VideoPage from './Components/VideoPage/VideoPage';
+import Navbar from './components/Navbar/Navbar';
+import LandingPage from './components/LandingPage/LandingPage';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import VideoPage from './components/VideoPage/VideoPage';
 
 function App() {
   // const [state, setState] = useState(0)

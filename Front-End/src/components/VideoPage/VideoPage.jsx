@@ -62,12 +62,12 @@ function VideoPage({ video }) {
   });
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'demo',
+      cloudName: 'dulhjtu0p',
     },
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
   // -----Video Formatting-----
-  const myVideo = cld.video('docs/walking_talking');
+  const myVideo = cld.video('v1664662847/woszwjaxldqxzqfvjh6r');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
@@ -105,7 +105,7 @@ function VideoPage({ video }) {
       // TODO: put request to send to new favorited creator to current user's data
     } else {
       setFavorited(['unfavorited', 'Favorite this Creator!']);
-      //TODO: put request to removed favorited from current user's data
+      // TODO: put request to removed favorited from current user's data
     }
   };
 
