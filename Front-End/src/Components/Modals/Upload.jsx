@@ -7,36 +7,42 @@ import UploadBlog from './UploadBlog';
 import UploadVideo from './UploadVideo';
 
 function Upload(props) {
-  const [modalShow, setModalShow] = useState(false);
   const [videoModalShow, setVideoModalShow] = useState(false);
   const [blogModalShow, setBlogModalShow] = useState(false);
+
+  const handleClose = () => props.setModalShow(false);
 
   return (
     <Theme>
       <Modal
-      show={modalShow}
-      onHide={() => setModalShow(false)}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
+        show={props.modalShow}
+        onHide={handleClose}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Upload:
-            <LargeButton onClick={() => setVideoModalShow(true)}>Video</LargeButton>
-            <LargeButton onClick={() => setBlogModalShow(true)}>Blog</LargeButton>
-            <LargeButton>Livestream</LargeButton>
           </Modal.Title>
         </Modal.Header>
+        <Modal.Body>
+          <LargeButton onClick={() => setVideoModalShow(true)}>Video</LargeButton>
+          <LargeButton onClick={() => setBlogModalShow(true)}>Blog</LargeButton>
+          <LargeButton>Livestream</LargeButton>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClose}>Close</Button>
+        </Modal.Footer>
       </Modal>
       <UploadVideo
         videoModalShow={videoModalShow}
         setVideoModalShow={setVideoModalShow}
-        setModalShow={setModalShow} username={props.username}/>
+        setModalShow={props.setModalShow} username={props.username} />
       <UploadBlog
         blogModalShow={blogModalShow}
         setBlogModalShow={setBlogModalShow}
-        setModalShow={setModalShow} username={props.username}/>
+        setModalShow={props.setModalShow} username={props.username} />
       {/* <Button variant="primary" onClick={() => setModalShow(true)}>Upload</Button> */}
     </Theme>
   );
