@@ -26,19 +26,19 @@ function App() {
     email: 'example@example.com',
     password: 'xcddfc',
     aboutMe: 'I am a walrus, it is pretty okay.',
-    favCreator: ['AllEyesBlank'],
+    favCreator: [],
   };
 
   return (
     <div>
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
-        <Route path="video_page" element={<VideoPage />} />
-      </Routes>
-    </div>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
+          <Route path="video_page" element={<VideoPage />} />
+        </Routes>
+      </div>
     </div>
   );
 }

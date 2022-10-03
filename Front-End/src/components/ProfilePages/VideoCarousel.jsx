@@ -65,7 +65,7 @@ function VideoCarousel({ videos, currentUser }) {
           <div className="col-2">
             <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
           </div>
-          <div className="col"></div>
+          <div className="col-2"></div>
         </div>
         <div className="vid-carousel">
           {currentVids.vids.map((video, index, vids) => (

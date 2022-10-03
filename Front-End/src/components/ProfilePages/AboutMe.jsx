@@ -22,7 +22,6 @@ function AboutMe({ user, currentUser }) {
 
   useEffect(() => {
     if (currentUser.favCreator.indexOf(user.username) !== -1) {
-      console.log('hewoo')
       setFaved(true)
     }
   })
