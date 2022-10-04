@@ -47,6 +47,13 @@
   align-items: center;
 }
 
+.videoCreator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .vid-carousel {
   display: flex;
 	flex-direction: row;
