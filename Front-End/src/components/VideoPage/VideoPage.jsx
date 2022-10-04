@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 function VideoPage({ video, user }) {
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
-    objectID: 1,
+    _id: `ObjectId("633b508828a2b0d986c22f92")`,
     title: 'Jay Talking',
     description: 'Jay Pritchett\'s complaints about goat cheese',
     username: 'Jay',
@@ -102,7 +102,7 @@ function VideoPage({ video, user }) {
       vid.votes[button].count += 1;
       vid.votes[button].usernames.push(currUser.username);
       setCurrentVid(vid);
-      axios.put('http://localhost:8080/video/vote', { videoID: currentVid.objectID, vote: button, username: currUser.username })
+      axios.put('http://localhost:8080/video/vote', { videoID: currentVid._id, vote: button, username: currUser.username })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -127,6 +127,16 @@ function VideoPage({ video, user }) {
     }
   };
 
+  const report = (e) => {
+    e.preventDefault();
+    const id = e.target.attributes[1].nodeValue;
+    const type = e.target.attributes[2].nodeValue;
+    axios.put('http://localhost:8080/video/report', { id, type })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const toggleModal = (e) => {
     e.preventDefault();
     const display = !showModal;
@@ -136,7 +146,7 @@ function VideoPage({ video, user }) {
   return (
     <Container style={{ height: '100%' }}>
       {/* <AddComment
-        style={{ show: showModal }}
+        show={showModal}
         toggleModal={toggleModal}
         user={currUser}
         videoID={currentVid.objectID}
@@ -148,13 +158,16 @@ function VideoPage({ video, user }) {
           </div>
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <div className="videoCreator" >
             <Link to="/profile_page" state={{ creator: currentVid.username, user: currUser }}> {/* TODO: pass creator name as props */}
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
           </div>
-          <p>{currentVid.description}</p>
+          <div className='videoDescription'>
+            <p>{currentVid.description}</p>
+            <h6 className="report" vidid={currentVid._id} type='video' onClick={report}>Report Comment</h6>
+          </div>
           <div>
             <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
               Insightful
@@ -182,18 +195,18 @@ function VideoPage({ video, user }) {
               maxHeight: '90%',
             }}
           >
-            {currentVid.comments.map((comment) => (
+            {currentVid.comments.map((comment, index) => (
               <ListGroup.Item as="li" key={comment.id}>
                 <div className="commentRow">
                   <h5>{comment.author}</h5>
                   <h6 className="date">{comment.date}</h6>
                 </div>
                 <p>{comment.comment}</p>
-                <h6 className="report">Report Comment</h6>
+                <h6 className="report" index={index} type='comment' onClick={report}>Report Comment</h6>
               </ListGroup.Item>
             ))}
           </ListGroup>
-          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal} show={showModal}>Add Comment</Button>
+          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
         </Col>
       </Row>
     </Container>
