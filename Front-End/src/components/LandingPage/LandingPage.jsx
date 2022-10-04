@@ -68,7 +68,7 @@ const LandingPage = ({currentUser}) => {
       let temp = [];
       for(var i = 0; i < videoData.length; i++) {
         if(videoData[i]) {
-          temp.push(videoData[i].thumbnail);
+          temp.push(videoData[i].url.replace('.mp4', '.jpg'));
         }
       }
       setThumbnails(temp);
