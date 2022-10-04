@@ -29,7 +29,6 @@ const LandingPage = () => {
     console.log(isFavorite);
   },[isFavorite])
 
-
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData) {
