@@ -3,6 +3,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -12,10 +13,28 @@ import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle } from './firebase';
 
 function AppNavbar({ setModalShow, isLoggedIn }) {
+  const [searchTerm, setsearchTerm] = useState('');
+
+  function handleSearchChange(e) {
+    e.preventDefault();
+    setsearchTerm(e.target.value);
+  }
+
+  function handleSearch() {
+    console.log('searching for:', searchTerm);
+    axios.get('/videos', searchTerm)
+      .then((response) => {
+        console.log('client-side response:', response);
+      })
+      .catch((err) => {
+        console.log('err:', err);
+      });
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="#">Old School</Navbar.Brand>
+        <Navbar.Brand href="/">Old School</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -30,8 +49,9 @@ function AppNavbar({ setModalShow, isLoggedIn }) {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                onChange={handleSearchChange}
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-success" onClick={handleSearch}>Search</Button>
             </Form>
           </Nav>
           <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
