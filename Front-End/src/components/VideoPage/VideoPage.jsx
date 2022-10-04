@@ -6,6 +6,7 @@ import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link, useLocation } from 'react-router-dom';
 import { signInWithGoogle } from './../Navbar/firebase.js';
+import { cloudName } from '../Modals/config';
 
 import AddComment from '../Modals/AddComment.jsx';
 
@@ -69,12 +70,12 @@ function VideoPage() {
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'demo',
+      cloudName: cloudName,
     },
   });
 
   // -----Video Formatting-----
-  const myVideo = cld.video('docs/walking_talking');
+  const myVideo = cld.video('x4qdcx7l6hyhqes24owk');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
