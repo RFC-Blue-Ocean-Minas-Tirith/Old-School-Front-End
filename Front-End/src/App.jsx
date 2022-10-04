@@ -6,6 +6,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePages/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
 import Upload from './components/Modals/Upload';
+import Flagged from './components/Modals/Flagged'
 
 function App() {
   // const [state, setState] = useState(0)
@@ -32,6 +33,7 @@ function App() {
         <Route path="video_page" element={<VideoPage />} />
       </Routes>
     </div>
+    <Flagged />
     </div>
   );
 }
