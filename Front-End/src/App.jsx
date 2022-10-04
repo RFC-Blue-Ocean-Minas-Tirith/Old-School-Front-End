@@ -28,39 +28,19 @@ function App() {
     registerIsLoggedIn(setIsLoggedIn, setCurrentUser);
   }, []);
 
-  const user = 'AllEyesBlank';
-  const currentUser = {
-    firstName: 'Walrus',
-    lastName: 'Gumbo',
-
-    profilePicture: 'https://source.unsplash.com/oEcsvUfCr1c/384x192',
-    username: 'Walrusington',
-    email: 'example@example.com',
-    password: 'xcddfc',
-    aboutMe: 'I am a walrus, it is pretty okay.',
-    favCreator: [],
-  };
+  // const user = 'AllEyesBlank';
 
   return (
     <div>
-    <div className="App">
-      <AppNavbar
-        setModalShow={setModalShow}
-        isLoggedIn={isLoggedIn}
-      />
-      <Upload setModalShow={setModalShow} modalShow={modalShow} />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser}/>} />
-        <Route path="video_page" element={<VideoPage />} />
-      </Routes>
-    </div>
       <div className="App">
-        <AppNavbar setModalShow={setModalShow} modalShow={modalShow} />
+        <AppNavbar
+          setModalShow={setModalShow}
+          isLoggedIn={isLoggedIn}
+        />
         <Upload setModalShow={setModalShow} modalShow={modalShow} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="profile_page" element={<ProfilePage user={user} currentUser={currentUser} />} />
+          <Route path="profile_page" element={<ProfilePage />} />
           <Route path="video_page" element={<VideoPage />} />
         </Routes>
       </div>

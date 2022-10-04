@@ -1,9 +1,10 @@
 /* eslint-disable no-alert */
-/* eslint-disable no-console */
+/* eslint-disable */
 import { initializeApp } from 'firebase/app';
 import {
   getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,
 } from 'firebase/auth';
+
 import { firebaseConfig } from './firebaseConfig';
 
 const app = initializeApp(firebaseConfig);

@@ -7,11 +7,13 @@ import BlogCarousel from './BlogCarousel';
 import VideoCarousel from './VideoCarousel';
 import AboutMe from './AboutMe';
 
-function ProfilePage({ user, currentUser }) {
+function ProfilePage() {
   const [videos, setVideos] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [userObj, setUser] = useState({});
   const location = useLocation();
+
+  const { user, currentUser } = location.state;
 
   function fetchData() {
     return axios.get(`http://localhost:8080/user/${user}`)
