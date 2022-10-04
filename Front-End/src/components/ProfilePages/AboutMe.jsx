@@ -3,26 +3,35 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { signInWithGoogle } from './../Navbar/firebase.js';
 
 function AboutMe({ user, currentUser }) {
   const [faved, setFaved] = useState(false)
   function handleFave() {
-    return axios.put('http://localhost:8080/userprofile', { currentUser: currentUser, user: user })
+    if (currentUser) {
+      return axios.put('http://localhost:8080/userprofile', { currentUser: currentUser, user: user })
       .then((data) => {
         setFaved(true);
       })
+    }
+    signInWithGoogle();
   }
 
   function handleUnfave() {
-    return axios.put('http://localhost:8080/userprofilex', { currentUser: currentUser, user: user})
-      .then((data) => {
-        setFaved(false);
-      })
+    if (currentUser) {
+      return axios.put('http://localhost:8080/userprofilex', { currentUser: currentUser, user: user})
+        .then((data) => {
+          setFaved(false);
+        })
+    }
+    signInWithGoogle();
   }
 
   useEffect(() => {
-    if (currentUser.favCreator.indexOf(user.username) !== -1) {
-      setFaved(true)
+    if (currentUser) {
+      if (currentUser.favCreator.indexOf(user.username) !== -1) {
+        setFaved(true)
+      }
     }
   })
 

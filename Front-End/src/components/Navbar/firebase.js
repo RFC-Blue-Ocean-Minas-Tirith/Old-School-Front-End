@@ -1,11 +1,11 @@
 /* eslint-disable no-alert */
-/* eslint-disable no-console */
+/* eslint-disable */
 import { initializeApp } from 'firebase/app';
 import {
   getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,
 } from 'firebase/auth';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: 'AIzaSyC4_5_rG4jZq1qOxfL4ct_5juWOd15Qp7s',
   authDomain: 'blue-ocean-old-school.firebaseapp.com',
   projectId: 'blue-ocean-old-school',
