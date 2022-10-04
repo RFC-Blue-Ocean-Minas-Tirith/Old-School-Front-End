@@ -13,23 +13,27 @@ function ProfilePage({ user, currentUser }) {
   const [userObj, setUser] = useState({});
   const location = useLocation();
 
-  useEffect(() => {
+  function fetchData() {
     return axios.get(`http://localhost:8080/user/${user}`)
-      .then((data) => {
-        setUser(data.data);
-      })
-      .then(() => {
-        return axios.get(`http://localhost:8080/video/user/${user}`)
-      })
-      .then((data) => {
-        setVideos(data.data);
-      })
-      .then(() => {
-        return axios.get(`http://localhost:8080/blog/user/${user}`);
-      })
-      .then((data) => {
-        setBlogs(data.data);
-      });
+    .then((data) => {
+      setUser(data.data);
+    })
+    .then(() => {
+      return axios.get(`http://localhost:8080/video/user/${user}`)
+    })
+    .then((data) => {
+      setVideos(data.data);
+    })
+    .then(() => {
+      return axios.get(`http://localhost:8080/blog/user/${user}`);
+    })
+    .then((data) => {
+      setBlogs(data.data);
+    });
+  }
+
+  useEffect(() => {
+    fetchData();
   }, [user]);
 
   return (
