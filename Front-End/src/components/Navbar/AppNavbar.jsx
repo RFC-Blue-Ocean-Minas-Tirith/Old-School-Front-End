@@ -12,7 +12,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle } from './firebase';
 
-function AppNavbar({ setModalShow, isLoggedIn }) {
+function AppNavbar({ setModalShow, isLoggedIn, setVideoData }) {
   const [searchTerm, setsearchTerm] = useState('');
 
   function handleSearchChange(e) {
@@ -22,9 +22,10 @@ function AppNavbar({ setModalShow, isLoggedIn }) {
 
   function handleSearch() {
     console.log('searching for:', searchTerm);
-    axios.get('/videos', searchTerm)
+    axios.get('http://localhost:8080/videos', { params: { searchTerm } })
       .then((response) => {
-        console.log('client-side response:', response);
+        console.log('video search results:', response.data);
+        setVideoData(response.data);
       })
       .catch((err) => {
         console.log('err:', err);
@@ -49,9 +50,9 @@ function AppNavbar({ setModalShow, isLoggedIn }) {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
-                onChange={handleSearchChange}
+                onChange={() => handleSearchChange}
               />
-              <Button variant="outline-success" onClick={handleSearch}>Search</Button>
+              <Button variant="outline-success" onClick={() => handleSearch}>Search</Button>
             </Form>
           </Nav>
           <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
