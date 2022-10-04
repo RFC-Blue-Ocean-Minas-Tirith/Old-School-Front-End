@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
@@ -25,6 +26,7 @@ function VideoPage() {
     profilePicture: 'https://lh3.googleusercontent.com/a-/ACNPEu8qlJebzGRXncV4yX8XwLCtyJfZn1rpv32P4nw5=s96-c',
   };
   const video = {};
+
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
     _id: `633b508828a2b0d986c22f92`,
@@ -79,7 +81,7 @@ function VideoPage() {
     private: false,
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const currUser = currentUser;
+  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
   const [showModal, setShowModal] = useState(false);
   const firstPic = currentVid.URL.replace('.mp4', '.jpeg');
   const cld = new Cloudinary({
@@ -98,9 +100,9 @@ function VideoPage() {
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
-  // useEffect(() => {
-  //   setCurrentVid(video);
-  // }, [video]);
+  useEffect(() => {
+    setCurrentVid(video);
+  }, [video]);
 
   useEffect(() => {
     axios.get(`http://localhost:8080/user/${currUser.username}`)
@@ -249,7 +251,7 @@ function VideoPage() {
               <ListGroup.Item as="li" key={comment.id}>
                 <div className="commentRow">
                   <h5>{comment.author}</h5>
-                  <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
+                  {/* <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6> */}
                 </div>
                 <p>{comment.comment}</p>
                 <h6 className="report" index={index} type='comment' onClick={report}>Report Comment</h6>

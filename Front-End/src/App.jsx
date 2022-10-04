@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -13,10 +13,22 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState();
+  const [videoData, setVideoData] = useState('');
 
   function handleAddUserToDB() {
     axios.post('http://localhost:8080/user', currentUser);
   }
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/video')
+      .then(res => {
+        setVideoData(res.data);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }, [])
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -36,11 +48,15 @@ function App() {
         <AppNavbar
           setModalShow={setModalShow}
           isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
+          setVideoData={setVideoData}
         />
         <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
         <Routes>
-          <Route path="/" element={<LandingPage currentUser={currentUser} />} />
+          <Route path="/" element={
+          <LandingPage
+            currentUser={currentUser}
+            videoData={videoData}
+            setVideoData={setVideoData} />} />
           <Route path="profile_page" element={<ProfilePage />} />
           <Route path="video_page" element={<VideoPage />} />
         </Routes>
