@@ -5,8 +5,11 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link } from 'react-router-dom';
-
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 import AddComment from '../Modals/AddComment.jsx';
+
+const timeAgo = new TimeAgo('en-US');
 
 function VideoPage({ video, user }) {
   // -----State-----
@@ -142,13 +145,27 @@ function VideoPage({ video, user }) {
     setShowModal(display);
   };
 
+  const addComment = (params) => {
+    const vid = { ...currentVid };
+    const comments = [...currentVid.comments];
+    comments.push({
+      id: -1,
+      author: params.username,
+      comment: params.comment,
+      date: timeAgo.format(params.date),
+    });
+    vid.comments = comments;
+    setCurrentVid(vid);
+  };
+
   return (
     <Container style={{ height: '100%' }}>
       <AddComment
         show={showModal}
         toggleModal={toggleModal}
-        user={currUser}
-        videoID={currentVid.objectID}
+        currUser={currUser.username}
+        videoID={currentVid._id}
+        addComment={addComment}
       />
       <Row style={{ marginTop: '30px' }}>
         <Col xs={7}>

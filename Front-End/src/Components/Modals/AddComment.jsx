@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Container, StyledButton } from './Modals.styled';
 
-function AddComment({ currUser, videoID, toggleModal, show }) {
+function AddComment({ currUser, videoID, toggleModal, show, addComment}) {
   const [comment, setComment] = useState();
 
   function handleComment(event) {
@@ -28,7 +28,8 @@ function AddComment({ currUser, videoID, toggleModal, show }) {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
+    addComment(params.params);
   }
 
   return (
