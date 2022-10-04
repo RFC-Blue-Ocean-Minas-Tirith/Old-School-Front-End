@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { LargeButton } from './Modals.styled';
+import { LargeButton, ColumnCentered } from './Modals.styled';
 import Theme from './Theme';
 import UploadBlog from './UploadBlog';
 import UploadVideo from './UploadVideo';
@@ -27,9 +27,11 @@ function Upload(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LargeButton onClick={() => setVideoModalShow(true)}>Video</LargeButton>
-          <LargeButton onClick={() => setBlogModalShow(true)}>Blog</LargeButton>
-          <LargeButton>Livestream</LargeButton>
+          <ColumnCentered>
+            <LargeButton onClick={() => setVideoModalShow(true)}>Video</LargeButton>
+            <LargeButton onClick={() => setBlogModalShow(true)}>Blog</LargeButton>
+            <LargeButton>Livestream</LargeButton>
+          </ColumnCentered>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleClose}>Close</Button>

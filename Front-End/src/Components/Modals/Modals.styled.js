@@ -10,7 +10,12 @@ export const Container = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+`;
+
+export const ColumnCentered = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Row = styled.div`
@@ -93,4 +98,9 @@ export const LeftLabel = styled.label`
 
 export const Checkbox = styled.input`
   width: 5%;
+`
+
+export const Comment = styled.div`
+  border: 1px solid black;
+  border-radius: 5px;
 `

@@ -4,8 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Container, StyledButton } from './Modals.styled';
 
-function AddComment(props) {
-  const [modalShow, setModalShow] = useState(false);
+function AddComment({ currUser, videoID, toggleModal, show }) {
   const [comment, setComment] = useState();
 
   function handleComment(event) {
@@ -15,15 +14,17 @@ function AddComment(props) {
   function handleAdd() {
     const params = {
       params: {
-        username: props.user,
+        username: currUser,
         'comment': comment,
         date: new Date(),
-        url: props.URL,
+        id: videoID,
       },
     };
     axios.patch('http://localhost:8080/video', params)
       .then((results) => {
         console.log(results);
+        toggleModal();
+        setComment();
       })
       .catch((err) => {
         console.log(err);
@@ -33,8 +34,8 @@ function AddComment(props) {
   return (
     <Container>
       <Modal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
+        show={show}
+        onHide={() => toggleModal()}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -51,11 +52,9 @@ function AddComment(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={handleAdd}>Add</Button>
-          {/* <Button onClick={() => setModalShow(false)}>Close</Button> */}
-          <Button onClick={props.toggleModal}>Close</Button>
+          <Button onClick={toggleModal}>Close</Button>
         </Modal.Footer>
       </Modal>
-      {/* <StyledButton variant="primary" onClick={() => setModalShow(true)}>Add Comment</StyledButton> */}
     </Container>
   );
 }
