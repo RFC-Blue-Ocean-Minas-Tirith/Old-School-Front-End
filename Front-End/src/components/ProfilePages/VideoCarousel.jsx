@@ -9,7 +9,7 @@
 import { useEffect, useState } from 'react';
 import VideoCarouselEntry from './VideoCarouselEntry';
 
-function VideoCarousel({ videos }) {
+function VideoCarousel({ videos, currentUser }) {
   const [currentVids, setCurrentVids] = useState({ vids: [], place: 0 });
   function sortThumbs(num) {
     if (videos.length < 3) {
@@ -19,10 +19,8 @@ function VideoCarousel({ videos }) {
     setCurrentVids({ vids: videos.slice(num, num + 3), place: num });
   }
   useEffect(() => {
-    if (videos.indexOf(currentVids.vids[currentVids.place]) === -1) {
-      sortThumbs(0);
-    }
-  });
+    sortThumbs(0)
+  }, [videos]);
 
   if (currentVids.place === 0) {
     if (videos.length < 3) {
@@ -31,7 +29,8 @@ function VideoCarousel({ videos }) {
           <h2 className="text-center"> Video Posts </h2>
           <div className="vid-carousel">
             {currentVids.vids.map((video, index, vids) => (
-              <VideoCarouselEntry video={video} index={index} vids={vids} />
+              // eslint-disable-next-line max-len
+              <VideoCarouselEntry video={video} index={index} vids={vids} currentUser={currentUser} />
             ))}
           </div>
         </div>
@@ -40,12 +39,17 @@ function VideoCarousel({ videos }) {
   }
   if (currentVids.place === 0) {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h2 className="text-center"> Video Posts </h2>
-        <a className="next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
+        <div className="row justify-content-between">
+          <div className="col-2"></div>
+          <div className="col-2">
+            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+          </div>
+        </div>
         <div className="vid-carousel">
           {currentVids.vids.map((video, index, vids) => (
-            <VideoCarouselEntry video={video} index={index} vids={vids} />
+            <VideoCarouselEntry video={video} index={index} vids={vids} currentUser={currentUser} />
           ))}
         </div>
       </div>
@@ -53,25 +57,36 @@ function VideoCarousel({ videos }) {
   }
   if (currentVids.place + 3 === videos.length) {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h2 className="text-center"> Video Posts </h2>
-        <a className="prev" onClick={() => { sortThumbs(currentVids.place - 1) }}>&#10094;</a>
+        <div className="row justify-content-between">
+          <div className="col-2">
+            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+          </div>
+          <div className="col-2"></div>
+        </div>
         <div className="vid-carousel">
           {currentVids.vids.map((video, index, vids) => (
-            <VideoCarouselEntry video={video} index={index} vids={vids} />
+            <VideoCarouselEntry video={video} index={index} vids={vids} currentUser={currentUser} />
           ))}
         </div>
       </div>
     );
   }
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h2 className="text-center"> Video Posts </h2>
-      <a className="prev" onClick={() => { sortThumbs(currentVids.place - 1) }}>&#10094;</a>
-      <a className="next" onClick={() => { sortThumbs(currentVids.place + 1) }}>&#10095;</a>
+      <div className="row justify-content-between">
+        <div className="col-2">
+          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+        </div>
+        <div className="col-2">
+          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+        </div>
+      </div>
       <div className="vid-carousel">
         {currentVids.vids.map((video, index, vids) => (
-          <VideoCarouselEntry video={video} index={index} vids={vids} />
+          <VideoCarouselEntry video={video} index={index} vids={vids} currentUser={currentUser} />
         ))}
       </div>
     </div>

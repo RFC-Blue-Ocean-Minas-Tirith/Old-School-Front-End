@@ -18,10 +18,8 @@ function BlogCarousel({ blogs }) {
     setCurrentBlgs({ blgs: blogs.slice(num, num + 3), place: num });
   }
   useEffect(() => {
-    if (blogs.indexOf(currentBlgs.blgs[currentBlgs.place]) === -1) {
-      sortThumbs(0);
-    }
-  });
+    sortThumbs(0);
+  }, [blogs]);
 
   if (currentBlgs.place === 0) {
     if (blogs.length <= 3) {
@@ -39,9 +37,14 @@ function BlogCarousel({ blogs }) {
   }
   if (currentBlgs.place === 0) {
     return (
-      <div>
+      <div className="container-fluid">
         <h2 className="text-center"> Blog Posts </h2>
-        <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
+        <div className="row justify-content-between">
+          <div className="col-2"></div>
+          <div className="col-2">
+            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
+          </div>
+        </div>
         <div className="vid-carousel">
           {currentBlgs.blgs.map((blog, index, blgs) => (
             <BlogCarouselEntry blog={blog} index={index} blgs={blgs} />
@@ -52,9 +55,14 @@ function BlogCarousel({ blogs }) {
   }
   if (currentBlgs.place + 3 === blogs.length) {
     return (
-      <div>
+      <div className="container-fluid">
         <h2 className="text-center"> Blog Posts </h2>
-        <a className="prev" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>&#10094;</a>
+        <div className="row justify-content-between">
+          <div className="col-2">
+            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
+          </div>
+          <div className="col"></div>
+        </div>
         <div className="vid-carousel">
           {currentBlgs.blgs.map((blog, index, blgs) => (
             <BlogCarouselEntry blog={blog} index={index} blgs={blgs} />
@@ -64,10 +72,16 @@ function BlogCarousel({ blogs }) {
     );
   }
   return (
-    <div>
+    <div className="container-fluid">
       <h2 className="text-center"> Blog Posts </h2>
-      <a className="prev" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>&#10094;</a>
-      <a className="next" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>&#10095;</a>
+      <div className="row justify-content-between">
+        <div className="col-2">
+          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
+        </div>
+        <div className="col-2">
+          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
+        </div>
+      </div>
       <div className="vid-carousel">
         {currentBlgs.blgs.map((blog, index, blgs) => (
           <BlogCarouselEntry blog={blog} index={index} blgs={blgs} />
