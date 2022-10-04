@@ -49,7 +49,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           setVideoData={setVideoData}
         />
-        <Upload setModalShow={setModalShow} modalShow={modalShow} />
+        <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
         <Routes>
           <Route path="/" element={
           <LandingPage
