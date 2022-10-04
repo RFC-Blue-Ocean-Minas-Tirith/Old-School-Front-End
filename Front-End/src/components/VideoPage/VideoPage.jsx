@@ -7,8 +7,10 @@ import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link, useLocation } from 'react-router-dom';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import { signInWithGoogle } from './../Navbar/firebase.js';
-import AddComment from '../Modals/AddComment.jsx';
+import { signInWithGoogle } from './../Navbar/firebase';
+import { cloudName } from '../Modals/config';
+
+import AddComment from '../Modals/AddComment';
 const timeAgo = new TimeAgo('en-US');
 
 function VideoPage() {
@@ -73,12 +75,12 @@ function VideoPage() {
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'demo',
+      cloudName: cloudName,
     },
   });
 
   // -----Video Formatting-----
-  const myVideo = cld.video('docs/walking_talking');
+  const myVideo = cld.video('x4qdcx7l6hyhqes24owk');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
@@ -90,7 +92,7 @@ function VideoPage() {
   const updateVote = (e) => {
     // TODO: add in Authentication by updating both local and DB username array on the vote value
     // FIXME: why does this reload the video?
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -110,7 +112,7 @@ function VideoPage() {
   };
 
   const favorite = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -131,7 +133,7 @@ function VideoPage() {
   };
 
   const report = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }

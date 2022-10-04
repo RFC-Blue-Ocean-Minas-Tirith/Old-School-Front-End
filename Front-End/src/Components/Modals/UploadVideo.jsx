@@ -17,6 +17,7 @@ function UploadVideo(props) {
   const [keywords, setKeywords] = useState([]);
   const [isKeyReleased, setIsKeyReleased] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -42,7 +43,9 @@ function UploadVideo(props) {
 
   function checkUploadResult(resultEvent) {
     if (resultEvent.event === 'success') {
+      console.log('Done! Video info: ', resultEvent.info)
       setVideoUrl(resultEvent.info.url);
+      setThumbnailUrl(resultEvent.info.thumbnail_url);
     };
   }
 
@@ -50,6 +53,7 @@ function UploadVideo(props) {
     {
       cloudName: cloudName,
       uploadPreset: uploadPreset,
+      sources: ['local', 'url', 'google_drive'],
     },
     (error, result) => { checkUploadResult(result); },
   );
@@ -83,6 +87,7 @@ function UploadVideo(props) {
         private: isPrivate,
         url: videoUrl,
         votes: votesInfo,
+        thumbnail: thumbnailUrl,
       },
     };
     axios.post('http://localhost:8080/video', params)

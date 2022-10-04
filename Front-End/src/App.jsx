@@ -38,7 +38,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           currentUser={currentUser}
         />
-        <Upload setModalShow={setModalShow} modalShow={modalShow} />
+        <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
         <Routes>
           <Route path="/" element={<LandingPage currentUser={currentUser} />} />
           <Route path="profile_page" element={<ProfilePage />} />
