@@ -36,10 +36,11 @@ function App() {
         <AppNavbar
           setModalShow={setModalShow}
           isLoggedIn={isLoggedIn}
+          currentUser={currentUser}
         />
         <Upload setModalShow={setModalShow} modalShow={modalShow} />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage currentUser={currentUser} />} />
           <Route path="profile_page" element={<ProfilePage />} />
           <Route path="video_page" element={<VideoPage />} />
         </Routes>
