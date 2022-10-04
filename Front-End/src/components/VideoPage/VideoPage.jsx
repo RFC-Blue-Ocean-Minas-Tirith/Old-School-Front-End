@@ -137,8 +137,7 @@ function VideoPage({ video, user }) {
       });
   };
 
-  const toggleModal = (e) => {
-    e.preventDefault();
+  const toggleModal = () => {
     const display = !showModal;
     setShowModal(display);
   };
