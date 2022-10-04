@@ -6,7 +6,7 @@ import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link } from 'react-router-dom';
 
-// import AddComment from '../Modals/AddComment.jsx';
+import AddComment from '../Modals/AddComment.jsx';
 
 function VideoPage({ video, user }) {
   // -----State-----
@@ -127,20 +127,19 @@ function VideoPage({ video, user }) {
     }
   };
 
-  const toggleModal = (e) => {
-    e.preventDefault();
+  const toggleModal = () => {
     const display = !showModal;
     setShowModal(display);
   };
 
   return (
     <Container style={{ height: '100%' }}>
-      {/* <AddComment
+      <AddComment
         style={{ show: showModal }}
         toggleModal={toggleModal}
         user={currUser}
         videoID={currentVid.objectID}
-      /> */}
+      />
       <Row style={{ marginTop: '30px' }}>
         <Col xs={7}>
           <div>
