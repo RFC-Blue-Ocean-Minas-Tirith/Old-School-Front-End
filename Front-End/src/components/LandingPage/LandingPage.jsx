@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import {Routes, Route, useNavigate, Link} from 'react-router-dom';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -109,7 +108,7 @@ const LandingPage = () => {
         <select  onChange={(e) => {
           const selectedMenuOption = e.target.value;
           setSortOn(selectedMenuOption);}}>
-              <option value = 'recent'>most recent</option>
+             <option value = 'recent'>most recent</option>
               <option value = 'informative'>Informative</option>
               <option value = 'favorited'>most favorited creators</option>
               <option value = 'insightful'>Insightful</option>
@@ -127,9 +126,7 @@ const LandingPage = () => {
             {(button)?<Button onClick = {handleFavorite}variant="primary">Favorite</Button>:<div></div>}
             </Col>
           </Row>
-          <Link to="/profile_page" state={{ user: videoData[index].username }}>
           <h5 class="border border-warning">{videoData[index].username}</h5>
-          </Link>
           <h5 class="border border-dark">{videoData[index].description}</h5>
           <div >
             <Row>
