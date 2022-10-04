@@ -6,6 +6,7 @@ import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link, useLocation } from 'react-router-dom';
 import { signInWithGoogle } from './../Navbar/firebase.js';
+import { cloudName } from '../Modals/config';
 
 import AddComment from '../Modals/AddComment.jsx';
 
@@ -69,7 +70,7 @@ function VideoPage() {
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'dulhjtu0p',
+      cloudName: cloudName,
     },
   });
 
