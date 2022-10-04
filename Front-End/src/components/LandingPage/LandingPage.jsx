@@ -25,6 +25,11 @@ const LandingPage = () => {
   const [isFunny, setFunny] = useState(false);
   const [isInformative, setInformative] = useState(false);
 
+  useEffect(() => {
+    console.log(isFavorite);
+  },[isFavorite])
+
+
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData) {
@@ -199,13 +204,13 @@ const LandingPage = () => {
       .catch(err => console.log(err));
   }
   function handleFave() {
-    return axios.put('http://localhost:8080/userprofile', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://localhost:8080/video/userprofile', { currentUser: currentUser, user: videoData[index].username })
     .then((data) => {
       setIsFavorite(true);
     });
   }
   function handleUnFave() {
-    return axios.put('http://localhost:8080/userprofilex', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://localhost:8080/video/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setIsFavorite(false);
       });
