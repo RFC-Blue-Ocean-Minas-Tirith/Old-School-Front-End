@@ -42,7 +42,7 @@ function ProfilePage() {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4">
-          <AboutMe user={userObj} currentUser={currentUser} />
+          <AboutMe user={userObj} currentUser={{'username': 'AllEyesBlank', favCreator: ['soup', 'soupy']}} />
         </div>
         <div className="col-md-8">
           <VideoCarousel videos={videos} currentUser={currentUser} />
