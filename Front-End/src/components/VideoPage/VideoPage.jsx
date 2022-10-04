@@ -18,6 +18,7 @@ function VideoPage() {
   // const { video, currentUser } = location.state;
   const currentUser = { username: 'Grompler' };
   const video = {};
+
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
     _id: `633b508828a2b0d986c22f92`,
@@ -71,7 +72,7 @@ function VideoPage() {
     private: false,
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const currUser = currentUser;
+  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
