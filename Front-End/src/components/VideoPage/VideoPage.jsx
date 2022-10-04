@@ -16,15 +16,22 @@ const timeAgo = new TimeAgo('en-US');
 function VideoPage() {
   const location = useLocation();
   // const { video, currentUser } = location.state;
-  const currentUser = { username: 'Grompler' };
+  const currentUser = {
+    username: 'Kevin Moyer',
+    uid: '',
+    email: 'kevin7.moyer@gmail.com',
+    favCreator: [],
+    isAdmin: false,
+    profilePicture: 'https://lh3.googleusercontent.com/a-/ACNPEu8qlJebzGRXncV4yX8XwLCtyJfZn1rpv32P4nw5=s96-c',
+  };
   const video = {};
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
     _id: `633b508828a2b0d986c22f92`,
-    title: 'Jay Talking',
+    title: 'Lookin Around',
     description: 'Jay Pritchett\'s complaints about goat cheese',
-    username: 'Jay',
-    date_Uploaded: '2022-10-03T21:13:44.576Z',
+    username: 'Kevin Moyer',
+    dateUploaded: '2022-10-03T21:13:44.576Z',
     comments: [{
       id: 1,
       author: 'Alice',
@@ -56,7 +63,8 @@ function VideoPage() {
       date: '2022-10-04T19:29:31.146Z',
     },
     ],
-    URL: 'http://res.cloudinary.com/dulhjtu0p/raw/upload/v1664831615/whdt2ntpbmygnj14zqih',
+    URL: 'http://res.cloudinary.com/dulhjtu0p/video/upload/v1664917298/dxedveswjewbth38qulg.mp4',
+    thumbnail: 'https://res.cloudinary.com/dulhjtu0p/video/upload/c_limit,h_60,w_90/v1664917298/dxedveswjewbth38qulg.jpg',
     votes: {
       insightful: {
         usernames: ['john', 'jacob', 'jimmerheimer'],
@@ -73,6 +81,7 @@ function VideoPage() {
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
   const currUser = currentUser;
   const [showModal, setShowModal] = useState(false);
+  const firstPic = currentVid.URL.replace('.mp4', '.jpeg');
   const cld = new Cloudinary({
     cloud: {
       cloudName: cloudName,
@@ -80,7 +89,12 @@ function VideoPage() {
   });
 
   // -----Video Formatting-----
-  const myVideo = cld.video('x4qdcx7l6hyhqes24owk');
+  let publicID = currentVid.URL.split('/');
+  publicID = publicID[publicID.length - 1];
+  publicID = publicID.substring(0, publicID.length - 4);
+  const myVideo = cld.video(publicID, {
+    controls: true,
+  });
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
@@ -119,13 +133,14 @@ function VideoPage() {
     e.preventDefault();
     if (favorited[0] === 'unfavorited') {
       setFavorited(['favorited', 'This is one of your Favorite Creators']);
-      axios.put('http://localhost:8080/userprofile', { currentUser: currUser.username, user: currentVid.username })
+      console.log(currUser.username, currentVid.username);
+      axios.put('http://localhost:8080/userprofile', { currentUser: currUser, user: currentVid.username })
         .catch((err) => {
           console.log(err);
         });
     } else {
       setFavorited(['unfavorited', 'Favorite this Creator!']);
-      axios.put('http://localhost:8080/userprofilex', { currentUser: currUser.username, user: currentVid.username })
+      axios.put('http://localhost:8080/userprofilex', { currentUser: currUser, user: currentVid.username })
         .catch((err) => {
           console.log(err);
         });
@@ -176,11 +191,11 @@ function VideoPage() {
       <Row style={{ marginTop: '30px' }}>
         <Col xs={8}>
           <div>
-            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" />
+            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
           </div>
           <div className="videoCreator">
             <h2>{currentVid.title}</h2>
-            <h6>{timeAgo.format(new Date(currentVid.date_Uploaded))}</h6>
+            <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
           </div>
           <div className="videoCreator">
             <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
