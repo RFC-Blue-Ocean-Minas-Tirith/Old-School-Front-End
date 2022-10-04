@@ -102,6 +102,17 @@ function VideoPage() {
   //   setCurrentVid(video);
   // }, [video]);
 
+  useEffect(() => {
+    axios.get(`http://localhost:8080/user/${currUser.username}`)
+      .then(({ data }) => {
+        const favorite = data.favCreator.indexOf(currentVid.username) === -1 ? ['unfavorited', 'Favorite this Creator!'] : ['favorited', 'This is one of your Favorite Creators'];
+        setFavorited(favorite);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [currentUser]);
+
   // -----Event Handlers-----
   const updateVote = (e) => {
     // TODO: add in Authentication by updating both local and DB username array on the vote value
