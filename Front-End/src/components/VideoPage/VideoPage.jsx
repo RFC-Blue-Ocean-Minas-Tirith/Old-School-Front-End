@@ -89,7 +89,7 @@ function VideoPage() {
   const updateVote = (e) => {
     // TODO: add in Authentication by updating both local and DB username array on the vote value
     // FIXME: why does this reload the video?
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -109,7 +109,7 @@ function VideoPage() {
   };
 
   const favorite = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -130,7 +130,7 @@ function VideoPage() {
   };
 
   const report = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
