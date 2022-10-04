@@ -4,11 +4,14 @@ import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { signInWithGoogle } from './../Navbar/firebase.js';
 
 import AddComment from '../Modals/AddComment.jsx';
 
-function VideoPage({ video, user }) {
+function VideoPage() {
+  const location = useLocation();
+  const { video, currentUser } = location.state;
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
     _id: `ObjectId("633b508828a2b0d986c22f92")`,
@@ -62,7 +65,7 @@ function VideoPage({ video, user }) {
     private: false,
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
+  const currUser = currentUser;
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
@@ -75,26 +78,21 @@ function VideoPage({ video, user }) {
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
-  // useEffect(() => {
-  //   /* don't use this one */axios.get('/video', { video })
-  //     .then((response) => {
-  //       setCurrentVid(response);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  /* end of don't use */
-  // setCurrentVid(video);
-  // }, [video]);
+  useEffect(() => {
+    setCurrentVid(video);
+  }, [video]);
 
   // useEffect(() => {
   //   setCurrUser(user);
   // }, [user]);
-
   // -----Event Handlers-----
   const updateVote = (e) => {
     // TODO: add in Authentication by updating both local and DB username array on the vote value
     // FIXME: why does this reload the video?
+    if (!currUser) {
+      signInWithGoogle();
+      return;
+    }
     e.preventDefault();
     const button = e.target.id;
     if (currentVid.votes[button].usernames.indexOf(currUser.username) === -1) {
@@ -111,6 +109,10 @@ function VideoPage({ video, user }) {
   };
 
   const favorite = (e) => {
+    if (!currUser) {
+      signInWithGoogle();
+      return;
+    }
     e.preventDefault();
     if (favorited[0] === 'unfavorited') {
       setFavorited(['favorited', 'This is one of your Favorite Creators']);
@@ -128,6 +130,10 @@ function VideoPage({ video, user }) {
   };
 
   const report = (e) => {
+    if (!currUser) {
+      signInWithGoogle();
+      return;
+    }
     e.preventDefault();
     const id = e.target.attributes[1].nodeValue;
     const type = e.target.attributes[2].nodeValue;
@@ -158,7 +164,7 @@ function VideoPage({ video, user }) {
           <h2>{currentVid.title}</h2>
           <p>{currentVid.date}</p>
           <div className="videoCreator" >
-            <Link to="/profile_page" state={{ creator: currentVid.username, user: currUser }}> {/* TODO: pass creator name as props */}
+            <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
             <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
