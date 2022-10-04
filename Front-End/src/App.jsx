@@ -28,18 +28,22 @@ function App() {
     registerIsLoggedIn(setIsLoggedIn, setCurrentUser);
   }, []);
 
+  // const user = 'AllEyesBlank';
+
   return (
-    <div className="App">
-      <AppNavbar
-        setModalShow={setModalShow}
-        isLoggedIn={isLoggedIn}
-      />
-      <Upload setModalShow={setModalShow} modalShow={modalShow} />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="profile_page" element={<ProfilePage />} />
-        <Route path="video_page" element={<VideoPage />} />
-      </Routes>
+    <div>
+      <div className="App">
+        <AppNavbar
+          setModalShow={setModalShow}
+          isLoggedIn={isLoggedIn}
+        />
+        <Upload setModalShow={setModalShow} modalShow={modalShow} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="profile_page" element={<ProfilePage />} />
+          <Route path="video_page" element={<VideoPage />} />
+        </Routes>
+      </div>
     </div>
   );
 }
