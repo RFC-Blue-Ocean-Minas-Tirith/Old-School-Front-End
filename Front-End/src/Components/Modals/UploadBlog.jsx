@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
@@ -15,6 +15,15 @@ function UploadBlog(props) {
   const [keyword, setKeyword] = useState('');
   const [keywords, setKeywords] = useState([]);
   const [isKeyReleased, setIsKeyReleased] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setSubmitted(false);
+    setValues(initialValues);
+    setIsPrivate(false);
+    setKeywords([]);
+    setKeyword('');
+  }, [props]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -40,14 +49,8 @@ function UploadBlog(props) {
       }
     };
     axios.post('http://localhost:8080/blog', params)
-      .then((results) => {
-        console.log(results);
-        setValues(initialValues);
-        setIsPrivate(false);
-        setKeywords([]);
-        setKeyword('');
-        props.setBlogModalShow(false);
-        props.setModalShow(false);
+      .then(() => {
+        setSubmitted(true);
       })
       .catch((err) => {
         console.log(err);
@@ -88,6 +91,35 @@ function UploadBlog(props) {
   const deleteTag = (index) => {
     setKeywords((prevState) => prevState.filter((tag, i) => i !== index));
   };
+
+  if (submitted) {
+    return (
+      <Modal
+        show={props.blogModalShow}
+        onHide={() => props.setBlogModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add a Blog Post
+        </Modal.Title>
+        </Modal.Header>
+      <Modal.Body>
+        <h2>Blog Post Submitted!</h2>
+        <h4>Blog Title: </h4> {values.title}
+        <h4>Blog Post: </h4> {values.description}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={() => {
+          props.setBlogModalShow(false);
+        }}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )} else {
 
   return (
 
@@ -139,10 +171,6 @@ function UploadBlog(props) {
       <Modal.Footer>
         <Button onClick={handleAdd}>Add</Button>
         <Button onClick={() => {
-          setValues(initialValues);
-          setIsPrivate(false);
-          setKeywords([]);
-          setKeyword('');
           props.setBlogModalShow(false);
         }}>
           Close
@@ -150,6 +178,7 @@ function UploadBlog(props) {
       </Modal.Footer>
     </Modal>
   );
+  }
 }
 
 export default UploadBlog;
