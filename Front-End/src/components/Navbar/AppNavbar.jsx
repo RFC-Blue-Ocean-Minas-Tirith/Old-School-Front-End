@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
+/* eslint-disable */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
@@ -11,7 +12,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle } from './firebase';
 
-function AppNavbar({ setModalShow, isLoggedIn }) {
+function AppNavbar({ setModalShow, isLoggedIn, currentUser }) {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -23,7 +24,7 @@ function AppNavbar({ setModalShow, isLoggedIn }) {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+            <Link to="/" className="nav-link active" aria-current="page" state={{ currentUser: currentUser }}>Home</Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"

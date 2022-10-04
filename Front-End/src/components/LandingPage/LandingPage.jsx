@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import {Routes, Route, useNavigate, Link} from 'react-router-dom';
+import {Routes, Route, useNavigate, Link, useLocation} from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -16,8 +16,9 @@ const timeAgo = new TimeAgo('en-US');
 
 //TODO:  Add an alt description for each img
 
-const LandingPage = () => {
-
+const LandingPage = ({currentUser}) => {
+  const location = useLocation()
+  // const { currentUser } = location.state;
   const [index, setIndex] = useState(0);
   const [videoData, setVideoData] = useState('');
   const [thumbnails, setThumbnails] = useState('');
@@ -109,7 +110,7 @@ const LandingPage = () => {
         <select  onChange={(e) => {
           const selectedMenuOption = e.target.value;
           setSortOn(selectedMenuOption);}}>
-             <option value = 'recent'>most recent</option>
+              <option value = 'recent'>most recent</option>
               <option value = 'informative'>Informative</option>
               <option value = 'favorited'>most favorited creators</option>
               <option value = 'insightful'>Insightful</option>
@@ -145,7 +146,9 @@ const LandingPage = () => {
             {
               thumbnails.map((thumbnail, i) => {
                 return (<Carousel.Item key={i}>
-                  <img onClick = {navigateToVideoPage} className="d-block w-100" src={thumbnail} />
+                  <Link to="video_page" state={{ currentUser: currentUser, video: videoData[index] }}>
+                  <img className="d-block w-100" src={thumbnail} />
+                  </Link>
                 </Carousel.Item>)
               })
             }
