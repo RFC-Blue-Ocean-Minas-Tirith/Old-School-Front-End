@@ -148,9 +148,9 @@ function UploadBlog(props) {
               </Row>
               <LeftLabel>
                 Blog Post:
-              </LeftLabel>
-              <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} />
-              <LeftLabel>Keywords:</LeftLabel>
+              </LeftLabel><br />
+              <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} /><br />
+              <LeftLabel>Keywords:</LeftLabel><br />
               <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
               {keywords.length > 0 && (
               <Tags>

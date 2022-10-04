@@ -16,8 +16,8 @@ function Flagged(props) {
         results.data.forEach((video) => {
           video.comments.forEach((comment) => {
             array.push(comment);
-          })
-        })
+          });
+        });
         setFlagged(array);
       })
       .catch((err) => {
@@ -25,7 +25,7 @@ function Flagged(props) {
       });
   }, [modalShow]);
 
-  function handleDelete() {
+  function handleDelete(e) {
     let copy = flagged.slice();
     copy.splice(e.target.value, 1);
     setFlagged(copy);
@@ -37,6 +37,13 @@ function Flagged(props) {
     copy.splice(e.target.value, 1);
     setFlagged(copy);
     // write request to set reported to true in database
+    // axios.patch('http://localhost:8080/flaggedComments')
+    //   .then((results) => {
+    //     console.log(results);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   return (

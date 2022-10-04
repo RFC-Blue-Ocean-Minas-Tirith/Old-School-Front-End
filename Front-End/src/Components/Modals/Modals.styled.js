@@ -10,7 +10,12 @@ export const Container = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+`;
+
+export const ColumnCentered = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Row = styled.div`
