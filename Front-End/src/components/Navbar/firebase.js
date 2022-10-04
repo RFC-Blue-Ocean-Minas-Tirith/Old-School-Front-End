@@ -4,19 +4,8 @@ import { initializeApp } from 'firebase/app';
 import {
   getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,
 } from 'firebase/auth';
-<<<<<<< HEAD
 
-export const firebaseConfig = {
-  apiKey: 'AIzaSyC4_5_rG4jZq1qOxfL4ct_5juWOd15Qp7s',
-  authDomain: 'blue-ocean-old-school.firebaseapp.com',
-  projectId: 'blue-ocean-old-school',
-  storageBucket: 'blue-ocean-old-school.appspot.com',
-  messagingSenderId: '708695349594',
-  appId: '1:708695349594:web:f7e0c791b481816bb3fb63',
-};
-=======
 import { firebaseConfig } from './firebaseConfig';
->>>>>>> 968b4857dc40e617b5dac6e5449fae1bb365bc64
 
 const app = initializeApp(firebaseConfig);
 
