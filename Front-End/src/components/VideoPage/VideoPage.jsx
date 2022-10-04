@@ -71,7 +71,7 @@ function VideoPage({ video, user }) {
   });
 
   // -----Video Formatting-----
-  const myVideo = cld.video('zwcesikwmvebfwdmnvdm');
+  const myVideo = cld.video('x4qdcx7l6hyhqes24owk');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
