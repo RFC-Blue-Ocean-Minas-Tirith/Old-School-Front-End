@@ -42,8 +42,10 @@ function AboutMe({ user, currentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      if (currentUser.favCreator.indexOf(user.username) !== -1) {
-        setFaved(true)
+      if (currentUser.favCreator) {
+        if (currentUser.favCreator.indexOf(user.username) !== -1) {
+          setFaved(true)
+        }
       }
     }
   })

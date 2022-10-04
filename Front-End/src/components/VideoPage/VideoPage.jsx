@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
@@ -15,9 +16,9 @@ const timeAgo = new TimeAgo('en-US');
 
 function VideoPage() {
   const location = useLocation();
-  // const { video, currentUser } = location.state;
-  const currentUser = { username: 'Grompler' };
-  const video = {};
+  const { video, currentUser } = location.state;
+  // const currentUser = { username: 'Grompler' };
+  // const video = {};
 
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
@@ -25,7 +26,7 @@ function VideoPage() {
     title: 'Jay Talking',
     description: 'Jay Pritchett\'s complaints about goat cheese',
     username: 'Jay',
-    date_Uploaded: '2022-10-03T21:13:44.576Z',
+    dateUploaded: '2022-10-03T21:13:44.576Z',
     comments: [{
       id: 1,
       author: 'Alice',
@@ -85,9 +86,9 @@ function VideoPage() {
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
-  // useEffect(() => {
-  //   setCurrentVid(video);
-  // }, [video]);
+  useEffect(() => {
+    setCurrentVid(video);
+  }, [video]);
 
   // -----Event Handlers-----
   const updateVote = (e) => {
@@ -181,7 +182,7 @@ function VideoPage() {
           </div>
           <div className="videoCreator">
             <h2>{currentVid.title}</h2>
-            <h6>{timeAgo.format(new Date(currentVid.date_Uploaded))}</h6>
+            <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
           </div>
           <div className="videoCreator">
             <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
@@ -224,7 +225,7 @@ function VideoPage() {
               <ListGroup.Item as="li" key={comment.id}>
                 <div className="commentRow">
                   <h5>{comment.author}</h5>
-                  <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
+                  {/* <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6> */}
                 </div>
                 <p>{comment.comment}</p>
                 <h6 className="report" index={index} type='comment' onClick={report}>Report Comment</h6>
