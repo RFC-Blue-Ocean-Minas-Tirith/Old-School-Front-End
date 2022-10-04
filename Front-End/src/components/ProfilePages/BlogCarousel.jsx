@@ -18,10 +18,8 @@ function BlogCarousel({ blogs }) {
     setCurrentBlgs({ blgs: blogs.slice(num, num + 3), place: num });
   }
   useEffect(() => {
-    if (blogs.indexOf(currentBlgs.blgs[currentBlgs.place]) === -1) {
-      sortThumbs(0);
-    }
-  });
+    sortThumbs(0);
+  }, [blogs]);
 
   if (currentBlgs.place === 0) {
     if (blogs.length <= 3) {

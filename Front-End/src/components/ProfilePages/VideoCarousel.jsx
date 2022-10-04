@@ -19,10 +19,8 @@ function VideoCarousel({ videos, currentUser }) {
     setCurrentVids({ vids: videos.slice(num, num + 3), place: num });
   }
   useEffect(() => {
-    if (videos.indexOf(currentVids.vids[currentVids.place]) === -1) {
-      sortThumbs(0);
-    }
-  });
+    sortThumbs(0)
+  }, [videos]);
 
   if (currentVids.place === 0) {
     if (videos.length < 3) {
