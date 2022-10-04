@@ -140,22 +140,22 @@ function UploadVideo(props) {
         centered
       >
         <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add a Video
-        </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Video
+          </Modal.Title>
         </Modal.Header>
-      <Modal.Body>
-        <h2>Video Submitted!</h2>
-        <h4>Video Title: </h4> {values.title}
-        <h4>Video Description: </h4> {values.description}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => {
-          props.setVideoModalShow(false);
-        }}>
-          Close
-        </Button>
-      </Modal.Footer>
+        <Modal.Body>
+          <h2>Video Submitted!</h2>
+          <h4>Video Title: </h4> {values.title}
+          <h4>Video Description: </h4> {values.description}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => {
+            props.setVideoModalShow(false);
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
     </Modal>
     )
   } else {

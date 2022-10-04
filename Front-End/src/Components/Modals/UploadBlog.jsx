@@ -102,81 +102,79 @@ function UploadBlog(props) {
         centered
       >
         <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add a Blog Post
-        </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Blog Post
+          </Modal.Title>
         </Modal.Header>
-      <Modal.Body>
-        <h2>Blog Post Submitted!</h2>
-        <h4>Blog Title: </h4> {values.title}
-        <h4>Blog Post: </h4> {values.description}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => {
-          props.setBlogModalShow(false);
-        }}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  )} else {
-
-  return (
-
-    <Modal
-      show={props.blogModalShow}
-      onHide={() => props.setBlogModalShow(false)}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add a Blog Post
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Column>
-          <form>
-            <Row>
-              <LeftLabel>
-                Title:
-              </LeftLabel>
-              <input type="text" placeholder="Title" name="title" value={values.title} onChange={handleInputChange} />
-              <RightLabel>
-                Private
-              </RightLabel>
-              <Checkbox type="checkbox" name="private" value={values.private} onChange={handlePrivate} />
-            </Row>
-            <LeftLabel>
-              Blog Post:
-            </LeftLabel>
-            <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} />
-            <LeftLabel>Keywords:</LeftLabel>
-            <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
-            {keywords.length > 0 && (
-            <Tags>
+        <Modal.Body>
+          <h2>Blog Post Submitted!</h2>
+          <h4>Blog Title: </h4> {values.title}
+          <h4>Blog Post: </h4> {values.description}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => {
+            props.setBlogModalShow(false);
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )} else {
+    return (
+      <Modal
+        show={props.blogModalShow}
+        onHide={() => props.setBlogModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Blog Post
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Column>
+            <form>
               <Row>
-                {keywords.map((word, index) => (
-                  <Tag key={index}>
-                    {word}
-                    <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
-                ))}
+                <LeftLabel>
+                  Title:
+                </LeftLabel>
+                <input type="text" placeholder="Title" name="title" value={values.title} onChange={handleInputChange} />
+                <RightLabel>
+                  Private
+                </RightLabel>
+                <Checkbox type="checkbox" name="private" value={values.private} onChange={handlePrivate} />
               </Row>
-            </Tags>
-            )}
-          </form>
-        </Column>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={handleAdd}>Add</Button>
-        <Button onClick={() => {
-          props.setBlogModalShow(false);
-        }}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
+              <LeftLabel>
+                Blog Post:
+              </LeftLabel>
+              <textarea rows="4" cols="50" placeholder="Write your post here..." name="description" value={values.description} onChange={handleInputChange} />
+              <LeftLabel>Keywords:</LeftLabel>
+              <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+              {keywords.length > 0 && (
+              <Tags>
+                <Row>
+                  {keywords.map((word, index) => (
+                    <Tag key={index}>
+                      {word}
+                      <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
+                  ))}
+                </Row>
+              </Tags>
+              )}
+            </form>
+          </Column>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleAdd}>Add</Button>
+          <Button onClick={() => {
+            props.setBlogModalShow(false);
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
   );
   }
 }
