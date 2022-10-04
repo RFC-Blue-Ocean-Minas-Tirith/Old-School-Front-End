@@ -10,7 +10,6 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 //TODO:  Add an alt description for each img
 function LandingPage({ currentUser, videoData, setVideoData }) {
-  console.log(videoData);
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
@@ -44,7 +43,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         })
       //.then(() => console.log('isFavorite =', isFavorite))
     }
-  })
+  }, [videoData]);
   // ===================== set button state ==========================
   useEffect(() => {
     if (videoData) {
@@ -73,6 +72,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   useEffect(() => {
     getThumbnails();
   }, [sortOn])
+
   const getThumbnails = () => {
     if (sortOn !== 'favorited') {
       axios.get(`http://localhost:8080/video/${sortOn}`)
@@ -197,71 +197,74 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       setFavorited('Favorite this Creator!');
     }
   }
-  return (
-    <div>
-      {
-        (!thumbnails.length) ? <div></div> :
-          <Container class="w-auto p-11">
-            <Row >
-              <Col class="border border-success">
-                <select onChange={(e) => {
-                  const selectedMenuOption = e.target.value;
-                  setSortOn(selectedMenuOption);
-                }}>
-                  <option value='recent'>most recent</option>
-                  <option value='informative'>Informative</option>
-                  <option value='favorited'>most favorited creators</option>
-                  <option value='insightful'>Insightful</option>
-                  <option value='funny'>Funny</option>
-                </select>
-                <Row>
-                  <Col>
-                    <h1>{videoData[index].title}</h1>
-                  </Col>
-                </Row>
-                <Row>
-                  <div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
-                </Row>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                  <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
-                      <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
-                  </Link>
-                  <Badge className="border border-warning" pill bg="warning" text="dark" onClick={() => {
-                    favorites();
-                    (isFavorite) ? handleUnFave() : handleFave()
-                  }
-                  }
-                  >{favorited}</Badge>
-                </div>
-                <h5 >{videoData[index].description}</h5>
-                <div >
-                  <div>
-                    <h5><strong>Mark This Video As:</strong></h5>
-                  </div>
+  if (videoData.length) {
+    return (
+      <div>
+        {
+          (!thumbnails.length) ? <div></div> :
+            <Container class="w-auto p-11">
+              <Row >
+                <Col class="border border-success">
+                  <select onChange={(e) => {
+                    const selectedMenuOption = e.target.value;
+                    setSortOn(selectedMenuOption);
+                  }}>
+                    <option value='recent'>most recent</option>
+                    <option value='informative'>Informative</option>
+                    <option value='favorited'>most favorited creators</option>
+                    <option value='insightful'>Insightful</option>
+                    <option value='funny'>Funny</option>
+                  </select>
                   <Row>
-                    <Col class="border border-primary"> <Button variant="primary" id="insightful" className="vote" onClick={() => (isInsightful) ? handleUnInsightful() : handleInsightful()}>Insightful<Badge bg="secondary" >{videoData[index].votes.insightful.usernames.length}{(isInsightful) ? ':thinking_face:' : ''}</Badge></Button></Col>
-                    <Col> <Button variant="primary" id="funny" className="vote" onClick={() => { (isFunny) ? handleUnFunny() : handleFunny() }}>Funny<Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}{(isFunny) ? ':joy:' : ''}</Badge></Button></Col>
-                    <Col> <Button variant="primary" id="informative" className="vote" onClick={() => { (isInformative) ? handleUnInformative() : handleInformative() }}>Informative<Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}{(isInformative) ? ':information_source:' : ''}</Badge></Button></Col>
+                    <Col>
+                      <h1>{videoData[index].title}</h1>
+                    </Col>
                   </Row>
-                </div>
-              </Col>
-              <Col class="border border-success" md={8}>
-                <Carousel interval={null} onSlide={setIndex}>
-                  {
-                    thumbnails.map((thumbnail, i) => {
-                      return (<Carousel.Item key={i}>
-                        <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                        <img className="d-block w-100" src={thumbnail} />
-                        </Link>
-                      </Carousel.Item>)
-                    })
-                  }
-                </Carousel>
-              </Col>
-            </Row>
-          </Container>
-      }
-    </div>
-  )
+                  <Row>
+                    <div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
+                  </Row>
+                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                    <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
+                      <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
+                    </Link>
+                    <Badge className="border border-warning" pill bg="warning" text="dark" onClick={() => {
+                      favorites();
+                      (isFavorite) ? handleUnFave() : handleFave()
+                    }
+                    }
+                    >{favorited}</Badge>
+                  </div>
+                  <h5 >{videoData[index].description}</h5>
+                  <div >
+                    <div>
+                      <h5><strong>Mark This Video As:</strong></h5>
+                    </div>
+                    <Row>
+                      <Col class="border border-primary"> <Button variant="primary" id="insightful" className="vote" onClick={() => (isInsightful) ? handleUnInsightful() : handleInsightful()}>Insightful<Badge bg="secondary" >{videoData[index].votes.insightful.usernames.length}{(isInsightful) ? ':thinking_face:' : ''}</Badge></Button></Col>
+                      <Col> <Button variant="primary" id="funny" className="vote" onClick={() => { (isFunny) ? handleUnFunny() : handleFunny() }}>Funny<Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}{(isFunny) ? ':joy:' : ''}</Badge></Button></Col>
+                      <Col> <Button variant="primary" id="informative" className="vote" onClick={() => { (isInformative) ? handleUnInformative() : handleInformative() }}>Informative<Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}{(isInformative) ? ':information_source:' : ''}</Badge></Button></Col>
+                    </Row>
+                  </div>
+                </Col>
+                <Col class="border border-success" md={8}>
+                  <Carousel interval={null} onSlide={setIndex}>
+                    {
+                      thumbnails.map((thumbnail, i) => {
+                        return (<Carousel.Item key={i}>
+                          <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
+                            <img className="d-block w-100" src={thumbnail} />
+                          </Link>
+                        </Carousel.Item>)
+                      })
+                    }
+                  </Carousel>
+                </Col>
+              </Row>
+            </Container>
+        }
+      </div>
+    )
+  }
+  return null;
 }
 export default LandingPage;
