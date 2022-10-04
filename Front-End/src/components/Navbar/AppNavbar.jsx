@@ -9,15 +9,9 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { signInWithGoogle, signOutGoogle, getCurrentUser } from './firebase';
+import { signInWithGoogle, signOutGoogle } from './firebase';
 
-function AppNavbar({ setModalShow }) {
-  // const isLoggedIn = getCurrentUser();
-
-  useEffect(() => {
-    getCurrentUser();
-  });
-
+function AppNavbar({ setModalShow, isLoggedIn }) {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -41,8 +35,11 @@ function AppNavbar({ setModalShow }) {
             </Form>
           </Nav>
           <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
-          <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-          {getCurrentUser()
+          {isLoggedIn
+            ? <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
+
+          {isLoggedIn
             ? <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
             : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>

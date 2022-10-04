@@ -4,15 +4,7 @@ import { initializeApp } from 'firebase/app';
 import {
   getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged,
 } from 'firebase/auth';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyC4_5_rG4jZq1qOxfL4ct_5juWOd15Qp7s',
-  authDomain: 'blue-ocean-old-school.firebaseapp.com',
-  projectId: 'blue-ocean-old-school',
-  storageBucket: 'blue-ocean-old-school.appspot.com',
-  messagingSenderId: '708695349594',
-  appId: '1:708695349594:web:f7e0c791b481816bb3fb63',
-};
+import { firebaseConfig } from './firebaseConfig';
 
 const app = initializeApp(firebaseConfig);
 
@@ -23,10 +15,8 @@ export const provider = new GoogleAuthProvider(app);
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const { user } = result;
-      console.log('credential:', credential, 'token:', token, 'user:', user);
+      console.log('Sign-in successful:', user.displayName);
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -38,22 +28,28 @@ export const signInWithGoogle = () => {
 };
 
 export const signOutGoogle = () => {
-  signOut(auth).then(() => {
-    alert('Sign-out successful.');
-  }).catch((error) => {
-    alert('Error signing out:', error);
-  });
+  signOut(auth)
+    .then(() => {
+      console.log('Sign-out successful.');
+    })
+    .catch((error) => {
+      console.log('Error signing out:', error);
+    });
 };
 
-export const getCurrentUser = () => {
+export const registerIsLoggedIn = (setIsLoggedIn, setCurrentUser) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      const { uid } = user;
-      console.log('user:', user);
-      return true;
+      setIsLoggedIn(true);
+      setCurrentUser({
+        username: user.displayName,
+        email: user.email,
+        profilePicture: user.photoURL,
+        uid: user.uid,
+      });
     } else {
-      console.log('No user signed in');
-      return false;
+      setIsLoggedIn(false);
+      setCurrentUser({});
     }
   });
 };
