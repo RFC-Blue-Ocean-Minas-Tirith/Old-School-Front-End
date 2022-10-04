@@ -5,50 +5,56 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
 import { Link, useLocation } from 'react-router-dom';
-import { signInWithGoogle } from './../Navbar/firebase.js';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import { signInWithGoogle } from './../Navbar/firebase';
 import { cloudName } from '../Modals/config';
 
-import AddComment from '../Modals/AddComment.jsx';
+import AddComment from '../Modals/AddComment';
+const timeAgo = new TimeAgo('en-US');
 
 function VideoPage() {
   const location = useLocation();
-  const { video, currentUser } = location.state;
+  // const { video, currentUser } = location.state;
+  const currentUser = { username: 'Grompler' };
+  const video = {};
+
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
-    _id: `ObjectId("633b508828a2b0d986c22f92")`,
+    _id: `633b508828a2b0d986c22f92`,
     title: 'Jay Talking',
     description: 'Jay Pritchett\'s complaints about goat cheese',
     username: 'Jay',
-    date_Uploaded: '10/1/2022',
+    date_Uploaded: '2022-10-03T21:13:44.576Z',
     comments: [{
       id: 1,
       author: 'Alice',
       comment: 'Is that Jake from State Farm?!',
-      date: '10/1/2022',
+      date: '2022-10-03T21:13:44.576Z',
     },
     {
       id: 2,
       author: 'Adam',
       comment: 'Jealous of those beards...',
-      date: '10/1/2022',
+      date: '2022-10-04T19:29:31.146Z',
     },
     {
       id: 3,
       author: 'Vicki',
       comment: 'Look at these bros....',
-      date: '10/1/2022',
+      date: '2022-10-04T19:29:31.146Z',
     },
     {
       id: 4,
       author: 'Melissa',
       comment: 'Is that Colonel Mustard?',
-      date: '10/1/2022',
+      date: '2022-10-04T19:29:31.146Z',
     },
     {
       id: 5,
       author: 'Zach',
       comment: 'Where are they walking though...',
-      date: '10/1/2022',
+      date: '2022-10-04T19:29:31.146Z',
     },
     ],
     URL: 'http://res.cloudinary.com/dulhjtu0p/raw/upload/v1664831615/whdt2ntpbmygnj14zqih',
@@ -66,7 +72,7 @@ function VideoPage() {
     private: false,
   });
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const currUser = currentUser;
+  const [currUser, setCurrUser] = useState({ username: 'Grompler' }); // FIXME: change to empty object when we have data
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
@@ -79,18 +85,15 @@ function VideoPage() {
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
-  useEffect(() => {
-    setCurrentVid(video);
-  }, [video]);
-
   // useEffect(() => {
-  //   setCurrUser(user);
-  // }, [user]);
+  //   setCurrentVid(video);
+  // }, [video]);
+
   // -----Event Handlers-----
   const updateVote = (e) => {
     // TODO: add in Authentication by updating both local and DB username array on the vote value
     // FIXME: why does this reload the video?
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -110,7 +113,7 @@ function VideoPage() {
   };
 
   const favorite = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -131,7 +134,7 @@ function VideoPage() {
   };
 
   const report = (e) => {
-    if (!currUser) {
+    if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
     }
@@ -149,22 +152,38 @@ function VideoPage() {
     setShowModal(display);
   };
 
+  const addComment = (params) => {
+    const vid = { ...currentVid };
+    const comments = [...currentVid.comments];
+    comments.push({
+      id: -1,
+      author: params.username,
+      comment: params.comment,
+      date: (params.date),
+    });
+    vid.comments = comments;
+    setCurrentVid(vid);
+  };
+
   return (
     <Container style={{ height: '100%' }}>
       <AddComment
         show={showModal}
         toggleModal={toggleModal}
-        user={currUser}
-        videoID={currentVid.objectID}
+        currUser={currUser.username}
+        videoID={currentVid._id}
+        addComment={addComment}
       />
       <Row style={{ marginTop: '30px' }}>
-        <Col xs={7}>
+        <Col xs={8}>
           <div>
             <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" />
           </div>
-          <h2>{currentVid.title}</h2>
-          <p>{currentVid.date}</p>
-          <div className="videoCreator" >
+          <div className="videoCreator">
+            <h2>{currentVid.title}</h2>
+            <h6>{timeAgo.format(new Date(currentVid.date_Uploaded))}</h6>
+          </div>
+          <div className="videoCreator">
             <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
@@ -172,7 +191,7 @@ function VideoPage() {
           </div>
           <div className='videoDescription'>
             <p>{currentVid.description}</p>
-            <h6 className="report" vidid={currentVid._id} type='video' onClick={report}>Report Comment</h6>
+            <h6 className="report" vidid={currentVid._id} type='video' onClick={report}>Report Video</h6>
           </div>
           <div>
             <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
@@ -205,7 +224,7 @@ function VideoPage() {
               <ListGroup.Item as="li" key={comment.id}>
                 <div className="commentRow">
                   <h5>{comment.author}</h5>
-                  <h6 className="date">{comment.date}</h6>
+                  <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
                 </div>
                 <p>{comment.comment}</p>
                 <h6 className="report" index={index} type='comment' onClick={report}>Report Comment</h6>
