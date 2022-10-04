@@ -28,3 +28,4 @@ src/components/Modals/config
 *.sw?
 
 config.js
+firebaseConfig.js
