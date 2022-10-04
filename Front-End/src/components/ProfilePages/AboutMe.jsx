@@ -12,7 +12,6 @@ function AboutMe({ user, currentUser }) {
   function handleBioWriting(e) {
     setBio(e.target.value)
   };
-  console.log('user: ', user, 'currentUser.username: ', currentUser.username);
   function bioSubmit() {
     return axios.put(`http://localhost:8080/userprofile/${user.username}`, { user: user.username, bio: bio })
       .then(() => {
