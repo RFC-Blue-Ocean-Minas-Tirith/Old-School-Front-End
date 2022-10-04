@@ -66,12 +66,12 @@ function VideoPage({ video, user }) {
   const [showModal, setShowModal] = useState(false);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'demo',
+      cloudName: 'dulhjtu0p',
     },
   });
 
   // -----Video Formatting-----
-  const myVideo = cld.video('docs/walking_talking');
+  const myVideo = cld.video('zwcesikwmvebfwdmnvdm');
   myVideo.resize(pad().width(800));
 
   // -----UseEffect-----
