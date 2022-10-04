@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Carousel, Button, Badge, ListGroup } from 'react-bootstrap';
@@ -10,7 +10,7 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 //TODO:  Add an alt description for each img
 function LandingPage({ currentUser, videoData, setVideoData }) {
-  console.log('videoData:', videoData)
+  console.log(videoData);
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
@@ -223,7 +223,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   <div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
                 </Row>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                  <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
+                  <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
+                      <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
+                  </Link>
                   <Badge className="border border-warning" pill bg="warning" text="dark" onClick={() => {
                     favorites();
                     (isFavorite) ? handleUnFave() : handleFave()
@@ -248,7 +250,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   {
                     thumbnails.map((thumbnail, i) => {
                       return (<Carousel.Item key={i}>
-                        <img onClick={() => navigateToVideoPage()} className="d-block w-100" src={thumbnail} />
+                        <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
+                        <img className="d-block w-100" src={thumbnail} />
+                        </Link>
                       </Carousel.Item>)
                     })
                   }
