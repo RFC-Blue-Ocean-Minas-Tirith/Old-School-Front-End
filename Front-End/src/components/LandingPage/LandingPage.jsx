@@ -211,7 +211,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           (!thumbnails.length) ? <div></div> :
             <Container className="w-auto p-11">
               <Row >
-                <Col className="border border-success">
+                <Col className="border-success">
                   <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
