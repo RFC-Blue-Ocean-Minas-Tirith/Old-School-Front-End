@@ -40,7 +40,7 @@ export const LargeButton = styled(Button)`
 `;
 
 export const Heading = styled.h1`
-  color: ${(props) => `${props.theme.colors.persianGreen}`};
+  color: ${(props) => `${props.theme.colors.maroon}`};
   font-size: ${({ theme: { fontSizes } }) => fontSizes.large};
 `;
 

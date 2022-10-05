@@ -29,6 +29,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
       .then((response) => {
         console.log('video search results:', response.data);
         setVideoData(response.data);
+        navigate('/');
       })
       .catch((err) => {
         console.log('err:', err);
