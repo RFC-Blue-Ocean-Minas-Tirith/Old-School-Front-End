@@ -10,7 +10,7 @@ function BlogCarouselEntry({ blog, currentUser }) {
   const [modal, setModal] = useState(false)
   setModal.bind(this);
   return (
-    <div className="blog-carousel-blog card center-block" onClick={() => { setModal(!modal)}}>
+    <div className="blog-carousel-blog card center-block" style={{ cursor: 'pointer'}} onClick={() => { setModal(!modal)}}>
       <Blog show={modal} toggle={setModal} blog={blog} currentUser={currentUser}/>
       <div className="card-body" style={{ height: '250px', width: '250px' }}>
         <div className="card-title text-center">
