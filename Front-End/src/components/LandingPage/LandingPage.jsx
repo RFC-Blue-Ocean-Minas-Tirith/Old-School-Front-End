@@ -19,7 +19,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   const [isFavorite, setIsFavorite] = useState(false);
   // ============= is the user a favorite ==================
   useEffect(() => {
-    if (videoData) {
+    if (videoData && currentUser) {
       axios.get('http://localhost:8080/user')
         .then(res => {
           //console.log('get user res', res.data);
@@ -35,26 +35,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         })
     }
   }, [videoData]);
-  // ===================== set button state ==========================
-  // useEffect(() => {
-  //   if (videoData) {
-  //     if (videoData[index].votes.informative.usernames.includes(currentUser)) {
-  //       setInformative(true);
-  //     } else {
-  //       setInformative(false);
-  //     }
-  //     if (videoData[index].votes.insightful.usernames.includes(currentUser)) {
-  //       setInsightful(true);
-  //     } else {
-  //       setInsightful(false);
-  //     }
-  //     if (videoData[index].votes.funny.usernames.includes(currentUser)) {
-  //       setFunny(true);
-  //     } else {
-  //       setFunny(false);
-  //     }
-  //   }
-  // }, [index])
 
   useEffect(() => {
     getThumbnails();
