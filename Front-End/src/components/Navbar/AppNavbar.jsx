@@ -68,7 +68,11 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             navbarScroll
           >
             <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+
+            {isLoggedIn
+              ? <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+              : null}
+
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -80,6 +84,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
               <Button id="whiteButton" variant="outline-success" onClick={handleSearch}>Search</Button>
             </Form>
           </Nav>
+
           {isLoggedIn && isAdmin
             ? <Button id="flagged" className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
