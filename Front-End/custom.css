@@ -116,7 +116,7 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
-  font-weight: bold;
+  /* font-weight: bold;*/
 }
 
 #time {
