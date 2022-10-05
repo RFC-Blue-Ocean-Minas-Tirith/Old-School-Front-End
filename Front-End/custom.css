@@ -89,7 +89,8 @@
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* #informative, #funny, #insightful {
+/* only ids work to change the button color
+#informative, #funny, #insightful {
   color: #FFFFFF;
   font-size: 1em;
   border: 1px solid #361118;
@@ -99,5 +100,4 @@
 
 html body {
   background-color: rgb(224, 215, 215);
-
 }
