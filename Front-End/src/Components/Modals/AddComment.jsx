@@ -20,7 +20,7 @@ function AddComment({ currUser, videoID, toggleModal, show, addComment}) {
         id: videoID,
       },
     };
-    axios.patch('http://localhost:8080/video', params)
+    axios.patch('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/video', params)
       .then((results) => {
         console.log(results);
         toggleModal();

@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: '../../Old-School-Back-End',
+    outDir: '../../Old-School-Back-End/public',
   },
 });

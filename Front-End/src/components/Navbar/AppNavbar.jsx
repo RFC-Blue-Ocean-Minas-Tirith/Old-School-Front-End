@@ -26,7 +26,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
 
   function handleSearch() {
     console.log('searching for:', searchTerm);
-    axios.get('http://localhost:8080/videos', { params: { searchTerm } })
+    axios.get('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/videos', { params: { searchTerm } })
       .then((response) => {
         console.log('video search results:', response.data);
         setVideoData(response.data);
@@ -48,7 +48,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
 
   function checkIfAdmin() {
     if (isLoggedIn) {
-      return axios.get(`http://localhost:8080/user/${currentUser.username}`)
+      return axios.get(`http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/user/${currentUser.username}`)
         .then((response) => {
           if (response.data.isAdmin) {
             setIsAdmin(true);

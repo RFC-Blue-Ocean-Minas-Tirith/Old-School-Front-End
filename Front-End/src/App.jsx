@@ -18,11 +18,11 @@ function App() {
   const [videoData, setVideoData] = useState('');
 
   function handleAddUserToDB() {
-    axios.post('http://localhost:8080/user', currentUser);
+    axios.post('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/user', currentUser);
   }
 
   useEffect(() => {
-    axios.get('http://localhost:8080/video')
+    axios.get('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/video')
       .then(res => {
         setVideoData(res.data);
         //console.log(res.data);

@@ -9,7 +9,7 @@ function Flagged(props) {
   const [flagged, setFlagged] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/flaggedComments')
+    axios.get('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/flaggedComments')
       .then((results) => {
         let array = [];
         results.data.forEach((video) => {
@@ -36,7 +36,7 @@ function Flagged(props) {
     copy.splice(e.target.value, 1);
     setFlagged(copy);
     // write request to set reported to true in database
-    // axios.patch('http://localhost:8080/flaggedComments')
+    // axios.patch('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/flaggedComments')
     //   .then((results) => {
     //     console.log(results);
     //   })

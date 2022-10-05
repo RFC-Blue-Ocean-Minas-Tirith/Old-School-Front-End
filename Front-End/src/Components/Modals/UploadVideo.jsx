@@ -90,7 +90,7 @@ function UploadVideo(props) {
         thumbnail: thumbnailUrl,
       },
     };
-    axios.post('http://localhost:8080/video', params)
+    axios.post('http://ec2-3-16-44-36.us-east-2.compute.amazonaws.com:8080/video', params)
       .then(() => {
         console.log('submitted')
         setSubmitted(true);
