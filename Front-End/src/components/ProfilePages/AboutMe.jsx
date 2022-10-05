@@ -49,7 +49,6 @@ function AboutMe({ user, currentUser }) {
       }
     }
   })
-  console.log(user, currentUser.username);
   if (currentUser) {
     if (user.username === currentUser.username) {
       if (editing) {
@@ -81,7 +80,7 @@ function AboutMe({ user, currentUser }) {
           </div>
           <div className="row justify-content-center">
             <div className="col-md-5">
-              <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {bioSubmit()}}>Submit</button>
+              <button type="button" className="btn btn-primary me-2" onClick={() => {bioSubmit()}}>Submit</button>
             </div>
           </div>
         </div>
@@ -114,7 +113,7 @@ function AboutMe({ user, currentUser }) {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-5">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {setEditing(true)}}>Edit</button>
+            <button type="button" className="btn btn-primary me-2" onClick={() => {setEditing(true)}}>Edit</button>
           </div>
         </div>
       </div>
@@ -182,7 +181,7 @@ function AboutMe({ user, currentUser }) {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-5">
-        <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {handleFave()}}>Favorite This Creator</button>
+        <button type="button" className="btn btn-primary me-2" onClick={() => {handleFave()}}>Favorite This Creator</button>
         </div>
       </div>
     </div>
