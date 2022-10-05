@@ -35,17 +35,6 @@ function Flagged(props) {
       .then((results) => {
         console.log(results);
         setFlaggedVideos(results.data);
-        // let array = [];
-        // results.data.forEach((video) => {
-        //   video.comments.forEach((comment) => {
-        //     if (comment.isReported) {
-        //       comment.title = video.title;
-        //       comment.videoId = video._id;
-        //       array.push(comment);
-        //     }
-        //   });
-        // });
-        // setFlaggedVideos(array);
       })
       .catch((err) => {
         console.log(err);
@@ -92,16 +81,15 @@ function Flagged(props) {
   }
 
   function handleVideoDelete(e) {
-    let copy = flagged.slice();
+    let copy = flaggedVideos.slice();
     copy.splice(e.target.value, 1);
-    setFlagged(copy);
+    setFlaggedVideos(copy);
     const params = {
       params: {
-        'comment': flagged[e.target.value].comment,
-        id: flagged[e.target.value].videoId,
+        id: flaggedVideos[e.target.value]._id,
       },
     };
-    axios.patch('http://localhost:8080/flaggedComments', params)
+    axios.patch('http://localhost:8080/flaggedVideos', params)
       .then((results) => {
         console.log(results);
       })
