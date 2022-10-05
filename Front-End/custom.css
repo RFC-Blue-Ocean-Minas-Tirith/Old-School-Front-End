@@ -4,6 +4,10 @@
   width: 30%
 }
 
+.nonclick {
+  cursor: scroll;
+}
+
 .voteCount {
   margin-left: 3px;
 }
