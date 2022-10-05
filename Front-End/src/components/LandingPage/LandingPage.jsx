@@ -27,7 +27,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData) {
-      axios.get('http://localhost:8080/user')
+      axios.get('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/user')
         .then(res => {
           //console.log('get user res', res.data);
           res.data.forEach(profile => {
@@ -77,7 +77,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   const getThumbnails = () => {
     // console.log('sortOn =', sortOn);
     if (sortOn !== 'favorited') {
-      axios.get(`http://localhost:8080/video/${sortOn}`)
+      axios.get(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/${sortOn}`)
         .then(res => {
           setVideoData(res.data);
           // console.log(res.data);
@@ -86,7 +86,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           console.log(err)
         });
     } else {
-      axios.get(`http://localhost:8080/video/${sortOn}`)
+      axios.get(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/${sortOn}`)
         .then(res => {
           let temp = [];
           for(var i = 0; i < res.data.length; i++){
@@ -139,21 +139,21 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   // };
   // ================ handle button updates to the database ==================
   const handleInsightful = () => {
-    axios.put(`http://localhost:8080/video/insightful`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/insightful`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
       })
       .catch(err => console.log(err));
   }
   const handleUnInsightful = () => {
-    axios.put(`http://localhost:8080/video/insightfulx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/insightfulx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
       })
       .catch(err => console.log(err));
   }
   const handleInformative = () => {
-    axios.put(`http://localhost:8080/video/informative`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/informative`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
         if (videoData[index].votes.informative.usernames.includes(currentUser)) {
@@ -165,34 +165,34 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       .catch(err => console.log(err));
   }
   const handleUnInformative = () => {
-    axios.put(`http://localhost:8080/video/informativex`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/informativex`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
       })
       .catch(err => console.log(err));
   }
   const handleFunny = () => {
-    axios.put(`http://localhost:8080/video/funny`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/funny`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
       })
       .catch(err => console.log(err));
   }
   const handleUnFunny = () => {
-    axios.put(`http://localhost:8080/video/funnyx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
+    axios.put(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/funnyx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
       .then(() => {
         getThumbnails();
       })
       .catch(err => console.log(err));
   }
   function handleFave() {
-    return axios.put('http://localhost:8080/video/userprofile', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setIsFavorite(true);
       });
   }
   function handleUnFave() {
-    return axios.put('http://localhost:8080/video/userprofilex', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setIsFavorite(false);
       });

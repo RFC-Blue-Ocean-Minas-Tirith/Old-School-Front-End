@@ -48,7 +48,7 @@ function UploadBlog(props) {
         private: isPrivate,
       }
     };
-    axios.post('http://localhost:8080/blog', params)
+    axios.post('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/blog', params)
       .then(() => {
         setSubmitted(true);
       })
