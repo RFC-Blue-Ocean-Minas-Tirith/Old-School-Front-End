@@ -32,9 +32,8 @@ function VideoPage() {
   useEffect(() => {
     setCurrentVid(video);
   }, [video]);
-
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentVid) {
       setCurrUser(currentUser);
       axios.get(`http://localhost:8080/user/favs`, {
         params: {
@@ -49,7 +48,7 @@ function VideoPage() {
           console.log(err);
         });
     }
-  }, []);
+  }, [currentUser, currentVid]);
 
   useEffect(() => {
     if (currentVid) {
@@ -140,6 +139,10 @@ function VideoPage() {
     vid.comments = comments;
     setCurrentVid(vid);
   };
+
+if (!currentVid) {
+  return <></>
+};
 
 return (
   <Container style={{ height: '100%' }}>

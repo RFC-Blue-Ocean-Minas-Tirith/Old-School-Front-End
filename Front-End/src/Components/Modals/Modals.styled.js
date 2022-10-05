@@ -67,9 +67,9 @@ export const Tag = styled.div`
   margin-right: 10px;
   padding: 0 10px;
   padding-right: 5px;
-  border: 1px solid orange;
+  border: 1px solid #a7142c;
   border-radius: 5px;
-  background-color: orange;
+  background-color: #a7142c;
   white-space: nowrap;
   color: white;
 `;

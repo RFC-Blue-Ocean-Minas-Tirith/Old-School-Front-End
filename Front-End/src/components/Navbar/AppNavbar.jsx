@@ -25,7 +25,6 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
   }
 
   function handleSearch() {
-    console.log('searching for:', searchTerm);
     axios.get('http://localhost:8080/videos', { params: { searchTerm } })
       .then((response) => {
         console.log('video search results:', response.data);
@@ -69,18 +68,23 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             navbarScroll
           >
             <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+
+            {isLoggedIn
+              ? <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+              : null}
+
             <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
-                onChange={() => handleSearchChange}
+                onChange={handleSearchChange}
               />
-              <Button id="whiteButton" variant="outline-success" onClick={() => handleSearch}>Search</Button>
+              <Button id="whiteButton" variant="outline-success" onClick={handleSearch}>Search</Button>
             </Form>
           </Nav>
+
           {isLoggedIn && isAdmin
             ? <Button id="flagged" className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
