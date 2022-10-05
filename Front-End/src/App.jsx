@@ -25,7 +25,7 @@ function App() {
     axios.get('http://localhost:8080/video')
       .then(res => {
         setVideoData(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch(err => {
         console.log(err)
