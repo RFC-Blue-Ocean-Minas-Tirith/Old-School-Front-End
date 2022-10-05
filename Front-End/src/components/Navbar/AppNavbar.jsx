@@ -25,7 +25,6 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
   }
 
   function handleSearch() {
-    console.log('searching for:', searchTerm);
     axios.get('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/videos', { params: { searchTerm } })
       .then((response) => {
         console.log('video search results:', response.data);
@@ -76,9 +75,9 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
-                onChange={() => handleSearchChange}
+                onChange={handleSearchChange}
               />
-              <Button id="whiteButton" variant="outline-success" onClick={() => handleSearch}>Search</Button>
+              <Button id="whiteButton" variant="outline-success" onClick={handleSearch}>Search</Button>
             </Form>
           </Nav>
           {isLoggedIn && isAdmin
