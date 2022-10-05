@@ -7,6 +7,7 @@ import Theme from './Theme';
 
 function Flagged(props) {
   const [flagged, setFlagged] = useState();
+  const [flaggedVideos, setFlaggedVideos] = useState();
 
   useEffect(() => {
     axios.get('http://localhost:8080/flaggedComments')
@@ -23,6 +24,28 @@ function Flagged(props) {
           });
         });
         setFlagged(array);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [props.flaggedModalShow]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/flaggedVideos')
+      .then((results) => {
+        console.log(results);
+        setFlaggedVideos(results.data);
+        // let array = [];
+        // results.data.forEach((video) => {
+        //   video.comments.forEach((comment) => {
+        //     if (comment.isReported) {
+        //       comment.title = video.title;
+        //       comment.videoId = video._id;
+        //       array.push(comment);
+        //     }
+        //   });
+        // });
+        // setFlaggedVideos(array);
       })
       .catch((err) => {
         console.log(err);
@@ -78,6 +101,21 @@ function Flagged(props) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Flagged Videos
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {flaggedVideos && flaggedVideos.map((item, i) => (
+              <Comment key={i}>
+                <p><strong>Username:</strong> {item.username}</p>
+                <p><strong>Video:</strong> {item.title}</p>
+                <Button id="redButton" value={i} onClick={handleDelete}>Delete</Button>
+                <Button id="redButton" value={i} onClick={handleKeep}>Keep</Button>
+              </Comment>
+            ))}
+          </Modal.Body>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
               Flagged Comments
