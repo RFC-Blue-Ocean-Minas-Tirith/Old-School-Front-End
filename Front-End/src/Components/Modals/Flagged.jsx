@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Container, StyledButton, Comment } from './Modals.styled';
+import { Container, Comment } from './Modals.styled';
 import Theme from './Theme';
 
 function Flagged(props) {
@@ -66,13 +66,13 @@ function Flagged(props) {
                 <p><strong>Username:</strong> {item.author}</p>
                 <p><strong>Video:</strong> {item.title}</p>
                 <p><strong>Comment:</strong> {item.comment}</p>
-                <Button value={i} onClick={handleDelete}>Delete</Button>
-                <Button value={i} onClick={handleKeep}>Keep</Button>
+                <Button id="redButton" value={i} onClick={handleDelete}>Delete</Button>
+                <Button id="redButton" value={i} onClick={handleKeep}>Keep</Button>
               </Comment>
             ))}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
+            <Button id="redButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
       </Container>

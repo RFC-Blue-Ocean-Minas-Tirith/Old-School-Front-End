@@ -135,7 +135,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           (!thumbnails.length) ? <div></div> :
             <Container className="w-auto p-11">
               <Row >
-                <Col className="border border-success">
+                <Col className="border-success">
                   <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
@@ -147,7 +147,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <option value='funny'>Funny</option>
                   </Form.Select>
                   <Row>
-                    <Col>
+                    <Col id="data">
                       <h1 id="VideoTitle">{videoData[index].title}</h1>
                     </Col>
                   </Row>
@@ -164,9 +164,11 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     }
                     >{favorited[1]}</Badge>
                   </div>
-                  <h5 id="description">{videoData[index].description}</h5>
+                  <div id="des">
+                    <h5 id="description">{videoData[index].description}</h5>
+                  </div>
                 </Col>
-                <Col className="border border-success" md={8}>
+                <Col id="carousel" class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {

@@ -27,7 +27,7 @@ export const Row = styled.div`
 export const StyledButton = styled.button`
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #5d3754;
+  border: 1px solid #FFFFFF;
   border-radius: 6px;
   background-color: #5d3754;
 `;

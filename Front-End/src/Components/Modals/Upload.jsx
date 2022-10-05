@@ -28,13 +28,13 @@ function Upload(props) {
         </Modal.Header>
         <Modal.Body>
           <ColumnCentered>
-            <LargeButton onClick={() => setVideoModalShow(true)}>Video</LargeButton>
-            <LargeButton onClick={() => setBlogModalShow(true)}>Blog</LargeButton>
-            <LargeButton>Livestream</LargeButton>
+            <Button id="largeButton" onClick={() => setVideoModalShow(true)}>Video</Button>
+            <Button id="largeButton" onClick={() => setBlogModalShow(true)}>Blog</Button>
+            <Button id="largeButton">Livestream</Button>
           </ColumnCentered>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose}>Close</Button>
+          <Button id="redButton" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
       <UploadVideo
@@ -45,7 +45,6 @@ function Upload(props) {
         blogModalShow={blogModalShow}
         setBlogModalShow={setBlogModalShow}
         setModalShow={props.setModalShow} username={props.currentUser.username} />
-      {/* <Button variant="primary" onClick={() => setModalShow(true)}>Upload</Button> */}
     </Theme>
   );
 }
