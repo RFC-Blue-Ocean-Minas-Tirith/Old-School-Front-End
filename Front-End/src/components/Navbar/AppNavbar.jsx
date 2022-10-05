@@ -36,16 +36,6 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
       });
   }
 
-  function navigateUserProfile() {
-    if (isLoggedIn) {
-      const urlUsername = currentUser.username.replace(' ', '-');
-      console.log('navigate to user:', `\\${urlUsername}`);
-      // navigate(`\\${urlUsername}`);
-    } else {
-      signInWithGoogle();
-    }
-  }
-
   function checkIfAdmin() {
     if (isLoggedIn) {
       return axios.get('http://localhost:8080/user/data', {
@@ -79,7 +69,9 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             navbarScroll
           >
             <Link to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
+            {isLoggedIn
+              ?  <Link to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+              : null}
             <Form className="d-flex">
               <Form.Control
                 type="search"
