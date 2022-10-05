@@ -99,23 +99,21 @@ function Flagged(props) {
   }
 
   function handleVideoKeep(e) {
-    // let copy = flagged.slice();
-    // copy.splice(e.target.value, 1);
-    // setFlagged(copy);
-    // const params = {
-    //   params: {
-    //     'comment': flagged[e.target.value].comment,
-    //     id: flagged[e.target.value].videoId,
-    //     commentID: flagged[e.target.value]._id
-    //   },
-    // };
-    // axios.patch('http://localhost:8080/flaggedCommentsKeep', params)
-    //   .then((results) => {
-    //     console.log(results);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    let copy = flaggedVideos.slice();
+    copy.splice(e.target.value, 1);
+    setFlaggedVideos(copy);
+    const params = {
+      params: {
+        id: flaggedVideos[e.target.value]._id,
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedVideosKeep', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
