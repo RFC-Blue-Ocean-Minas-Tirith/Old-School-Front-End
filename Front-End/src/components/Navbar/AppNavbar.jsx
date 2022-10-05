@@ -49,6 +49,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
     if (isLoggedIn) {
       return axios.get(`http://localhost:8080/user/${currentUser.username}`)
         .then((response) => {
+          console.log('isAdmin: ', response)
           if (response.data.isAdmin) {
             setIsAdmin(true);
           }
