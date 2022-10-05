@@ -35,7 +35,7 @@ function VideoPage() {
   useEffect(() => {
     if (currentUser && currentVid) {
       setCurrUser(currentUser);
-      axios.get(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/user/favs`, {
+      axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
         params: {
           user: currentUser.username
         }
@@ -78,7 +78,7 @@ function VideoPage() {
       vid.votes[button].count += 1;
       vid.votes[button].usernames.push(currUser.username);
       setCurrentVid(vid);
-      axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/vote', { videoID: currentVid._id, vote: button, username: currUser.username })
+      axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video/vote', { videoID: currentVid._id, vote: button, username: currUser.username })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -94,13 +94,13 @@ function VideoPage() {
     e.preventDefault();
     if (favorited[0] === 'unfavorited') {
       setFavorited(['favorited', 'This is one of your Favorite Creators']);
-      axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/userprofile', { currentUser: currUser, user: currentVid.username })
+      axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currUser, user: currentVid.username })
         .catch((err) => {
           console.log(err);
         });
     } else {
       setFavorited(['unfavorited', 'Favorite this Creator!']);
-      axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/userprofilex', { currentUser: currUser, user: currentVid.username })
+      axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currUser, user: currentVid.username })
         .catch((err) => {
           console.log(err);
         });
@@ -116,7 +116,7 @@ function VideoPage() {
     const id = e.target.attributes[1].nodeValue;
     const type = e.target.attributes[2].nodeValue;
     const commentID = e.target.attributes[3].nodeValue;
-    axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/report', { id, type, commentID })
+    axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video/report', { id, type, commentID })
       .catch((err) => {
         console.log(err);
       });

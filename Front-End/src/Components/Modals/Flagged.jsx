@@ -9,7 +9,7 @@ function Flagged(props) {
   const [flagged, setFlagged] = useState();
 
   useEffect(() => {
-    axios.get('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/flaggedComments')
+    axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedComments')
       .then((results) => {
         console.log(results);
         let array = [];
@@ -37,7 +37,7 @@ function Flagged(props) {
     };
     console.log(params);
     // needs work
-    axios.patch('http://localhost:8080/flaggedComments', params)
+    axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedComments', params)
       .then((results) => {
         console.log(results);
       })
@@ -51,7 +51,7 @@ function Flagged(props) {
     copy.splice(e.target.value, 1);
     setFlagged(copy);
     // write request to set reported to true in database
-    // axios.patch('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/flaggedComments')
+    // axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedComments')
     //   .then((results) => {
     //     console.log(results);
     //   })
