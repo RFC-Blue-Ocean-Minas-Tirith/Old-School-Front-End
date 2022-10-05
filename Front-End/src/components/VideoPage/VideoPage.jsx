@@ -34,7 +34,7 @@ function VideoPage() {
   }, [video]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentVid) {
       setCurrUser(currentUser);
       axios.get(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/user/favs`, {
         params: {
