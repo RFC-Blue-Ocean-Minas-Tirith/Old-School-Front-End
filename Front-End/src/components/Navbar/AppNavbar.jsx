@@ -4,16 +4,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle } from './firebase';
+import { StyledButton } from '../Modals/Modals.styled';
 
-function AppNavbar({ setModalShow, isLoggedIn, setVideoData }) {
+function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFlaggedModalShow }) {
+  const navigate = useNavigate();
   const [searchTerm, setsearchTerm] = useState('');
+  const [isAdmin, setIsAdmin] = useState('');
 
   function handleSearchChange(e) {
     e.preventDefault();
@@ -32,6 +35,33 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData }) {
       });
   }
 
+  function navigateUserProfile() {
+    if (isLoggedIn) {
+      const urlUsername = currentUser.username.replace(' ', '-');
+      console.log('navigate to user:', `\\${urlUsername}`);
+      // navigate(`\\${urlUsername}`);
+    } else {
+      signInWithGoogle();
+    }
+  }
+
+  function checkIfAdmin() {
+    if (isLoggedIn) {
+      return axios.get(`http://localhost:8080/user/${currentUser.username}`)
+        .then((response) => {
+          if (response.data.isAdmin) {
+            setIsAdmin(true);
+          }
+        });
+    }
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      checkIfAdmin();
+    }
+  }, [isLoggedIn]);
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -44,6 +74,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData }) {
             navbarScroll
           >
             <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+            <Link className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -55,7 +86,10 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData }) {
               <Button variant="outline-success" onClick={() => handleSearch}>Search</Button>
             </Form>
           </Nav>
-          <Link to="/profile_page" className="btn btn-primary me-2" type="button">Notifications</Link>
+          {isLoggedIn && isAdmin
+            ? <StyledButton className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</StyledButton>
+            : null}
+
           {isLoggedIn
             ? <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
             : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}

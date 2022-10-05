@@ -7,10 +7,12 @@ import LandingPage from './components/LandingPage/LandingPage';
 import ProfilePage from './components/ProfilePages/ProfilePage';
 import VideoPage from './components/VideoPage/VideoPage';
 import Upload from './components/Modals/Upload';
+import Flagged from './components/Modals/Flagged';
 import { registerIsLoggedIn } from './components/Navbar/firebase';
 
 function App() {
   const [modalShow, setModalShow] = useState(false);
+  const [flaggedModalShow, setFlaggedModalShow] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [videoData, setVideoData] = useState('');
@@ -49,8 +51,13 @@ function App() {
           setModalShow={setModalShow}
           isLoggedIn={isLoggedIn}
           setVideoData={setVideoData}
+          currentUser={currentUser}
+          flaggedModalShow={flaggedModalShow}
+          setFlaggedModalShow={setFlaggedModalShow}
         />
         <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
+        <Flagged flaggedModalShow={flaggedModalShow} setFlaggedModalShow={setFlaggedModalShow} />
+
         <Routes>
           <Route path="/" element={
           <LandingPage
