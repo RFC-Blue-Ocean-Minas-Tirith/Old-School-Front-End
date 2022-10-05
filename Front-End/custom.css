@@ -93,19 +93,58 @@
 #informative, #funny, #insightful {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #361118;
+  border: 1px solid #a7142c;
   border-radius: 6px;
-  background-color: #5d3754;
+  background-color: #a7142c;
   margin: 20px 10px 0px 10px;
 }
 
+#redButton {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #a7142c;
+  border-radius: 6px;
+  background-color: #a7142c;
+}
+
+#flagged {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #FFFFFF;
+  border-radius: 6px;
+  background-color: #a7142c;
+}
+
+#largeButton {
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  background-color: #a7142c;
+}
+
+#whiteButton {
+  color: #a7142c;
+  font-size: 1em;
+  border: 1px solid #FFFFFF;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+}
+
+#nav {
+  background-color: #a7142c;
+  color: #FFFFFF;
+}
+
 html body {
-  background-color: rgb(224, 215, 215);
+  background-color: rgb(227, 210, 210);
   font-family:'Georgia', 'Garamond','Times New Roman';
 }
 
 #VideoTitle {
-  padding: 30px 0px 5px;
+  font-size: 1.7em;
+  padding: 15px 0px 5px;
+  /* font-weight: bold;*/
 }
 
 #time {
@@ -113,5 +152,20 @@ html body {
 }
 
 #description {
-  padding: 10px 0px;
+  padding: 10px 17px 10px 0px;
+  overflow-y: scroll;
+  max-height: 110px;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+
+#des {
+  width: 100%;
+    height: 100%;
+  overflow: hidden;
+}
+
+#data {
+  max-height: 110px;
 }

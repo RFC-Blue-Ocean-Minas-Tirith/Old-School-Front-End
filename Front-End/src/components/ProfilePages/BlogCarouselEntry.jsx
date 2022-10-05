@@ -3,6 +3,8 @@
 /* eslint-disable react/jsx-key */
 import { useState, useEffect } from 'react';
 import Blog from './../Modals/Blog';
+import TimeAgo from 'javascript-time-ago';
+const timeAgo = new TimeAgo('en-US')
 
 function BlogCarouselEntry({ blog, currentUser }) {
   const [modal, setModal] = useState(false)
@@ -15,10 +17,10 @@ function BlogCarouselEntry({ blog, currentUser }) {
           {blog.title}
         </div>
         <div className="card-text text-center">
-          {blog.description}
+          {`${blog.description.slice(0, 100)}...`}
         </div>
         <div className="card-text text-center">
-          {blog.dateUploaded}
+          {timeAgo.format(new Date(blog.dateUploaded))}
         </div>
       </div>
     </div>

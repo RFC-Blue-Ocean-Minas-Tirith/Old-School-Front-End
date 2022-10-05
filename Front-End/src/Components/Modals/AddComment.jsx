@@ -52,8 +52,8 @@ function AddComment({ currUser, videoID, toggleModal, show, addComment}) {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleAdd}>Add</Button>
-          <Button onClick={toggleModal}>Close</Button>
+          <Button id="redButton" onClick={handleAdd}>Add</Button>
+          <Button id="redButton" onClick={toggleModal}>Close</Button>
         </Modal.Footer>
       </Modal>
     </Container>
