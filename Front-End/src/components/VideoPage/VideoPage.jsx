@@ -140,6 +140,7 @@ function VideoPage() {
     vid.comments = comments;
     setCurrentVid(vid);
   };
+
 if (!currentVid) {
   return <></>
 }
