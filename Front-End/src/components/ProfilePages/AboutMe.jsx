@@ -76,7 +76,7 @@ function AboutMe({ user, currentUser }) {
           <div className="row">
           </div>
           <div className="row">
-            <label for="Biography Text Area"></label>
+            <label htmlFor="Biography Text Area"></label>
             <textarea class="form-control" rows="10" placeholder="Write your bio here..." onChange={(e) => {handleBioWriting(e)}}></textarea>
           </div>
           <div className="row justify-content-center">
