@@ -21,9 +21,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   const [isInsightful, setInsightful] = useState(false);
   const [isFunny, setFunny] = useState(false);
   const [isInformative, setInformative] = useState(false);
-  useEffect(() => {
-    console.log(isFavorite);
-  }, [isFavorite])
+  // useEffect(() => {
+  //   console.log(isFavorite);
+  // }, [isFavorite])
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData) {
@@ -65,9 +65,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       }
     }
   }, [index])
-  useEffect(() => {
-    console.log(isFunny, isInformative, isInsightful);
-  }, [isFunny, isInformative, isInsightful])
+  // useEffect(() => {
+  //   console.log(isFunny, isInformative, isInsightful);
+  // }, [isFunny, isInformative, isInsightful])
   // ========== mount components via get video from db ================
 
   useEffect(() => {
@@ -75,11 +75,12 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   }, [sortOn])
 
   const getThumbnails = () => {
+    // console.log('sortOn =', sortOn);
     if (sortOn !== 'favorited') {
       axios.get(`http://localhost:8080/video/${sortOn}`)
         .then(res => {
           setVideoData(res.data);
-          //console.log(res.data);
+          // console.log(res.data);
         })
         .catch(err => {
           console.log(err)
@@ -87,8 +88,13 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     } else {
       axios.get(`http://localhost:8080/video/${sortOn}`)
         .then(res => {
-          console.log(res.data[0].videos);
-          let temp = res.data.map(data => data.videos[0]);
+          let temp = [];
+          for(var i = 0; i < res.data.length; i++){
+            if(res.data[i].videos[0]){
+              temp.push(res.data[i].videos[0]);
+            }
+          }
+          //console.log('there are the favorited videos =',temp);
           setVideoData(temp);
         })
         .catch(err => {
@@ -127,10 +133,10 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     }
   }, [videoData]);
   // ============= navigation function ====================
-  const navigateToVideoPage = () => {
-    //   //navigate('/video_page');
-    console.log('navigating to VideoPage...')
-  };
+  // const navigateToVideoPage = () => {
+  //   //   //navigate('/video_page');
+  //   console.log('navigating to VideoPage...')
+  // };
   // ================ handle button updates to the database ==================
   const handleInsightful = () => {
     axios.put(`http://localhost:8080/video/insightful`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
@@ -203,9 +209,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       <div>
         {
           (!thumbnails.length) ? <div></div> :
-            <Container class="w-auto p-11">
+            <Container className="w-auto p-11">
               <Row >
-                <Col class="border border-success">
+                <Col className="border border-success">
                   <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
@@ -222,7 +228,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     </Col>
                   </Row>
                   <Row>
-                    <div id="time" class="board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
+                    <div id="time" className="board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
                   </Row>
                   <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
@@ -237,7 +243,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </div>
                   <h5 id="description">{videoData[index].description}</h5>
                 </Col>
-                <Col class="border border-success" md={8}>
+                <Col className="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
