@@ -154,7 +154,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
                           <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                            <img className="d-block w-100" src={thumbnail} />
+                            <img className="d-block w-100" style = {{objectFit:'cover', maxHeight:'500px' }} src={thumbnail} />
                           </Link>
                         </Carousel.Item>)
                       })
