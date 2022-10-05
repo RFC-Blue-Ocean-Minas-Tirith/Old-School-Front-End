@@ -179,3 +179,10 @@ html body {
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
 }
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon /*, .carousel-indicators */ {
+    background-color: black;
+    border-radius: 50%;
+    opacity: 0.8;
+}
