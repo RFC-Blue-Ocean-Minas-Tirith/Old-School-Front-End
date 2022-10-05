@@ -34,7 +34,7 @@ function VideoPage() {
   }, [video]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentVid) {
       setCurrUser(currentUser);
       axios.get(`http://localhost:8080/user/favs`, {
         params: {
@@ -144,7 +144,7 @@ function VideoPage() {
 if (!currentVid) {
   return <></>
 }
-  
+
 return (
   <Container style={{ height: '100%' }}>
     <Row style={{ marginTop: '30px' }}>
