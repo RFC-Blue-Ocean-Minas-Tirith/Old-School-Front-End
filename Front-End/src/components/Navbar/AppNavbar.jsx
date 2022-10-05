@@ -83,7 +83,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
                 aria-label="Search"
                 onChange={() => handleSearchChange}
               />
-              <Button variant="outline-success" onClick={() => handleSearch}>Search</Button>
+              <Button id="search" variant="outline-success" onClick={() => handleSearch}>Search</Button>
             </Form>
           </Nav>
           {isLoggedIn && isAdmin
