@@ -22,7 +22,7 @@ function AboutMe({ user, currentUser }) {
 
   function handleFave() {
     if (currentUser) {
-      return axios.put('http://localhost:8080/userprofile', { currentUser: currentUser, user: user })
+      return axios.put('http://localhost:8080/userprofile', { currentUser: currentUser, user: user.username })
       .then((data) => {
         setFaved(true);
       })
@@ -32,7 +32,7 @@ function AboutMe({ user, currentUser }) {
 
   function handleUnfave() {
     if (currentUser) {
-      return axios.put('http://localhost:8080/userprofilex', { currentUser: currentUser, user: user})
+      return axios.put('http://localhost:8080/userprofilex', { currentUser: currentUser, user: user.username})
         .then((data) => {
           setFaved(false);
         })
