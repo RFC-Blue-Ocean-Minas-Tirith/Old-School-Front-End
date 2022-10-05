@@ -27,10 +27,8 @@ export const Row = styled.div`
 export const StyledButton = styled.button`
   color: palevioletred;
   font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
+  border: 1px solid palevioletred;
+  border-radius: 6px;
   background-color: pink;
   &:hover {
     background-color: red;

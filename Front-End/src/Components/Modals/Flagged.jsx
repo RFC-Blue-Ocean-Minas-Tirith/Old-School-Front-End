@@ -50,8 +50,8 @@ function Flagged(props) {
     <Theme>
       <Container>
         <Modal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
+          show={props.flaggedModalShow}
+          onHide={() => props.setFlaggedModalShow(false)}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -64,19 +64,18 @@ function Flagged(props) {
           <Modal.Body>
             {flagged && flagged.map((item, i) => (
               <Comment key={i}>
-              <p><strong>Username:</strong> {item.author}</p>
-              <p><strong>Video:</strong> {item.title}</p>
-              <p><strong>Comment:</strong> {item.comment}</p>
-              <Button value={i} onClick={handleDelete}>Delete</Button>
-              <Button value={i} onClick={handleKeep}>Keep</Button>
+                <p><strong>Username:</strong> {item.author}</p>
+                <p><strong>Video:</strong> {item.title}</p>
+                <p><strong>Comment:</strong> {item.comment}</p>
+                <Button value={i} onClick={handleDelete}>Delete</Button>
+                <Button value={i} onClick={handleKeep}>Keep</Button>
               </Comment>
             ))}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => setModalShow(false)}>Close</Button>
+            <Button onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
-        <StyledButton variant="primary" onClick={() => setModalShow(true)}>Flagged</StyledButton>
       </Container>
     </Theme>
   );
