@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable object-shorthand */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
@@ -12,12 +13,12 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { signInWithGoogle, signOutGoogle } from './firebase';
-import { StyledButton } from '../Modals/Modals.styled';
 
 function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFlaggedModalShow }) {
   const navigate = useNavigate();
   const [searchTerm, setsearchTerm] = useState('');
   const [isAdmin, setIsAdmin] = useState('');
+  const [isFiltered, setIsFiltered] = useState(false);
 
   function handleSearchChange(e) {
     e.preventDefault();
@@ -27,8 +28,10 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
   function handleSearch() {
     axios.get('http://localhost:8080/videos', { params: { searchTerm } })
       .then((response) => {
-        console.log('video search results:', response.data);
+        console.log('video search results:', response.data)
         setVideoData(response.data);
+        setIsFiltered(true);
+        navigate('/');
       })
       .catch((err) => {
         console.log('err:', err);
@@ -48,6 +51,19 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
           }
         });
     }
+  }
+
+  function resetFilter() {
+    setIsFiltered(false);
+    document.getElementById('searchField').value = '';
+    return axios.get('http://localhost:8080/video')
+      .then((res) => {
+        setVideoData(res.data);
+        //console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -75,6 +91,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
 
             <Form className="d-flex">
               <Form.Control
+                id="searchField"
                 type="search"
                 placeholder="Search"
                 className="me-2"
@@ -83,6 +100,18 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
               />
               <Button id="whiteButton" variant="outline-success" onClick={handleSearch}>Search</Button>
             </Form>
+            {isFiltered
+              ? (
+                <>
+                  <Navbar.Text style={{ color: 'white', paddingLeft: '10px', paddingRight: '10px' }}>
+                    Search results:&nbsp;
+                    {videoData.length}&nbsp;
+                    {videoData.length === 1 ? 'video' : 'videos'}
+                  </Navbar.Text>
+                  <Button type="reset" id="whiteButton" variant="outline-success" onClick={resetFilter}>Clear Search</Button>
+                </>
+              )
+              : null}
           </Nav>
 
           {isLoggedIn && isAdmin
