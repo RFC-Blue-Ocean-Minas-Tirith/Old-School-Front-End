@@ -148,7 +148,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <h5 id="description">{videoData[index].description}</h5>
                   </div>
                 </Col>
-                <Col id="carousel" class="border border-success" md={8}>
+                <Col id="carousel" class="border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
