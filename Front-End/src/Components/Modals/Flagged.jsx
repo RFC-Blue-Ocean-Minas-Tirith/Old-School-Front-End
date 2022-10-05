@@ -91,6 +91,45 @@ function Flagged(props) {
       });
   }
 
+  function handleVideoDelete(e) {
+    let copy = flagged.slice();
+    copy.splice(e.target.value, 1);
+    setFlagged(copy);
+    const params = {
+      params: {
+        'comment': flagged[e.target.value].comment,
+        id: flagged[e.target.value].videoId,
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedComments', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleVideoKeep(e) {
+    // let copy = flagged.slice();
+    // copy.splice(e.target.value, 1);
+    // setFlagged(copy);
+    // const params = {
+    //   params: {
+    //     'comment': flagged[e.target.value].comment,
+    //     id: flagged[e.target.value].videoId,
+    //     commentID: flagged[e.target.value]._id
+    //   },
+    // };
+    // axios.patch('http://localhost:8080/flaggedCommentsKeep', params)
+    //   .then((results) => {
+    //     console.log(results);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  }
+
   return (
     <Theme>
       <Container>
@@ -111,8 +150,8 @@ function Flagged(props) {
               <Comment key={i}>
                 <p><strong>Username:</strong> {item.username}</p>
                 <p><strong>Video:</strong> {item.title}</p>
-                <Button id="redButton" value={i} onClick={handleDelete}>Delete</Button>
-                <Button id="redButton" value={i} onClick={handleKeep}>Keep</Button>
+                <Button id="redButton" value={i} onClick={handleVideoDelete}>Delete</Button>
+                <Button id="redButton" value={i} onClick={handleVideoKeep}>Keep</Button>
               </Comment>
             ))}
           </Modal.Body>

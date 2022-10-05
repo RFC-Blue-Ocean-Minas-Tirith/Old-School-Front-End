@@ -93,9 +93,9 @@ export const LeftLabel = styled.label`
 
 export const Checkbox = styled.input`
   width: 5%;
-`
+`;
 
 export const Comment = styled.div`
   border: 1px solid black;
   border-radius: 5px;
-`
+`;
