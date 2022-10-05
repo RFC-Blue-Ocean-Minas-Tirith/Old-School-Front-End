@@ -6,7 +6,6 @@ import { Container, StyledButton, Comment } from './Modals.styled';
 import Theme from './Theme';
 
 function Flagged(props) {
-  const [modalShow, setModalShow] = useState(false);
   const [flagged, setFlagged] = useState();
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function Flagged(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [modalShow]);
+  }, [props.flaggedModalShow]);
 
   function handleDelete(e) {
     let copy = flagged.slice();
