@@ -91,12 +91,12 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             : null}
 
           {isLoggedIn
-            ? <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
+            ? <Button id="upload" className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button id="upload" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
 
           {isLoggedIn
-            ? <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
-            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
+            ? <Button id="login" className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button id="login" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

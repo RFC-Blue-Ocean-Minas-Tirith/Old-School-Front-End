@@ -93,10 +93,19 @@
 #informative, #funny, #insightful {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid maroon;
+  border: 1px solid #a7142c;
   border-radius: 6px;
-  background-color: maroon;
+  background-color: #a7142c;
   margin: 20px 10px 0px 10px;
+}
+
+#upload, #login {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #a7142c;
+  border-radius: 6px;
+  background-color: #a7142c;
+  /* margin: 20px 10px 0px 10px; */
 }
 
 html body {
