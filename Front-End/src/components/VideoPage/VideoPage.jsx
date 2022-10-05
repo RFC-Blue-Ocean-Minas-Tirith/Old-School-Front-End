@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Col, Row, Container, Button, Badge, ListGroup } from 'react-bootstrap';
+import { Col, Row, Container, Button, Badge, ListGroup, Alert, Overlay, Tooltip } from 'react-bootstrap';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { AdvancedVideo } from '@cloudinary/react';
 import { pad } from '@cloudinary/url-gen/actions/resize';
@@ -23,6 +23,12 @@ function VideoPage() {
   const [showModal, setShowModal] = useState(false);
   const [firstPic, setFirstPic] = useState('');
   const [myVideo, setMyVideo] = useState();
+  const [showInsightful, setShowInsightful] = useState(false);
+  const [showInformative, setShowInformative] = useState(false);
+  const [showFunny, setShowFunny] = useState(false);
+  const target1 = useRef(null);
+  const target2 = useRef(null);
+  const target3 = useRef(null);
   const cld = new Cloudinary({
     cloud: {
       cloudName: cloudName,
@@ -83,6 +89,18 @@ function VideoPage() {
           // eslint-disable-next-line no-console
           console.log(err);
         });
+    } else {
+      switch (button) {
+        case 'insightful':
+          setShowInsightful(!showInsightful);
+          break;
+        case 'informative':
+          setShowInformative(!showInformative);
+          break;
+        case 'funny':
+          setShowFunny(!showFunny);
+          break;
+      }
     }
   };
 
@@ -116,10 +134,18 @@ function VideoPage() {
     const id = e.target.attributes[1].nodeValue;
     const type = e.target.attributes[2].nodeValue;
     const commentID = e.target.attributes[3].nodeValue;
+    const index = e.target.attributes[4].nodeValue;
     axios.put('http://localhost:8080/video/report', { id, type, commentID })
       .catch((err) => {
         console.log(err);
       });
+    let vid = { ...currentVid };
+    if (type === 'video') {
+      vid.reported = true;
+    } else {
+      vid.comments[index].isReported = true;
+    }
+    setCurrentVid(vid)
   };
 
   const toggleModal = () => {
@@ -140,81 +166,107 @@ function VideoPage() {
     setCurrentVid(vid);
   };
 
-if (!currentVid) {
-  return <></>
-};
+  if (!currentVid) {
+    return <></>
+  }
 
-return (
-  <Container style={{ height: '100%' }}>
-    <Row style={{ marginTop: '30px' }}>
-      <Col xs={8}>
-        <div>
-          <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
-        </div>
-        <div className="videoCreator">
-          <h2>{currentVid.title}</h2>
-          <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
-        </div>
-        <div className="videoCreator">
-          <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
-            <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
-          </Link>
-          <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
-        </div>
-        <div className='videoDescription'>
-          <p>{currentVid.description}</p>
-          <h6 className="report" vidid={currentVid._id} type='video' filler={0} onClick={report}>Report Video</h6>
-        </div>
-        <div>
-          <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
-            Insightful
-            <br></br>
-            <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.usernames.length}</Badge>
-          </Button>
-          <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
-            Informative
-            <br></br>
-            <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
-          </Button>
-          <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
-            Funny
-            <br></br>
-            <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
-          </Button>
-        </div>
-      </Col>
-      <Col>
-        <ListGroup
-          variant="flush"
-          style={{
-            overflowX: 'overflow',
-            overflowY: 'scroll',
-            maxHeight: '90%',
-          }}
-        >
-          {currentVid.comments.map((comment, index) => (
-            <ListGroup.Item as="li" key={comment._id}>
-              <div className="commentRow">
-                <h5>{comment.author}</h5>
-                <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
-              </div>
-              <p>{comment.comment}</p>
-              <h6 className="report" vidid={currentVid._id} type='comment' commentid={comment._id} onClick={report}>Report Comment</h6>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-        <Button id="redButton" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
-      </Col>
-    </Row>
-    <AddComment
-      show={showModal}
-      toggleModal={toggleModal}
-      currUser={currUser.username}
-      videoID={currentVid._id}
-      addComment={addComment}
-    />
-  </Container>
-);
+  const reportField = !currentVid.reported ? (<h6 className="report" vidid={currentVid._id} type='video' filler={0} filler2={0} onClick={report}>{'<Report Video>'}</h6>) : (<Alert variant='warning'>Reported for admin review</Alert>);
+  return (
+    <Container fluid>
+      <Row >
+        <Col xs={8}>
+          <div className="videoCreator">
+            <h2>{currentVid.title}</h2>
+            <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
+          </div>
+          <div>
+            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
+          </div>
+          <div className="videoCreator">
+            <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
+              <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
+            </Link>
+            <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
+          </div>
+          <div className='videoDescription'>
+            <p>{currentVid.description}</p>
+            {reportField}
+          </div>
+          <div>
+            <Button variant="primary" id="insightful" className="vote" ref={target1} onClick={updateVote}>
+              Insightful
+              <br></br>
+              <Badge bg="secondary" className="voteCount" >{currentVid.votes.insightful.usernames.length}</Badge>
+            </Button>
+            <Overlay target={target1.current} show={showInsightful} placement='bottom'>
+              {(props) => (
+                <Tooltip id='insightfulTT' {...props}>
+                  Already Voted, Thank You!
+                </Tooltip>
+              )}
+            </Overlay>
+            <Button variant="primary" id="informative" className="vote" ref={target2} onClick={updateVote}>
+              Informative
+              <br></br>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
+            </Button>
+            <Overlay target={target2.current} show={showInformative} placement='bottom'>
+              {(props) => (
+                <Tooltip id='informativeTT' {...props}>
+                  Already Voted, Thank You!
+                </Tooltip>
+              )}
+            </Overlay>
+            <Button variant="primary" id="funny" className="vote" ref={target3} onClick={updateVote}>
+              Funny
+              <br></br>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
+            </Button>
+            <Overlay target={target3.current} show={showFunny} placement='bottom'>
+              {(props) => (
+                <Tooltip id='funnyTT' {...props}>
+                  Already Voted, Thank You!
+                </Tooltip>
+              )}
+            </Overlay>
+          </div>
+        </Col>
+        <Col>
+          <h2>Comments</h2>
+          <ListGroup
+            variant="flush"
+            style={{
+              overflowX: 'overflow',
+              overflowY: 'scroll',
+              maxHeight: '70%',
+            }}
+          >
+            {currentVid.comments.map((comment, index) => {
+              let reportCommField = comment.isReported ? (<Alert variant='warning'>Reported for admin review</Alert>) : (<h4 className="report" vidid={currentVid._id} type='comment' commentid={comment._id} index={index} onClick={report}>{'<Report Comment>'}</h4>)
+
+              return (<ListGroup.Item as="li" key={comment._id}>
+                <div className="commentRow">
+                  <h5 className='commentUser'><strong>{comment.author}</strong></h5>
+                  <h4 className="date">{timeAgo.format(new Date(comment.date))}</h4>
+                </div>
+                <p className='commentText'>{comment.comment}</p>
+                {reportCommField}
+              </ListGroup.Item>)
+            })}
+          </ListGroup>
+          <div id="commentSpacer"></div>
+          <Button id="redButton" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
+        </Col>
+      </Row>
+      <AddComment
+        show={showModal}
+        toggleModal={toggleModal}
+        currUser={currUser.username}
+        videoID={currentVid._id}
+        addComment={addComment}
+      />
+    </Container >
+  );
 }
 
 export default VideoPage;
