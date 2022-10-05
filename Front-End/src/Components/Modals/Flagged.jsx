@@ -15,7 +15,11 @@ function Flagged(props) {
         let array = [];
         results.data.forEach((video) => {
           video.comments.forEach((comment) => {
-            array.push(comment);
+            if (comment.isReported) {
+              comment.title = video.title;
+              comment.videoId = video._id;
+              array.push(comment);
+            }
           });
         });
         setFlagged(array);
@@ -32,11 +36,10 @@ function Flagged(props) {
     const params = {
       params: {
         'comment': flagged[e.target.value].comment,
-        id: flagged[e.target.value]._id,
+        id: flagged[e.target.value].videoId,
       },
     };
     console.log(params);
-    // needs work
     axios.patch('http://localhost:8080/flaggedComments', params)
       .then((results) => {
         console.log(results);
