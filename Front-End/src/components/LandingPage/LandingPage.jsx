@@ -217,7 +217,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <option value='funny'>Funny</option>
                   </Form.Select>
                   <Row>
-                    <Col>
+                    <Col id="data">
                       <h1 id="VideoTitle">{videoData[index].title}</h1>
                     </Col>
                   </Row>
@@ -235,9 +235,11 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     }
                     >{favorited}</Badge>
                   </div>
-                  <h5 id="description">{videoData[index].description}</h5>
+                  <div id="des">
+                    <h5 id="description">{videoData[index].description}</h5>
+                  </div>
                 </Col>
-                <Col class="border border-success" md={8}>
+                <Col id="carousel" class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
