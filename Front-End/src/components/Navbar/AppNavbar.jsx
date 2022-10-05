@@ -65,9 +65,9 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
   }, [isLoggedIn]);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar id="nav" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">Old School</Navbar.Brand>
+        <Navbar.Brand id="nav" href="/">Old School</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -75,8 +75,8 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
+            <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
+            <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"
