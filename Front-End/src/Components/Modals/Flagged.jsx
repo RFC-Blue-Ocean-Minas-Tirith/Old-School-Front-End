@@ -39,7 +39,6 @@ function Flagged(props) {
         id: flagged[e.target.value].videoId,
       },
     };
-    console.log(params);
     axios.patch('http://localhost:8080/flaggedComments', params)
       .then((results) => {
         console.log(results);
@@ -53,14 +52,20 @@ function Flagged(props) {
     let copy = flagged.slice();
     copy.splice(e.target.value, 1);
     setFlagged(copy);
-    // write request to set reported to true in database
-    // axios.patch('http://localhost:8080/flaggedComments')
-    //   .then((results) => {
-    //     console.log(results);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    const params = {
+      params: {
+        'comment': flagged[e.target.value].comment,
+        id: flagged[e.target.value].videoId,
+        commentID: flagged[e.target.value]._id
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedCommentsKeep', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
