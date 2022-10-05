@@ -218,11 +218,11 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </Form.Select>
                   <Row>
                     <Col>
-                      <h1>{videoData[index].title}</h1>
+                      <h1 id="VideoTitle">{videoData[index].title}</h1>
                     </Col>
                   </Row>
                   <Row>
-                    <div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
+                    <div id="time" class="board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
                   </Row>
                   <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
@@ -235,7 +235,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     }
                     >{favorited}</Badge>
                   </div>
-                  <h5 >{videoData[index].description}</h5>
+                  <h5 id="description">{videoData[index].description}</h5>
                 </Col>
                 <Col class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
