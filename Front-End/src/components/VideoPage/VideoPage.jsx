@@ -141,6 +141,10 @@ function VideoPage() {
     setCurrentVid(vid);
   };
 
+if (!currentVid) {
+  return <></>
+}
+  
 return (
   <Container style={{ height: '100%' }}>
     <Row style={{ marginTop: '30px' }}>
