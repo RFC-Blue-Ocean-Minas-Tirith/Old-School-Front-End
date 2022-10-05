@@ -23,7 +23,7 @@ function VideoCarousel({ videos, currentUser }) {
   }, [videos]);
 
   if (currentVids.place === 0) {
-    if (videos.length < 3) {
+    if (videos.length <= 3) {
       return (
         <div className="container">
           <h2 className="text-center"> Video Posts </h2>

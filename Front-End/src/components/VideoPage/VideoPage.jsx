@@ -32,7 +32,6 @@ function VideoPage() {
   useEffect(() => {
     setCurrentVid(video);
   }, [video]);
-
   useEffect(() => {
     if (currentUser && currentVid) {
       setCurrUser(currentUser);
@@ -143,7 +142,8 @@ function VideoPage() {
 
 if (!currentVid) {
   return <></>
-}
+};
+
 return (
   <Container style={{ height: '100%' }}>
     <Row style={{ marginTop: '30px' }}>
