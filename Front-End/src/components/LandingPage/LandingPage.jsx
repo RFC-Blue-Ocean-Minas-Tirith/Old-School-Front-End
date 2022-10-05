@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Carousel, Button, Badge, ListGroup } from 'react-bootstrap';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import Form from 'react-bootstrap/Form';
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 //TODO:  Add an alt description for each img
@@ -205,7 +206,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
             <Container class="w-auto p-11">
               <Row >
                 <Col class="border border-success">
-                  <select onChange={(e) => {
+                  <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
                   }}>
@@ -214,7 +215,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <option value='favorited'>most favorited creators</option>
                     <option value='insightful'>Insightful</option>
                     <option value='funny'>Funny</option>
-                  </select>
+                  </Form.Select>
                   <Row>
                     <Col>
                       <h1>{videoData[index].title}</h1>
