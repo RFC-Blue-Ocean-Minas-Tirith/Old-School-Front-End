@@ -205,15 +205,15 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
               <Row>
                   <div >
                     <div>
-                      <Button variant="primary" id="insightful" className="vote nonclick">Insightful
+                      <Button variant="primary" id="insightful-landing" className="vote nonclick">Insightful
                         <br>
                         </br>
                         <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
                       </Button>
-                      <Button variant="primary" id="funny" className="vote">Funny<br>
+                      <Button variant="primary" id="funny-landing" className="vote">Funny<br>
                       </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
                       </Button>
-                      <Button variant="primary" id="informative" className="vote" >Informative
+                      <Button variant="primary" id="informative-landing" className="vote" >Informative
                         <br>
                         </br>
                         <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
