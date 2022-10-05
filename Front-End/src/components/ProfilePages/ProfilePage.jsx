@@ -16,9 +16,10 @@ function ProfilePage() {
   const { user, currentUser } = location.state;
 
   function fetchData() {
-    return axios.get(`http://localhost:8080/user/${user}`)
-    .then((data) => {
-      setUser(data.data);
+    return axios.get(`http://localhost:8080/user/data`, {
+      params: {
+        user: user
+      }
     })
     .then(() => {
       return axios.get(`http://localhost:8080/video/user/${user}`)
