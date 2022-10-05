@@ -41,32 +41,72 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   }, [sortOn])
 
   const getThumbnails = () => {
+    let results = videoData;
     // console.log('sortOn =', sortOn);
-    if (sortOn !== 'favorited') {
-      axios.get(`http://localhost:8080/video/${sortOn}`)
-        .then(res => {
-          setVideoData(res.data);
-          // console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err)
-        });
-    } else {
-      axios.get(`http://localhost:8080/video/${sortOn}`)
-        .then(res => {
-          let temp = [];
-          for(var i = 0; i < res.data.length; i++){
-            if(res.data[i].videos[0]){
-              temp.push(res.data[i].videos[0]);
+    if (sortOn === 'favorited') {
+      results = [];
+      axios.get(`http://localhost:8080/user/favs`, {
+        params: {
+          user: currentUser.username
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        for (let i = 0; i < videoData.length; i++) {
+          for (let j = 0; j < data.data.length; j++) {
+            if (data.data[j] === videoData[i].username) {
+              results.push(videoData[i]);
             }
           }
-          //console.log('there are the favorited videos =',temp);
-          setVideoData(temp);
-        })
-        .catch(err => {
-          console.log(err)
-        });
+        }
+      })
+      .then(() => {
+        setVideoData(results);
+        let temp = [];
+        for (var i = 0; i < results.length; i++) {
+          if (results[i]) {
+            temp.push(results[i].url.replace('.mp4', '.jpg'));
+          }
+        }
+        setThumbnails(temp)
+      })
     }
+    if (sortOn === 'insightful') {
+      for (let i = 0; i < videoData.length; i++) {
+        results.sort((a, b) => {
+          return b.votes.insightful.usernames.length - a.votes.insightful.usernames.length
+        })
+      }
+    }
+    if (sortOn === 'informative') {
+      for (let i = 0; i < videoData.length; i++) {
+        results.sort((a, b) => {
+          return b.votes.informative.usernames.length - a.votes.informative.usernames.length
+        })
+      }
+    }
+    if (sortOn === 'funny') {
+      for (let i = 0; i < videoData.length; i++) {
+        results.sort((a, b) => {
+          return b.votes.funny.usernames.length - a.votes.funny.usernames.length
+        })
+      }
+    }
+    if (sortOn === 'recent') {
+      for (let i = 0; i < videoData.length; i++) {
+        results.sort((a, b) => {
+          return Date.parse(b.dateUploaded) - Date.parse(a.dateUploaded)
+        })
+      }
+    }
+    setVideoData(results);
+    let temp = [];
+    for (var i = 0; i < results.length; i++) {
+      if (results[i]) {
+        temp.push(results[i].url.replace('.mp4', '.jpg'));
+      }
+    }
+    setThumbnails(temp);
   }
   // ============ create a map of the thumbnails ===================
   useEffect(() => {
