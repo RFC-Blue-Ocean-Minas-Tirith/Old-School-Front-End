@@ -32,7 +32,6 @@ function VideoPage() {
   useEffect(() => {
     setCurrentVid(video);
   }, [video]);
-
   useEffect(() => {
     if (currentUser && currentVid) {
       setCurrUser(currentUser);
@@ -49,7 +48,7 @@ function VideoPage() {
           console.log(err);
         });
     }
-  }, []);
+  }, [currentVid]);
 
   useEffect(() => {
     if (currentVid) {
