@@ -55,6 +55,8 @@ function App() {
           flaggedModalShow={flaggedModalShow}
           setFlaggedModalShow={setFlaggedModalShow}
         />
+        <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
+        <Flagged flaggedModalShow={flaggedModalShow} setFlaggedModalShow={setFlaggedModalShow} />
         <Routes>
           <Route path="/" element={
           <LandingPage
@@ -64,8 +66,6 @@ function App() {
           <Route path="profile_page" element={<ProfilePage />} />
           <Route path="video_page" element={<VideoPage />} />
         </Routes>
-        <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
-        <Flagged flaggedModalShow={flaggedModalShow} setFlaggedModalShow={setFlaggedModalShow} />
       </div>
     </div>
   );
