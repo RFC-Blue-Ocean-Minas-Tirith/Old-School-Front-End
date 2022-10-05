@@ -21,7 +21,8 @@ function ProfilePage() {
         user: user
       }
     })
-    .then(() => {
+    .then((data) => {
+      setUser(data.data)
       return axios.get(`http://localhost:8080/video/user/${user}`)
     })
     .then((data) => {
@@ -38,7 +39,6 @@ function ProfilePage() {
   useEffect(() => {
     fetchData();
   }, [user]);
-
   return (
     <div className="container-fluid">
       <div className="row">

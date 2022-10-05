@@ -49,7 +49,7 @@ function AboutMe({ user, currentUser }) {
       }
     }
   })
-
+  console.log(user, currentUser.username);
   if (currentUser) {
     if (user.username === currentUser.username) {
       if (editing) {

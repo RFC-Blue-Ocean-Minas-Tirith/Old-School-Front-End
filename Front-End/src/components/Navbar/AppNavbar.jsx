@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 /* eslint-disable react/self-closing-comp */
@@ -74,7 +75,7 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             navbarScroll
           >
             <Link to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
+            <Link to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"
