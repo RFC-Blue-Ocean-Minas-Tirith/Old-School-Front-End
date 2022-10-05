@@ -31,6 +31,10 @@
   justify-content: space-between;
 }
 
+#commentSpacer {
+  margin-top: 15px;
+}
+
 .date {
   font-size: 10px;
 }
