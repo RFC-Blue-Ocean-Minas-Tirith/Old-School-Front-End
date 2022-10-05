@@ -44,7 +44,7 @@ function VideoCarousel({ videos, currentUser }) {
         <div className="row justify-content-between">
           <div className="col-2"></div>
           <div className="col-2">
-            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
           </div>
         </div>
         <div className="vid-carousel">
@@ -61,7 +61,7 @@ function VideoCarousel({ videos, currentUser }) {
         <h2 className="text-center"> Video Posts </h2>
         <div className="row justify-content-between">
           <div className="col-2">
-            <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
           </div>
           <div className="col-2"></div>
         </div>
@@ -78,10 +78,10 @@ function VideoCarousel({ videos, currentUser }) {
       <h2 className="text-center"> Video Posts </h2>
       <div className="row justify-content-between">
         <div className="col-2">
-          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
         </div>
         <div className="col-2">
-          <button type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
         </div>
       </div>
       <div className="vid-carousel">

@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 
 const theme = {
   colors: {
-    persianGreen: '#06B49A',
+    maroon: '#a7142c',
   },
   fonts: ['Times New Roman'],
   fontSizes: {
