@@ -235,16 +235,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     >{favorited}</Badge>
                   </div>
                   <h5 >{videoData[index].description}</h5>
-                  <div >
-                    <div>
-                      <h5><strong>Mark This Video As:</strong></h5>
-                    </div>
-                    <Row>
-                      <Col class="border border-primary"> <Button variant="primary" id="insightful" className="vote" onClick={() => (isInsightful) ? handleUnInsightful() : handleInsightful()}>Insightful<Badge bg="secondary" >{videoData[index].votes.insightful.usernames.length}{(isInsightful) ? ':thinking_face:' : ''}</Badge></Button></Col>
-                      <Col> <Button variant="primary" id="funny" className="vote" onClick={() => { (isFunny) ? handleUnFunny() : handleFunny() }}>Funny<Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}{(isFunny) ? ':joy:' : ''}</Badge></Button></Col>
-                      <Col> <Button variant="primary" id="informative" className="vote" onClick={() => { (isInformative) ? handleUnInformative() : handleInformative() }}>Informative<Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}{(isInformative) ? ':information_source:' : ''}</Badge></Button></Col>
-                    </Row>
-                  </div>
                 </Col>
                 <Col class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
@@ -260,6 +250,26 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </Carousel>
                 </Col>
               </Row>
+              <Row>
+                  <div >
+                    <div>
+                      <Button variant="primary" id="insightful" className="vote" onClick={() => (isInsightful) ? handleUnInsightful() : handleInsightful()}>Insightful
+                        <br>
+                        </br>
+                        <Badge bg="secondary" >{videoData[index].votes.insightful.usernames.length}{(isInsightful) ? ':thinking_face:' : ''}</Badge>
+                      </Button>
+                      <Button variant="primary" id="funny" className="vote" onClick={() => { (isFunny) ? handleUnFunny() : handleFunny() }}>Funny<br>
+                      </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}{(isFunny) ? ':joy:' : ''}</Badge>
+                      </Button>
+                      <Button variant="primary" id="informative" className="vote" onClick={() => { (isInformative) ? handleUnInformative() : handleInformative() }}>Informative
+                        <br>
+                        </br>
+                        <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}{(isInformative) ? ':information_source:' : ''}</Badge>
+                      </Button>
+                    </div>
+                  </div>
+              </Row>
+
             </Container>
         }
       </div>
