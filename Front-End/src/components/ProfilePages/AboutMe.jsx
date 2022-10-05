@@ -48,7 +48,8 @@ function AboutMe({ user, currentUser }) {
         }
       }
     }
-  })
+  }, [user])
+
   if (currentUser) {
     if (user.username === currentUser.username) {
       if (editing) {
