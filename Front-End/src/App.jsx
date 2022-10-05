@@ -51,6 +51,7 @@ function App() {
           setModalShow={setModalShow}
           isLoggedIn={isLoggedIn}
           setVideoData={setVideoData}
+          videoData={videoData}
           currentUser={currentUser}
           flaggedModalShow={flaggedModalShow}
           setFlaggedModalShow={setFlaggedModalShow}
