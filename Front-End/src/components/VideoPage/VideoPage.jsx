@@ -34,7 +34,7 @@ function VideoPage() {
   }, [video]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentVid) {
       setCurrUser(currentUser);
       axios.get(`http://localhost:8080/user/favs`, {
         params: {
