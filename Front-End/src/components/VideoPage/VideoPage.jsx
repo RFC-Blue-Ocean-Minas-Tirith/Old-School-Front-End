@@ -144,8 +144,11 @@ function VideoPage() {
 if (!currentVid) {
   return <></>
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5f98ebe6ffb6e4784849fe8c4bc84094ea4aaaec
 return (
   <Container style={{ height: '100%' }}>
     <Row style={{ marginTop: '30px' }}>
