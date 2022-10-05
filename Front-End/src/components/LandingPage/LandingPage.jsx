@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Carousel, Button, Badge, ListGroup } from 'react-bootstrap';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import Form from 'react-bootstrap/Form';
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 //TODO:  Add an alt description for each img
@@ -205,7 +206,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
             <Container class="w-auto p-11">
               <Row >
                 <Col class="border border-success">
-                  <select onChange={(e) => {
+                  <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
                   }}>
@@ -214,14 +215,14 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <option value='favorited'>most favorited creators</option>
                     <option value='insightful'>Insightful</option>
                     <option value='funny'>Funny</option>
-                  </select>
+                  </Form.Select>
                   <Row>
                     <Col>
-                      <h1>{videoData[index].title}</h1>
+                      <h1 id="VideoTitle">{videoData[index].title}</h1>
                     </Col>
                   </Row>
                   <Row>
-                    <div class="border board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
+                    <div id="time" class="board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
                   </Row>
                   <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
@@ -234,7 +235,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     }
                     >{favorited}</Badge>
                   </div>
-                  <h5 >{videoData[index].description}</h5>
+                  <h5 id="description">{videoData[index].description}</h5>
                 </Col>
                 <Col class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>

@@ -25,14 +25,11 @@ export const Row = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  color: palevioletred;
+  color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid palevioletred;
+  border: 1px solid #5d3754;
   border-radius: 6px;
-  background-color: pink;
-  &:hover {
-    background-color: red;
-  }
+  background-color: #5d3754;
 `;
 
 export const LargeButton = styled(Button)`
