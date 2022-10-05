@@ -30,7 +30,7 @@ function Upload(props) {
           <ColumnCentered>
             <Button id="largeButton" onClick={() => setVideoModalShow(true)}>Video</Button>
             <Button id="largeButton" onClick={() => setBlogModalShow(true)}>Blog</Button>
-            <Button id="largeButton">Livestream</Button>
+            {/* <Button id="largeButton">Livestream</Button> */}
           </ColumnCentered>
         </Modal.Body>
         <Modal.Footer>
