@@ -49,7 +49,7 @@ function VideoPage() {
           console.log(err);
         });
     }
-  }, []);
+  }, [currentUser, currentVid]);
 
   useEffect(() => {
     if (currentVid) {
