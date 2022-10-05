@@ -99,22 +99,36 @@
   margin: 20px 10px 0px 10px;
 }
 
-#redButton, #search, #upload, #login, #comment {
+#redButton {
   color: #FFFFFF;
   font-size: 1em;
   border: 1px solid #a7142c;
   border-radius: 6px;
   background-color: #a7142c;
-  /* margin: 20px 10px 0px 10px; */
 }
 
-#search, #upload, #login {
+#flagged {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #FFFFFF;
+  border-radius: 6px;
+  background-color: #a7142c;
+}
+
+#largeButton {
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  background-color: #a7142c;
+}
+
+#whiteButton {
   color: #a7142c;
   font-size: 1em;
   border: 1px solid #FFFFFF;
   border-radius: 6px;
   background-color: #FFFFFF;
-  /* margin: 20px 10px 0px 10px; */
 }
 
 #nav {

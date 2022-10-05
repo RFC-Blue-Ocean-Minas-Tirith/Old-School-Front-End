@@ -78,20 +78,20 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
                 aria-label="Search"
                 onChange={() => handleSearchChange}
               />
-              <Button id="search" variant="outline-success" onClick={() => handleSearch}>Search</Button>
+              <Button id="whiteButton" variant="outline-success" onClick={() => handleSearch}>Search</Button>
             </Form>
           </Nav>
           {isLoggedIn && isAdmin
-            ? <StyledButton className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</StyledButton>
+            ? <Button id="flagged" className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
 
           {isLoggedIn
-            ? <Button id="upload" className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-            : <Button id="upload" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
+            ? <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
 
           {isLoggedIn
-            ? <Button id="login" className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
-            : <Button id="login" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
+            ? <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

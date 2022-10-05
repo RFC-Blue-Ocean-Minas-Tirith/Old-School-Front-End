@@ -27,12 +27,9 @@ export default function Blog({ blog, currentUser, toggle, show }) {
             {blog.description}
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button onClick={() => setModalShow(false)}>Close</Button> */}
-            {/* not sure if this is how I should do it... */}
-            <Button onClick={() => { toggle(!show); }}>Close</Button>
+            <Button id="redButton" onClick={() => { toggle(!show); }}>Close</Button>
           </Modal.Footer>
         </Modal>
-        {/* <Button variant="primary" onClick={() => setModalShow(true)}>Blog Post</Button> */}
       </Container>
     </Theme>
   );

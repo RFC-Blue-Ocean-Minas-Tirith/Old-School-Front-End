@@ -155,7 +155,7 @@ function UploadVideo(props) {
           <h4>Video Description: </h4> {values.description}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => {
+          <Button id="redButton" onClick={() => {
             props.setVideoModalShow(false);
           }}>
             Close
@@ -194,7 +194,7 @@ function UploadVideo(props) {
             </LeftLabel>
             <textarea rows="4" cols="50" placeholder="Write your description here..." onChange={handleInputChange} name="description"/>
             <LeftLabel>Video: </LeftLabel>
-            <button type="button" onClick={showWidget}>Upload</button>
+            <button id="redButton" type="button" onClick={showWidget}>Upload</button>
             <LeftLabel>Keywords:</LeftLabel>
             <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
             {keywords.length > 0 && (
@@ -203,7 +203,7 @@ function UploadVideo(props) {
                 {keywords.map((word, index) => (
                   <Tag key={index}>
                     {word}
-                    <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
+                    <TagButton id="redButton" onClick={() => deleteTag(index)}>x</TagButton></Tag>
                 ))}
               </Row>
             </Tags>
@@ -211,8 +211,8 @@ function UploadVideo(props) {
           </Column>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleAdd}>Add</Button>
-          <Button onClick={() => {
+          <Button id="redButton" onClick={handleAdd}>Add</Button>
+          <Button id="redButton" onClick={() => {
             props.setVideoModalShow(false);
           }}>
             Close
