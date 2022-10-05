@@ -14,7 +14,6 @@ function Flagged(props) {
   useEffect(() => {
     axios.get('http://localhost:8080/flaggedComments')
       .then((results) => {
-        console.log(results);
         let array = [];
         results.data.forEach((video) => {
           video.comments.forEach((comment) => {
@@ -35,7 +34,6 @@ function Flagged(props) {
   useEffect(() => {
     axios.get('http://localhost:8080/flaggedVideos')
       .then((results) => {
-        console.log(results);
         setFlaggedVideos(results.data);
       })
       .catch((err) => {
