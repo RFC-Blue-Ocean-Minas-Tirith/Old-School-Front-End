@@ -16,7 +16,7 @@ import { StyledButton } from '../Modals/Modals.styled';
 function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFlaggedModalShow }) {
   const navigate = useNavigate();
   const [searchTerm, setsearchTerm] = useState('');
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState('');
 
   function handleSearchChange(e) {
     e.preventDefault();
