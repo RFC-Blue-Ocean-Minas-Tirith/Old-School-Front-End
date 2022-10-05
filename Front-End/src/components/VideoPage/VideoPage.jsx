@@ -28,37 +28,37 @@ function VideoPage() {
 
   // -----State-----
   const [currentVid, setCurrentVid] = useState({
-    _id: `633b508828a2b0d986c22f92`,
+    _id: `633c9f3c8b04c676c67a146f`,
     title: 'Lookin Around',
     description: 'Jay Pritchett\'s complaints about goat cheese',
     username: 'Kevin Moyer',
     dateUploaded: '2022-10-03T21:13:44.576Z',
     comments: [{
-      id: 1,
+      _id: 1,
       author: 'Alice',
       comment: 'Is that Jake from State Farm?!',
       date: '2022-10-03T21:13:44.576Z',
     },
     {
-      id: 2,
+      _id: 2,
       author: 'Adam',
       comment: 'Jealous of those beards...',
       date: '2022-10-04T19:29:31.146Z',
     },
     {
-      id: 3,
+      _id: 3,
       author: 'Vicki',
       comment: 'Look at these bros....',
       date: '2022-10-04T19:29:31.146Z',
     },
     {
-      id: 4,
+      _id: 4,
       author: 'Melissa',
       comment: 'Is that Colonel Mustard?',
       date: '2022-10-04T19:29:31.146Z',
     },
     {
-      id: 5,
+      _id: '633cebd065d3d46f86af90cb',
       author: 'Zach',
       comment: 'Where are they walking though...',
       date: '2022-10-04T19:29:31.146Z',
@@ -182,7 +182,8 @@ const report = (e) => {
   e.preventDefault();
   const id = e.target.attributes[1].nodeValue;
   const type = e.target.attributes[2].nodeValue;
-  axios.put('http://localhost:8080/video/report', { id, type })
+  const commentID = e.target.attributes[3].nodeValue;
+  axios.put('http://localhost:8080/video/report', { id, type, commentID })
     .catch((err) => {
       console.log(err);
     });
@@ -232,7 +233,7 @@ return (
         </div>
         <div className='videoDescription'>
           <p>{currentVid.description}</p>
-          <h6 className="report" vidid={currentVid._id} type='video' onClick={report}>Report Video</h6>
+          <h6 className="report" vidid={currentVid._id} type='video' filler={0} onClick={report}>Report Video</h6>
         </div>
         <div>
           <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
@@ -262,13 +263,13 @@ return (
           }}
         >
           {currentVid.comments.map((comment, index) => (
-            <ListGroup.Item as="li" key={comment.id}>
+            <ListGroup.Item as="li" key={comment._id}>
               <div className="commentRow">
                 <h5>{comment.author}</h5>
-                {/* <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6> */}
+                <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
               </div>
               <p>{comment.comment}</p>
-              <h6 className="report" index={index} type='comment' onClick={report}>Report Comment</h6>
+              <h6 className="report" vidid={currentVid._id} type='comment' commentid={comment._id} onClick={report}>Report Comment</h6>
             </ListGroup.Item>
           ))}
         </ListGroup>
