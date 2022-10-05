@@ -18,7 +18,7 @@ function ProfilePage() {
   function fetchData() {
     return axios.get(`http://localhost:8080/user/data`, {
       params: {
-        user: user
+        user: currentUser.username
       }
     })
     .then((data) => {
