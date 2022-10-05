@@ -1,5 +1,7 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Container, Comment } from './Modals.styled';
@@ -135,7 +137,8 @@ function Flagged(props) {
             {flaggedVideos && flaggedVideos.map((item, i) => (
               <Comment key={i}>
                 <p><strong>Username:</strong> {item.username}</p>
-                <p><strong>Video:</strong> {item.title}</p>
+                <div><strong>Video:</strong>
+                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}>{item.title}</Link></div>
                 <Button id="redButton" value={i} onClick={handleVideoDelete}>Delete</Button>
                 <Button id="redButton" value={i} onClick={handleVideoKeep}>Keep</Button>
               </Comment>
@@ -150,7 +153,8 @@ function Flagged(props) {
             {flagged && flagged.map((item, i) => (
               <Comment key={i}>
                 <p><strong>Username:</strong> {item.author}</p>
-                <p><strong>Video:</strong> {item.title}</p>
+                <div><strong>Video:</strong>
+                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}>{item.title}</Link></div>
                 <p><strong>Comment:</strong> {item.comment}</p>
                 <Button id="redButton" value={i} onClick={handleDelete}>Delete</Button>
                 <Button id="redButton" value={i} onClick={handleKeep}>Keep</Button>
