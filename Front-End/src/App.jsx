@@ -57,7 +57,6 @@ function App() {
         />
         <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
         <Flagged flaggedModalShow={flaggedModalShow} setFlaggedModalShow={setFlaggedModalShow} />
-
         <Routes>
           <Route path="/" element={
           <LandingPage
