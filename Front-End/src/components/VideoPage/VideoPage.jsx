@@ -16,71 +16,8 @@ const timeAgo = new TimeAgo('en-US');
 function VideoPage() {
   const location = useLocation();
   const { video, currentUser } = location.state;
-  // const currentUser = {
-  //   username: 'Kevin Moyer',
-  //   uid: '',
-  //   email: 'kevin7.moyer@gmail.com',
-  //   favCreator: [],
-  //   isAdmin: false,
-  //   profilePicture: 'https://lh3.googleusercontent.com/a-/ACNPEu8qlJebzGRXncV4yX8XwLCtyJfZn1rpv32P4nw5=s96-c',
-  // };
-  // const video = {};
-
   // -----State-----
-  const [currentVid, setCurrentVid] = useState(
-    //   {
-    //   _id: `633c9f3c8b04c676c67a146f`,
-    //   title: 'Lookin Around',
-    //   description: 'Jay Pritchett\'s complaints about goat cheese',
-    //   username: 'Kevin Moyer',
-    //   dateUploaded: '2022-10-03T21:13:44.576Z',
-    //   comments: [{
-    //     _id: 1,
-    //     author: 'Alice',
-    //     comment: 'Is that Jake from State Farm?!',
-    //     date: '2022-10-03T21:13:44.576Z',
-    //   },
-    //   {
-    //     _id: 2,
-    //     author: 'Adam',
-    //     comment: 'Jealous of those beards...',
-    //     date: '2022-10-04T19:29:31.146Z',
-    //   },
-    //   {
-    //     _id: 3,
-    //     author: 'Vicki',
-    //     comment: 'Look at these bros....',
-    //     date: '2022-10-04T19:29:31.146Z',
-    //   },
-    //   {
-    //     _id: 4,
-    //     author: 'Melissa',
-    //     comment: 'Is that Colonel Mustard?',
-    //     date: '2022-10-04T19:29:31.146Z',
-    //   },
-    //   {
-    //     _id: '633cebd065d3d46f86af90cb',
-    //     author: 'Zach',
-    //     comment: 'Where are they walking though...',
-    //     date: '2022-10-04T19:29:31.146Z',
-    //   },
-    //   ],
-    //   URL: 'http://res.cloudinary.com/dulhjtu0p/video/upload/v1664917298/dxedveswjewbth38qulg.mp4',
-    //   thumbnail: 'https://res.cloudinary.com/dulhjtu0p/video/upload/c_limit,h_60,w_90/v1664917298/dxedveswjewbth38qulg.jpg',
-    //   votes: {
-    //     insightful: {
-    //       usernames: ['john', 'jacob', 'jimmerheimer'],
-    //     },
-    //     funny: {
-    //       usernames: ['john', 'jacob'],
-    //     },
-    //     informative: {
-    //       usernames: ['john'],
-    //     },
-    //   },
-    //   private: false,
-    // }
-  );
+  const [currentVid, setCurrentVid] = useState();
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
   const [currUser, setCurrUser] = useState({});
   const [showModal, setShowModal] = useState(false);
@@ -91,10 +28,6 @@ function VideoPage() {
       cloudName: cloudName,
     },
   });
-
-  // -----Video Formatting-----
-
-
   // -----UseEffect-----
   useEffect(() => {
     setCurrentVid(video);
@@ -134,7 +67,6 @@ function VideoPage() {
 
   // -----Event Handlers-----
   const updateVote = (e) => {
-    // TODO: add in Authentication by updating both local and DB username array on the vote value
     // FIXME: why does this reload the video?
     if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
@@ -209,81 +141,77 @@ function VideoPage() {
     setCurrentVid(vid);
   };
 
-  if (!currentVid) {
-    return (<></>)
-  }
-  return (
-    <Container style={{ height: '100%' }}>
-      <Row>
-        <Col xs={8}>
-          <div className="videoCreator">
-            <h2>{currentVid.title}</h2>
-            <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
-          </div>
-          <div>
-            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
-          </div>
-          <div className="videoCreator">
-            <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
-              <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
-            </Link>
-            <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
-          </div>
-          <div className='videoDescription'>
-            <p>{currentVid.description}</p>
-            <h6 className="report" vidid={currentVid._id} type='video' filler={0} onClick={report}>Report Video</h6>
-          </div>
-          <div>
-            <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
-              Insightful
-              <br></br>
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.usernames.length}</Badge>
-            </Button>
-            <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
-              Informative
-              <br></br>
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
-            </Button>
-            <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
-              Funny
-              <br></br>
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
-            </Button>
-          </div>
-        </Col>
-        <Col>
-          <h2>Comments</h2>
-          <ListGroup
-            variant="flush"
-            style={{
-              overflowX: 'overflow',
-              overflowY: 'scroll',
-              maxHeight: '90%',
-            }}
-          >
-            {currentVid.comments.map((comment, index) => (
-              <ListGroup.Item as="li" key={comment._id}>
-                <div className="commentRow">
-                  <h5>{comment.author}</h5>
-                  <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
-                </div>
-                <p>{comment.comment}</p>
-                <h6 className="report" vidid={currentVid._id} type='comment' commentid={comment._id} onClick={report}>Report Comment</h6>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
-          <Button style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
-        </Col>
-      </Row>
-      <AddComment
-        show={showModal}
-        toggleModal={toggleModal}
-        currUser={currUser.username}
-        videoID={currentVid._id}
-        addComment={addComment}
-      />
-    </Container>
-  );
+return (
+  <Container style={{ height: '100%' }}>
+    <Row style={{ marginTop: '30px' }}>
+      <Col xs={8}>
+        <div>
+          <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
+        </div>
+        <div className="videoCreator">
+          <h2>{currentVid.title}</h2>
+          <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
+        </div>
+        <div className="videoCreator">
+          <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
+            <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
+          </Link>
+          <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
+        </div>
+        <div className='videoDescription'>
+          <p>{currentVid.description}</p>
+          <h6 className="report" vidid={currentVid._id} type='video' filler={0} onClick={report}>Report Video</h6>
+        </div>
+        <div>
+          <Button variant="primary" id="insightful" className="vote" onClick={updateVote}>
+            Insightful
+            <br></br>
+            <Badge bg="secondary" className="voteCount">{currentVid.votes.insightful.usernames.length}</Badge>
+          </Button>
+          <Button variant="primary" id="informative" className="vote" onClick={updateVote}>
+            Informative
+            <br></br>
+            <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
+          </Button>
+          <Button variant="primary" id="funny" className="vote" onClick={updateVote}>
+            Funny
+            <br></br>
+            <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
+          </Button>
+        </div>
+      </Col>
+      <Col>
+        <ListGroup
+          variant="flush"
+          style={{
+            overflowX: 'overflow',
+            overflowY: 'scroll',
+            maxHeight: '90%',
+          }}
+        >
+          {currentVid.comments.map((comment, index) => (
+            <ListGroup.Item as="li" key={comment._id}>
+              <div className="commentRow">
+                <h5>{comment.author}</h5>
+                <h6 className="date">{timeAgo.format(new Date(comment.date))}</h6>
+              </div>
+              <p>{comment.comment}</p>
+              <h6 className="report" vidid={currentVid._id} type='comment' commentid={comment._id} onClick={report}>Report Comment</h6>
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+        <Button id="redButton" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
+      </Col>
+    </Row>
+    <AddComment
+      show={showModal}
+      toggleModal={toggleModal}
+      currUser={currUser.username}
+      videoID={currentVid._id}
+      addComment={addComment}
+    />
+  </Container>
+);
 }
 
 export default VideoPage;

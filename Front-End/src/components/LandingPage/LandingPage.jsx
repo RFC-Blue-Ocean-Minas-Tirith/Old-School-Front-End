@@ -15,15 +15,8 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
   const [button, setButton] = useState(true);
-  const [favorited, setFavorited] = useState('Favorite this Creator!');
-  const [faved, setFaved] = useState(false)
+  const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isInsightful, setInsightful] = useState(false);
-  const [isFunny, setFunny] = useState(false);
-  const [isInformative, setInformative] = useState(false);
-  // useEffect(() => {
-  //   console.log(isFavorite);
-  // }, [isFavorite])
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData) {
@@ -31,44 +24,37 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         .then(res => {
           //console.log('get user res', res.data);
           res.data.forEach(profile => {
-            if (profile.username === currentUser) {
+            if (profile.username === currentUser.username) {
               if (profile.favCreator.includes(videoData[index].username)) {
-                setIsFavorite(true);
-                setFavorited('This is one of your Favorite Creators');
+                setFavorited(['favorited', 'This is one of your Favorite Creators']);
               } else {
-                setIsFavorite(false);
-                setFavorited('Favorite this Creator!');
+                setFavorited(['unfavorited','Favorite this Creator!']);
               }
             }
           })
         })
-      //.then(() => console.log('isFavorite =', isFavorite))
     }
   }, [videoData]);
   // ===================== set button state ==========================
-  useEffect(() => {
-    if (videoData) {
-      if (videoData[index].votes.informative.usernames.includes(currentUser)) {
-        setInformative(true);
-      } else {
-        setInformative(false);
-      }
-      if (videoData[index].votes.insightful.usernames.includes(currentUser)) {
-        setInsightful(true);
-      } else {
-        setInsightful(false);
-      }
-      if (videoData[index].votes.funny.usernames.includes(currentUser)) {
-        setFunny(true);
-      } else {
-        setFunny(false);
-      }
-    }
-  }, [index])
   // useEffect(() => {
-  //   console.log(isFunny, isInformative, isInsightful);
-  // }, [isFunny, isInformative, isInsightful])
-  // ========== mount components via get video from db ================
+  //   if (videoData) {
+  //     if (videoData[index].votes.informative.usernames.includes(currentUser)) {
+  //       setInformative(true);
+  //     } else {
+  //       setInformative(false);
+  //     }
+  //     if (videoData[index].votes.insightful.usernames.includes(currentUser)) {
+  //       setInsightful(true);
+  //     } else {
+  //       setInsightful(false);
+  //     }
+  //     if (videoData[index].votes.funny.usernames.includes(currentUser)) {
+  //       setFunny(true);
+  //     } else {
+  //       setFunny(false);
+  //     }
+  //   }
+  // }, [index])
 
   useEffect(() => {
     getThumbnails();
@@ -106,23 +92,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   useEffect(() => {
     //console.log('this is the videoData', videoData);
     if (videoData) {
-      if (videoData[index].votes.informative.usernames.includes(currentUser)) {
-        setInformative(true);
-      } else {
-        setInformative(false);
-      }
-      if (videoData[index].votes.insightful.usernames.includes(currentUser)) {
-        setInsightful(true);
-      } else {
-        setInsightful(false);
-      }
-      if (videoData[index].votes.funny.usernames.includes(currentUser)) {
-        setFunny(true);
-      } else {
-        setFunny(false);
-      }
-      //console.log(videoData);
-      //let temp = videoData.map(data => data.thumbnail);
       let temp = [];
       for (var i = 0; i < videoData.length; i++) {
         if (videoData[i]) {
@@ -186,24 +155,24 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       .catch(err => console.log(err));
   }
   function handleFave() {
-    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/userprofile', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
-        setIsFavorite(true);
+        setFavorited(['favorited', 'This is one of your Favorite Creators']);
       });
   }
   function handleUnFave() {
-    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/video/userprofilex', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
-        setIsFavorite(false);
+        setFavorited(['unfavorited','Favorite this Creator!']);
       });
   }
-  const favorites = () => {
-    if (isFavorite) {
-      setFavorited('This is one of your Favorite Creators');
-    } else {
-      setFavorited('Favorite this Creator!');
-    }
-  }
+  // const favorites = () => {
+  //   if (isFavorite) {
+  //     setFavorited('This is one of your Favorite Creators');
+  //   } else {
+  //     setFavorited('Favorite this Creator!');
+  //   }
+  // }
   if (videoData.length) {
     return (
       <div>
@@ -211,7 +180,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           (!thumbnails.length) ? <div></div> :
             <Container className="w-auto p-11">
               <Row >
-                <Col className="border border-success">
+                <Col className="border-success">
                   <Form.Select size="lg" onChange={(e) => {
                     const selectedMenuOption = e.target.value;
                     setSortOn(selectedMenuOption);
@@ -223,7 +192,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <option value='funny'>Funny</option>
                   </Form.Select>
                   <Row>
-                    <Col>
+                    <Col id="data">
                       <h1 id="VideoTitle">{videoData[index].title}</h1>
                     </Col>
                   </Row>
@@ -234,16 +203,17 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
                       <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
                     </Link>
-                    <Badge className="border border-warning" pill bg="warning" text="dark" onClick={() => {
-                      favorites();
-                      (isFavorite) ? handleUnFave() : handleFave()
+                    <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={() => {
+                      (favorited[0] === 'favorited') ? handleUnFave() : handleFave()
                     }
                     }
-                    >{favorited}</Badge>
+                    >{favorited[1]}</Badge>
                   </div>
-                  <h5 id="description">{videoData[index].description}</h5>
+                  <div id="des">
+                    <h5 id="description">{videoData[index].description}</h5>
+                  </div>
                 </Col>
-                <Col className="border border-success" md={8}>
+                <Col id="carousel" class="border border-success" md={8}>
                   <Carousel interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
@@ -260,18 +230,18 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
               <Row>
                   <div >
                     <div>
-                      <Button variant="primary" id="insightful" className="vote" onClick={() => (isInsightful) ? handleUnInsightful() : handleInsightful()}>Insightful
+                      <Button variant="primary" id="insightful" className="vote nonclick">Insightful
                         <br>
                         </br>
-                        <Badge bg="secondary" >{videoData[index].votes.insightful.usernames.length}{(isInsightful) ? ':thinking_face:' : ''}</Badge>
+                        <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
                       </Button>
-                      <Button variant="primary" id="funny" className="vote" onClick={() => { (isFunny) ? handleUnFunny() : handleFunny() }}>Funny<br>
-                      </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}{(isFunny) ? ':joy:' : ''}</Badge>
+                      <Button variant="primary" id="funny" className="vote">Funny<br>
+                      </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
                       </Button>
-                      <Button variant="primary" id="informative" className="vote" onClick={() => { (isInformative) ? handleUnInformative() : handleInformative() }}>Informative
+                      <Button variant="primary" id="informative" className="vote" >Informative
                         <br>
                         </br>
-                        <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}{(isInformative) ? ':information_source:' : ''}</Badge>
+                        <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
                       </Button>
                     </div>
                   </div>

@@ -36,19 +36,13 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
       });
   }
 
-  function navigateUserProfile() {
-    if (isLoggedIn) {
-      const urlUsername = currentUser.username.replace(' ', '-');
-      console.log('navigate to user:', `\\${urlUsername}`);
-      // navigate(`\\${urlUsername}`);
-    } else {
-      signInWithGoogle();
-    }
-  }
-
   function checkIfAdmin() {
     if (isLoggedIn) {
-      return axios.get(`http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/user/${currentUser.username}`)
+      return axios.get('http://ec2-52-14-88-68.us-east-2.compute.amazonaws.com:8080/user/data', {
+        params: {
+          user: currentUser.username
+        }
+      })
         .then((response) => {
           if (response.data.isAdmin) {
             setIsAdmin(true);
@@ -64,9 +58,9 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
   }, [isLoggedIn]);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar id="nav" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">Old School</Navbar.Brand>
+        <Navbar.Brand id="nav" href="/">Old School</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -74,8 +68,8 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to="/" className="nav-link active" aria-current="page">Home</Link>
-            <Link to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page" onClick={() => navigateUserProfile()}>My Profile</Link>
+            <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
+            <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -84,20 +78,20 @@ function AppNavbar({ setModalShow, isLoggedIn, setVideoData, currentUser, setFla
                 aria-label="Search"
                 onChange={() => handleSearchChange}
               />
-              <Button variant="outline-success" onClick={() => handleSearch}>Search</Button>
+              <Button id="whiteButton" variant="outline-success" onClick={() => handleSearch}>Search</Button>
             </Form>
           </Nav>
           {isLoggedIn && isAdmin
-            ? <StyledButton className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</StyledButton>
+            ? <Button id="flagged" className="btn btn-primary me-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
 
           {isLoggedIn
-            ? <Button className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
+            ? <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
 
           {isLoggedIn
-            ? <Button className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
-            : <Button className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
+            ? <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button id="whiteButton" className="btn btn-primary me-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar>
