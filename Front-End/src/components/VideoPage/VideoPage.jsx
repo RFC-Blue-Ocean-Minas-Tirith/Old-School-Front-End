@@ -209,13 +209,6 @@ const addComment = (params) => {
 
 return (
   <Container style={{ height: '100%' }}>
-    <AddComment
-      show={showModal}
-      toggleModal={toggleModal}
-      currUser={currUser.username}
-      videoID={currentVid._id}
-      addComment={addComment}
-    />
     <Row style={{ marginTop: '30px' }}>
       <Col xs={8}>
         <div>
@@ -276,6 +269,13 @@ return (
         <Button id="comment" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
       </Col>
     </Row>
+    <AddComment
+      show={showModal}
+      toggleModal={toggleModal}
+      currUser={currUser.username}
+      videoID={currentVid._id}
+      addComment={addComment}
+    />
   </Container>
 );
 }
