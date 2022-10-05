@@ -136,13 +136,13 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       .catch(err => console.log(err));
   }
   function handleFave() {
-    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comuserprofile', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setFavorited(['favorited', 'This is one of your Favorite Creators']);
       });
   }
   function handleUnFave() {
-    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comuserprofilex', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setFavorited(['unfavorited','Favorite this Creator!']);
       });
