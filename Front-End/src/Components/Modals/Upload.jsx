@@ -21,8 +21,8 @@ function Upload(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Header id="contained-modal-title-vcenter" closeButton>
+          <Modal.Title >
             Upload:
           </Modal.Title>
         </Modal.Header>
