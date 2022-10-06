@@ -40,7 +40,8 @@ function Upload(props) {
       <UploadVideo
         videoModalShow={videoModalShow}
         setVideoModalShow={setVideoModalShow}
-        setModalShow={props.setModalShow} username={props.currentUser.username} />
+        setModalShow={props.setModalShow}
+        currentUser={props.currentUser}/>
       <UploadBlog
         blogModalShow={blogModalShow}
         setBlogModalShow={setBlogModalShow}

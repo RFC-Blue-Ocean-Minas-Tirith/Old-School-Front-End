@@ -47,7 +47,7 @@ function VideoPage() {
         }
       })
         .then(({ data }) => {
-          const favorite = data.indexOf(currentVid.username) === -1 ? ['unfavorited', 'Favorite this Creator!'] : ['favorited', 'This is one of your Favorite Creators'];
+          const favorite = data.indexOf(currentVid.username) === -1 ? ['unfavorited', 'Favorite this Creator!'] : ['favorited', 'Favorite Creator'];
           setFavorited(favorite);
         })
         .catch((err) => {
@@ -111,7 +111,7 @@ function VideoPage() {
     }
     e.preventDefault();
     if (favorited[0] === 'unfavorited') {
-      setFavorited(['favorited', 'This is one of your Favorite Creators']);
+      setFavorited(['favorited', 'Favorite Creator']);
       axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currUser, user: currentVid.username })
         .catch((err) => {
           console.log(err);

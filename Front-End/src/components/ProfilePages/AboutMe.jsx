@@ -156,7 +156,7 @@ function AboutMe({ user, currentUser }) {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-5">
-          <Badge id='favorited' className="border border-warning" pill bg="warning" text="dark" onClick={() => {handleUnfave()}}>This is one of your Favorite Creators.</Badge>
+          <Badge id='favorited' className="border border-warning" style={{fontSize: '16px'}} pill bg="warning" text="dark" onClick={() => {handleUnfave()}}>Favorite Creator.</Badge>
         </div>
       </div>
     </div>
@@ -189,7 +189,7 @@ function AboutMe({ user, currentUser }) {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-5">
-        <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={() => {handleFave()}}>Favorite this Creator!</Badge>
+        <Badge id={favorited[0]} className="border border-warning" style={{fontSize: '16px'}} pill bg="warning" text="dark" onClick={() => {handleFave()}}>Favorite this Creator!</Badge>
         </div>
       </div>
     </div>
