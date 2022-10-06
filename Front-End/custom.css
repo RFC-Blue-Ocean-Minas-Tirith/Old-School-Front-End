@@ -65,6 +65,9 @@
 	align-items: center;
 }
 
+#carousel img{
+  border-radius: 15px;
+}
 .prev,
 .next {
 	cursor: pointer;
@@ -157,6 +160,12 @@
 #nav {
   background-color: #a7142c;
   color: #FFFFFF;
+  height: 12vh;
+}
+
+#nav-search {
+  margin-top: 1%;
+  height: 100%;
 }
 
 html body {
@@ -167,7 +176,18 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
+  background: #a7142c;
+  color: white;
+  text-align: center;
+  border-radius: 0px 0px 15px 15px;
+  /* margin: 2%; */
   /* font-weight: bold;*/
+}
+#dropdown-sorter {
+  background: #a7142c;
+  border-radius: 15px 15px 0px 0px;
+  outline: none;
+  color: white;
 }
 
 #time {
@@ -193,7 +213,6 @@ html body {
   max-height: 110px;
 }
 
-<<<<<<< HEAD
 .flaggedRow {
   display: flex;
   flex-direction: row;
@@ -204,7 +223,8 @@ html body {
   color: blue;
   border-bottom: 1px solid blue;
   padding-left: 5px;
-=======
+}
+
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
@@ -215,5 +235,80 @@ html body {
     background-color: black;
     border-radius: 50%;
     opacity: 0.8;
->>>>>>> e40665a800c273c57320f9a8eb3e36db0cfd3fe4
+}
+
+#video-carousel-container {
+  border-radius: 15px;
+  background-color: rgb(241, 228, 228);
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+#video-carousel-title {
+  background: #a7142c;
+  border-radius: 15px;
+  color: white;
+  width: 100%;
+  padding: 1%;
+}
+
+#about-me-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(241, 228, 228);
+  border-radius: 15px;
+  padding: 1%;
+  /* margin-bottom: 1%; */
+  height: 99%;
+}
+
+#about-me-user {
+  background: #a7142c;
+  border-radius: 0px 0px 15px 15px;
+  color: white;
+  padding: 1%;
+  margin-left: -1%;
+  margin-right: -1%;
+}
+
+#about-me-picture {
+  background: #a7142c;
+  border-radius: 15px 15px 0px 0px;
+  color: white;
+  padding: 1%;
+  margin-top: -1%;
+  margin-left: -1%;
+  margin-right: -1%;
+}
+
+#about-me-bio {
+  margin-top: 2%;
+}
+
+#logo {
+  color: white;
+  font-size: 50px;
+  font-family: 'Garamond'
+}
+
+#nav-button {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+#landing-page-topbar {
+  background: #a7142c;
+  width: 100%;
+  margin-right: 2%;
+  padding: 2%;
+  border-radius: 15px;
+  margin-top: 1%;
+  /* text-decoration: underline white; */
+}
+
+#dropdown-selector {
+  top: 13%;
+  position: absolute;
+  width: 29%;
 }

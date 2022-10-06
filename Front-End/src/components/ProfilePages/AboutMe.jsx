@@ -95,8 +95,8 @@ function AboutMe({ user, currentUser }) {
         )
       }
       return (
-        <div className="container">
-        <div className="row">
+        <div id="about-me-container" className="container">
+        <div id="about-me-picture" className="row">
           <div className="text-center">
             <img
               src={user.profilePicture}
@@ -111,12 +111,12 @@ function AboutMe({ user, currentUser }) {
             />
           </div>
         </div>
-        <div className="row">
+        <div id="about-me-user" className="row">
           <h1 className="text-center">{user.username}</h1>
         </div>
         <div className="row">
         </div>
-        <div className="row">
+        <div id="about-me-bio" className="row">
           <p className="text-center">{user.aboutMe}</p>
         </div>
         <div className="row justify-content-center">
