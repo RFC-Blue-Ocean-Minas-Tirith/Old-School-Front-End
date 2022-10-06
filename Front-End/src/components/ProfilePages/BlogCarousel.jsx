@@ -42,7 +42,7 @@ function BlogCarousel({ blogs }) {
         <div className="row justify-content-between">
           <div className="col-2"></div>
           <div className="col-2">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
           </div>
         </div>
         <div className="vid-carousel">
@@ -59,7 +59,7 @@ function BlogCarousel({ blogs }) {
         <h2 id="video-carousel-title" className="text-center"> Blog Posts </h2>
         <div className="row justify-content-between">
           <div className="col-2">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
           </div>
           <div className="col"></div>
         </div>
@@ -76,10 +76,10 @@ function BlogCarousel({ blogs }) {
       <h2 id="video-carousel-title" className="text-center"> Blog Posts </h2>
       <div className="row justify-content-between">
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place - 1) }}>Prev Blogs</button>
         </div>
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentBlgs.place + 1) }}>More Blogs</button>
         </div>
       </div>
       <div className="vid-carousel">
