@@ -174,7 +174,7 @@ function VideoPage() {
   return (
     <Container fluid>
       <Row >
-        <Col xs={8}>
+        <Col xs={7}>
           <div className="videoTitle">
             <h2>{currentVid.title}</h2>
             <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
@@ -257,7 +257,7 @@ function VideoPage() {
             })}
           </ListGroup>
           <div id="commentSpacer"></div>
-          <Button id="addComment" style={{ width: '100%', height: '8%' }} bg="primary" variant="warning" onClick={toggleModal}>Add Comment</Button>
+          <Button id="clickButton" style={{ width: '100%', height: '8%' }} bg="primary" variant="warning" onClick={toggleModal}>Add Comment</Button>
         </Col>
       </Row>
       <AddComment

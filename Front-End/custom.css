@@ -1,7 +1,13 @@
 
 .vote {
   margin: 5px;
-  width: 30%
+  width: 27%
+}
+
+#buttonRow {
+  display: flex;
+  flex-direction: flex-start;
+  justify-content: space-between;
 }
 
 .nonclick {
@@ -19,6 +25,10 @@
 .videoUser {
   margin-bottom: 0px;
   margin-right: 5px;
+  color: #5d3754;
+  text-decoration: underline;
+  text-decoration-color: #5d3754;
+  -webkit-text-decoration-color: #5d3754;
 }
 
 #favorited, #unfavorited {
@@ -121,7 +131,15 @@
 }
 
 /* only ids work to change the button color */
-#informative, #funny, #insightful, #addComment {
+#informative,
+#funny,
+#insightful,
+#informative-landing,
+#funny-landing,
+#insightful-landing,
+#clickButton,
+#clickButtonFlag,
+#largeButton {
   color: #FFFFFF;
   font-size: 1em;
   border: 1px solid #361118;
@@ -129,12 +147,18 @@
   background-color: #5d3754;
   margin: 20px 10px 0px 10px;
 }
+
+#informative,
+#funny,
+#insightful {
+
+}
 #informative-landing, #funny-landing, #insightful-landing {
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   font-size: 1em;
-  border: 1px solid #a7142c;
+  /* border: 1px solid #a7142c; */
   border-radius: 6px;
-  background-color: #a7142c;
+  /* background-color: #a7142c; */
   margin: 20px 10px 0px 10px;
   cursor: auto;
 }
@@ -169,7 +193,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 90%;
-  background-color: #a7142c;
+  /* background-color: #a7142c; */
   padding: 30px;
 }
 
@@ -232,9 +256,10 @@ html body {
 }
 
 #link {
-  color: blue;
-  border-bottom: 1px solid blue;
+  color: #5d3754;
+  border-bottom: 1px solid #5d3754;
   padding-left: 5px;
+  font-weight: bold;
 }
 
 .carousel-control-next,

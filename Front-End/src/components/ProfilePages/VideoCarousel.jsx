@@ -61,7 +61,7 @@ function VideoCarousel({ videos, currentUser }) {
         <h2 className="text-center"> Video Posts </h2>
         <div className="row justify-content-between">
           <div className="col-2">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
           </div>
           <div className="col-2"></div>
         </div>
@@ -78,10 +78,10 @@ function VideoCarousel({ videos, currentUser }) {
       <h2 className="text-center"> Video Posts </h2>
       <div className="row justify-content-between">
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
         </div>
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
         </div>
       </div>
       <div className="vid-carousel">

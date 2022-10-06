@@ -121,7 +121,7 @@ function AboutMe({ user, currentUser }) {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-5">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {setEditing(true)}}>Edit</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => {setEditing(true)}}>Edit</button>
           </div>
         </div>
       </div>
