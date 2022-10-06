@@ -9,12 +9,12 @@ function VideoCarouselEntry({ video, currentUser }) {
     <div className="video-carousel-video card center-block">
       <div className="card-body">
       <Link to="/video_page" className="nav-link active" aria-current="page" state={{currentUser: currentUser, video: video}}>
-      <img src={thumb} width="250px" height="250px" style={{ objectFit: 'cover' }} alt="video" className="card-img-top" />
+      <img src={thumb} width="250px" height="250px" style={{ objectFit: 'cover', maxWidth: '250px' }} alt="video" className="card-img-top" />
       </Link>
-        <div className="card-title text-center">
+        <div id="carousel-card-title" className="card-title text-center">
           {video.title}
         </div>
-        <div className="card-text">
+        <div id="carousel-card-title" className="card-text">
           {video.description}
         </div>
       </div>
