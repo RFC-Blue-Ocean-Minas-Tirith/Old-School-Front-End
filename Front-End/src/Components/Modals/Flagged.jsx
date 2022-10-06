@@ -2,11 +2,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Container, Comment, Column, Row } from './Modals.styled';
 import Theme from './Theme';
+import { serviceID, templateID, publicKey } from './config';
 
 function Flagged(props) {
   const [flagged, setFlagged] = useState();
@@ -55,6 +57,29 @@ function Flagged(props) {
     axios.patch('http://localhost:8080/flaggedComments', params)
       .then((results) => {
         console.log(results);
+        return axios.get('http://localhost:8080/user/data', {
+          params: {
+            user: flagged[e.target.value].author
+          }
+        })
+          .then ((results) => {
+            let templateParams = {
+              currentUser: results.data.email,
+              username: results.data.username,
+              video: flagged[e.target.value].title,
+              comment: flagged[e.target.value].comment
+            }
+            console.log('template params', templateParams);
+            emailjs.send(serviceID, templateID, templateParams, publicKey)
+              .then((result) => {
+                console.log('email sent!', result.status, result.text);
+              }, (error) => {
+                  console.log('error', error);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          })
       })
       .catch((err) => {
         console.log(err);
