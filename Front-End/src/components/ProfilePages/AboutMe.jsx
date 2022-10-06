@@ -61,8 +61,8 @@ function AboutMe({ user, currentUser }) {
     if (user.username === currentUser.username) {
       if (editing) {
         return (
-          <div className="container">
-          <div className="row">
+          <div id="about-me-container" className="container">
+          <div id="about-me-picture" className="row">
             <div className="text-center">
               <img
                 src={user.profilePicture}
@@ -77,14 +77,14 @@ function AboutMe({ user, currentUser }) {
               />
             </div>
           </div>
-          <div className="row">
+          <div id="about-me-user" className="row">
             <h1 className="text-center">{user.username}</h1>
           </div>
           <div className="row">
           </div>
-          <div className="row">
+          <div id="about-me-bio" className="row">
             <label for="Biography Text Area"></label>
-            <textarea class="form-control" rows="10" placeholder="Write your bio here..." onChange={(e) => {handleBioWriting(e)}}></textarea>
+            <textarea id="about-me-bio-text" class="form-control" columns="5" rows="10" placeholder="Write your bio here..." onChange={(e) => {handleBioWriting(e)}}></textarea>
           </div>
           <div className="row text-center justify-content-center">
             <div className="col-md-5">
@@ -130,8 +130,8 @@ function AboutMe({ user, currentUser }) {
   }
   if (faved) {
     return (
-      <div className="container">
-      <div className="row">
+      <div id="about-me-container" className="container">
+      <div id="about-me-picture" className="row">
         <div className="text-center">
           <img
             src={user.profilePicture}
@@ -146,12 +146,12 @@ function AboutMe({ user, currentUser }) {
           />
         </div>
       </div>
-      <div className="row">
+      <div id="about-me-user" className="row">
         <h1 className="text-center">{user.username}</h1>
       </div>
       <div className="row">
       </div>
-      <div className="row">
+      <div id="about-me-bio" className="row">
         <p className="text-center">{user.aboutMe}</p>
       </div>
       <div className="row justify-content-center">
@@ -163,8 +163,8 @@ function AboutMe({ user, currentUser }) {
     )
   }
   return (
-    <div className="container">
-      <div className="row">
+    <div id="about-me-container" className="container">
+      <div id="about-me-picture" className="row">
         <div className="text-center">
           <img
             src={user.profilePicture}
@@ -179,12 +179,12 @@ function AboutMe({ user, currentUser }) {
           />
         </div>
       </div>
-      <div className="row">
+      <div id="about-me-user" className="row">
         <h1 className="text-center">{user.username}</h1>
       </div>
       <div className="row">
       </div>
-      <div className="row">
+      <div id="about-me-bio" className="row">
         <p className="text-center">{user.aboutMe}</p>
       </div>
       <div className="row justify-content-center">
