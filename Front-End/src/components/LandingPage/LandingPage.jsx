@@ -41,36 +41,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
 
   const getThumbnails = () => {
     let results = videoData;
-    if (sortOn === 'favorited') {
-      results = [];
-      axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
-        params: {
-          user: currentUser.username
-        }
-      })
-        .then((data) => {
-          console.log(data);
-          for (let i = 0; i < videoData.length; i++) {
-            for (let j = 0; j < data.data.length; j++) {
-              if (data.data[j] === videoData[i].username) {
-                results.push(videoData[i]);
-              }
-            }
-          }
-        })
-        .then(() => {
-          setVideoData(results);
-          setIndex(0);
-          let temp = [];
-          for (var i = 0; i < results.length; i++) {
-            if (results[i]) {
-              temp.push(results[i].url.replace('.mp4', '.jpg'));
-            }
-          }
-          setThumbnails(temp)
-          return;
-        })
-    }
     if (sortOn === 'insightful') {
       for (let i = 0; i < videoData.length; i++) {
         results.sort((a, b) => {
@@ -108,6 +78,40 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       }
     }
     setThumbnails(temp);
+    if (sortOn === 'favorited') {
+      results = [];
+      axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
+        params: {
+          user: currentUser.username
+        }
+      })
+        .then((data) => {
+          for (let i = 0; i < videoData.length; i++) {
+            for (let j = 0; j < data.data.length; j++) {
+              if (data.data[j] === videoData[i].username) {
+                results.push(videoData[i]);
+              }
+            }
+          }
+        })
+        .then(() => {
+          if (results.length > 0) {
+            setVideoData(results);
+            setIndex(0);
+            let temp = [];
+            for (var i = 0; i < results.length; i++) {
+              if (results[i]) {
+                temp.push(results[i].url.replace('.mp4', '.jpg'));
+              }
+            }
+            setThumbnails(temp)
+            return;
+          }
+          console.log('you are here first, ', videoData)
+          results = videoData;
+          return;
+        })
+    }
   }
   useEffect(() => {
     if (videoData) {
