@@ -14,9 +14,9 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
-  const [button, setButton] = useState(true);
+  // const [button, setButton] = useState(true);
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData && currentUser) {
@@ -28,13 +28,17 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
               if (profile.favCreator.includes(videoData[index].username)) {
                 setFavorited(['favorited', 'This is one of your Favorite Creators']);
               } else {
-                setFavorited(['unfavorited','Favorite this Creator!']);
+                setFavorited(['unfavorited', 'Favorite this Creator!']);
               }
             }
           })
         })
+        .then(() => {
+          console.log('index =', index);
+          console.log('this is the favorited data =', favorited)
+        })
     }
-  }, [videoData]);
+  }, [index, videoData]);
 
 
   useEffect(() => {
@@ -51,26 +55,27 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           user: currentUser.username
         }
       })
-      .then((data) => {
-        console.log(data);
-        for (let i = 0; i < videoData.length; i++) {
-          for (let j = 0; j < data.data.length; j++) {
-            if (data.data[j] === videoData[i].username) {
-              results.push(videoData[i]);
+        .then((data) => {
+          console.log(data);
+          for (let i = 0; i < videoData.length; i++) {
+            for (let j = 0; j < data.data.length; j++) {
+              if (data.data[j] === videoData[i].username) {
+                results.push(videoData[i]);
+              }
             }
           }
-        }
-      })
-      .then(() => {
-        setVideoData(results);
-        let temp = [];
-        for (var i = 0; i < results.length; i++) {
-          if (results[i]) {
-            temp.push(results[i].url.replace('.mp4', '.jpg'));
+        })
+        .then(() => {
+          setVideoData(results);
+          let temp = [];
+          for (var i = 0; i < results.length; i++) {
+            if (results[i]) {
+              temp.push(results[i].url.replace('.mp4', '.jpg'));
+            }
           }
-        }
-        setThumbnails(temp)
-      })
+          setThumbnails(temp)
+          return;
+        })
     }
     if (sortOn === 'insightful') {
       for (let i = 0; i < videoData.length; i++) {
@@ -184,7 +189,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   function handleUnFave() {
     return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
-        setFavorited(['unfavorited','Favorite this Creator!']);
+        setFavorited(['unfavorited', 'Favorite this Creator!']);
       });
   }
   // const favorites = () => {
@@ -240,7 +245,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
                           <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                            <img className="d-block w-100" style = {{objectFit:'cover', maxHeight:'500px' }} src={thumbnail} />
+                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px' }} src={thumbnail} />
                           </Link>
                         </Carousel.Item>)
                       })
@@ -249,25 +254,24 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                 </Col>
               </Row>
               <Row>
-                  <div >
-                    <div>
-                      <Button variant="primary" id="insightful" className="vote nonclick">Insightful
-                        <br>
-                        </br>
-                        <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
-                      </Button>
-                      <Button variant="primary" id="funny" className="vote">Funny<br>
-                      </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
-                      </Button>
-                      <Button variant="primary" id="informative" className="vote" >Informative
-                        <br>
-                        </br>
-                        <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
-                      </Button>
-                    </div>
+                <div >
+                  <div>
+                    <Button variant="primary" id="insightful-landing" className="vote nonclick">Insightful
+                      <br>
+                      </br>
+                      <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
+                    </Button>
+                    <Button variant="primary" id="funny-landing" className="vote">Funny<br>
+                    </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
+                    </Button>
+                    <Button variant="primary" id="informative-landing" className="vote" >Informative
+                      <br>
+                      </br>
+                      <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
+                    </Button>
                   </div>
+                </div>
               </Row>
-
             </Container>
         }
       </div>
