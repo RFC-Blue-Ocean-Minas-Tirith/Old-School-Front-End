@@ -170,8 +170,8 @@ function Flagged(props) {
                 <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link">{item.title}</h6></Link></div>
                 </Column>
                 <Column>
-                <Button id="redButtonFlag" value={i} onClick={handleVideoDelete}>Delete</Button>
-                <Button id="redButtonFlag" value={i} onClick={handleVideoKeep}>Keep</Button>
+                <Button id="clickButtonFlag" value={i} onClick={handleVideoDelete}>Delete</Button>
+                <Button id="clickButtonFlag" value={i} onClick={handleVideoKeep}>Keep</Button>
                 </Column>
                 </Row>
                 </ListGroup.Item>
