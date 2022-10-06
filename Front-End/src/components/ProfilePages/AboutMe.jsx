@@ -44,11 +44,16 @@ function AboutMe({ user, currentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      if (currentUser.favCreator) {
-        if (currentUser.favCreator.indexOf(user.username) !== -1) {
-          setFaved(true)
+      axios.get(`http://localhost:8080/user/favs`, {
+        params: {
+          user: currentUser.username
         }
-      }
+      })
+      .then(({ data }) => {
+        if (data.indexOf(user.username) !== -1) {
+          setFaved(true);
+        }
+      })
     }
   }, [user])
 
