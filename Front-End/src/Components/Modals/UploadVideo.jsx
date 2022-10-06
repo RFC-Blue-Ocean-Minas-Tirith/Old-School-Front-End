@@ -92,21 +92,15 @@ function UploadVideo(props) {
         url: videoUrl,
         votes: votesInfo,
         thumbnail: thumbnailUrl,
-<<<<<<< HEAD
       },
     };
     axios.post('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video', params)
-=======
-      }
-    }
-    axios.post('http://localhost:8080/video', params)
->>>>>>> 0302c38841fe5e480a8ac744390eccaff9889468
       .then(() => {
         props.setModalShow(false);
         setSubmitted(true)
       })
     .then(() => {
-      axios.get('http://localhost:8080/usersForFaveCreator', {
+      axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/usersForFaveCreator', {
         params: {
           favoriteUser: props.currentUser.username,
         },
