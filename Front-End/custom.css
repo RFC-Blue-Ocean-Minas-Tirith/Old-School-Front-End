@@ -1,7 +1,13 @@
 
 .vote {
   margin: 5px;
-  width: 30%
+  width: 27%
+}
+
+#buttonRow {
+  display: flex;
+  flex-direction: flex-start;
+  justify-content: space-between;
 }
 
 .nonclick {
@@ -19,6 +25,10 @@
 .videoUser {
   margin-bottom: 0px;
   margin-right: 5px;
+  color: #5d3754;
+  text-decoration: underline;
+  text-decoration-color: #5d3754;
+  -webkit-text-decoration-color: #5d3754;
 }
 
 #favorited, #unfavorited {
@@ -31,17 +41,32 @@
   justify-content: space-between;
 }
 
+.commentUser {
+  font-size: 24px;
+  color: #a7142c
+}
+
+#commentSpacer {
+  margin-top: 15px;
+}
+
+.commentText {
+  font-size: 20px;
+}
+
 .date {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .report {
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
+  text-align: right;
 }
 
 .report:hover {
   color: red;
+  font-weight: bold;
 }
 
 .videoMetaData {
@@ -49,6 +74,18 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.videoTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a7142c;
+  color: white;
+  border-radius: 15px;
+  padding: 8px 10px 0px 10px;
+  margin-bottom: 10px;
 }
 
 .videoCreator {
@@ -65,6 +102,9 @@
 	align-items: center;
 }
 
+#carousel img{
+  border-radius: 15px;
+}
 .prev,
 .next {
 	cursor: pointer;
@@ -94,13 +134,38 @@
 }
 
 /* only ids work to change the button color */
-#informative, #funny, #insightful {
+#informative,
+#funny,
+#insightful,
+#informative-landing,
+#funny-landing,
+#insightful-landing,
+#clickButton,
+#clickButtonFlag,
+#largeButton {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #a7142c;
+  border: 1px solid #361118;
   border-radius: 6px;
-  background-color: #a7142c;
+  background-color: #5d3754;
   margin: 20px 10px 0px 10px;
+}
+
+#informative,
+#funny,
+#insightful {
+
+}
+#informative-landing, #funny-landing, #insightful-landing {
+  /* color: #FFFFFF; */
+  background-color: #a7142c;
+  border: 1px solid #a7142c;
+  font-size: 1em;
+  /* border: 1px solid #a7142c; */
+  border-radius: 6px;
+  /* background-color: #a7142c; */
+  margin: 20px 10px 0px 10px;
+  cursor: auto;
 }
 
 #redButton {
@@ -109,6 +174,15 @@
   border: 1px solid #a7142c;
   border-radius: 6px;
   background-color: #a7142c;
+}
+
+#redButtonFlag {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #a7142c;
+  border-radius: 6px;
+  background-color: #a7142c;
+  margin: 2px;
 }
 
 #flagged {
@@ -124,7 +198,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 90%;
-  background-color: #a7142c;
+  /* background-color: #a7142c; */
   padding: 30px;
 }
 
@@ -139,6 +213,12 @@
 #nav {
   background-color: #a7142c;
   color: #FFFFFF;
+  height: 12vh;
+}
+
+#nav-search {
+  margin-top: 1%;
+  height: 100%;
 }
 
 html body {
@@ -149,7 +229,18 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
+  background: #a7142c;
+  color: white;
+  text-align: center;
+  border-radius: 0px 0px 15px 15px;
+  /* margin: 2%; */
   /* font-weight: bold;*/
+}
+#dropdown-sorter {
+  background: #a7142c;
+  border-radius: 15px 15px 0px 0px;
+  outline: none;
+  color: white;
 }
 
 #time {
@@ -159,7 +250,7 @@ html body {
 #description {
   padding: 10px 17px 10px 0px;
   overflow-y: scroll;
-  max-height: 110px;
+  max-height: 180px;
   width: 100%;
   height: 100%;
   box-sizing: content-box;
@@ -167,7 +258,7 @@ html body {
 
 #des {
   width: 100%;
-    height: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -175,14 +266,119 @@ html body {
   max-height: 110px;
 }
 
-.carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
+.flaggedRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
+
+#link {
+  color: #5d3754;
+  border-bottom: 1px solid #5d3754;
+  padding-left: 5px;
+}
+
 
 .carousel-control-next-icon,
 .carousel-control-prev-icon /*, .carousel-indicators */ {
-    background-color: black;
+    background-color:#a7142c;
     border-radius: 50%;
     opacity: 0.8;
+    opacity: 1;
+}
+
+#video-carousel-container {
+  border-radius: 15px;
+  background-color: rgb(241, 228, 228);
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+#video-carousel-title {
+  background: #a7142c;
+  border-radius: 15px;
+  color: white;
+  width: 100%;
+  padding: 1%;
+}
+
+#about-me-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(241, 228, 228);
+  border-radius: 15px;
+  padding: 1%;
+  /* margin-bottom: 1%; */
+  height: 99%;
+}
+
+#about-me-user {
+  background: #a7142c;
+  border-radius: 0px 0px 15px 15px;
+  color: white;
+  padding: 1%;
+  margin-left: -1%;
+  margin-right: -1%;
+}
+
+#about-me-picture {
+  background: #a7142c;
+  border-radius: 15px 15px 0px 0px;
+  color: white;
+  padding: 1%;
+  margin-top: -1%;
+  margin-left: -1%;
+  margin-right: -1%;
+}
+
+#about-me-bio {
+  margin-top: 2%;
+}
+
+#about-me-bio-text {
+  margin-left: 2%;
+  width: 95%;
+}
+
+#logo {
+  color: white;
+  font-size: 50px;
+  font-family: 'Garamond'
+}
+
+#nav-button {
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+#landing-page-topbar {
+  background: #a7142c;
+  width: 100%;
+  margin-right: 2%;
+  padding: 2%;
+  border-radius: 15px;
+  margin-top: 1%;
+  /* text-decoration: underline white; */
+}
+
+#dropdown-selector {
+  top: 13%;
+  position: absolute;
+  width: 29%;
+}
+
+#contained-modal-title-vcenter {
+  background-color:#a7142c;
+  color: white;
+}
+
+#contained-modal-title-vcenter2 {
+  border-radius: 0px;
+  background-color:#a7142c;
+  color: white;
+}
+
+#video-page-description {
+  text-align: left;
 }

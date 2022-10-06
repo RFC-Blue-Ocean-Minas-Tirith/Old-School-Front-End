@@ -33,7 +33,7 @@ function UploadVideo(props) {
     setKeywords([]);
     setKeyword('');
     setVideoUrl('');
-  }, [props]);
+  }, [props.setModalShow]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -98,7 +98,7 @@ function UploadVideo(props) {
     }
     axios.post('http://localhost:8080/video', params)
       .then(() => {
-        console.log('submitted')
+        props.setModalShow(false);
         setSubmitted(true)
       })
     .then(() => {
@@ -165,90 +165,90 @@ const deleteTag = (index) => {
   setKeywords(prevState => prevState.filter((tag, i) => i !== index));
 }
 
-if (submitted) {
-  return (
-    <Modal
-      show={props.videoModalShow}
-      onHide={() => props.setVideoModalShow(false)}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add a Video
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h2>Video Submitted!</h2>
-        <h4>Video Title: </h4> {values.title}
-        <h4>Video Description: </h4> {values.description}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button id="redButton" onClick={() => {
-          props.setVideoModalShow(false);
-        }}>
-          Close
-        </Button>
-      </Modal.Footer>
+  if (submitted) {
+    return (
+      <Modal
+        show={props.videoModalShow}
+        onHide={() => props.setVideoModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header id="contained-modal-title-vcenter" closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Video
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h2>Video Submitted!</h2>
+          <h4>Video Title: </h4> {values.title}
+          <h4>Video Description: </h4> {values.description}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="clickButton" onClick={() => {
+            props.setVideoModalShow(false);
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
     </Modal>
   )
 } else {
   return (
-    <Modal
-      show={props.videoModalShow}
-      onHide={() => props.setVideoModalShow(false)}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Add a Video
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Column>
-          <Row>
+      <Modal
+        show={props.videoModalShow}
+        onHide={() => props.setVideoModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header id="contained-modal-title-vcenter" closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a Video
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Column>
+            <Row>
+              <LeftLabel>
+                Title:
+              </LeftLabel>
+              <input type="text" placeholder="Title" name="title" onChange={handleInputChange}/>
+              <RightLabel>
+                Private
+              </RightLabel>
+              <Checkbox type="checkbox" onChange={handlePrivate} />
+            </Row>
             <LeftLabel>
-              Title:
+              Description:
             </LeftLabel>
-            <input type="text" placeholder="Title" name="title" onChange={handleInputChange} />
-            <RightLabel>
-              Private
-            </RightLabel>
-            <Checkbox type="checkbox" onChange={handlePrivate} />
-          </Row>
-          <LeftLabel>
-            Description:
-          </LeftLabel>
-          <textarea rows="4" cols="50" placeholder="Write your description here..." onChange={handleInputChange} name="description" />
-          <LeftLabel>Video: </LeftLabel>
-          <button id="redButton" type="button" onClick={showWidget}>Upload</button>
-          <LeftLabel>Keywords:</LeftLabel>
-          <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
-          {keywords.length > 0 && (
+            <textarea rows="4" cols="50" placeholder="Write your description here..." onChange={handleInputChange} name="description"/>
+            <LeftLabel>Video: </LeftLabel>
+            <button id="clickButton" type="button" onClick={showWidget}>Upload</button>
+            <LeftLabel>Keywords:</LeftLabel>
+            <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+            {keywords.length > 0 && (
             <Tags>
               <Row>
                 {keywords.map((word, index) => (
                   <Tag key={index}>
                     {word}
-                    <TagButton id="redButton" onClick={() => deleteTag(index)}>x</TagButton></Tag>
+                    <TagButton id="clickButton" onClick={() => deleteTag(index)}>x</TagButton></Tag>
                 ))}
               </Row>
             </Tags>
-          )}
-        </Column>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button id="redButton" onClick={handleAdd}>Add</Button>
-        <Button id="redButton" onClick={() => {
-          props.setVideoModalShow(false);
-        }}>
-          Close
-        </Button>
-      </Modal.Footer>
-    </Modal>
+            )}
+          </Column>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="clickButton" onClick={handleAdd}>Add</Button>
+          <Button id="clickButton" onClick={() => {
+            props.setVideoModalShow(false);
+          }}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
   );
 }
   }

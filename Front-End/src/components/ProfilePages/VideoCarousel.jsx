@@ -25,8 +25,8 @@ function VideoCarousel({ videos, currentUser }) {
   if (currentVids.place === 0) {
     if (videos.length <= 3) {
       return (
-        <div className="container">
-          <h2 className="text-center"> Video Posts </h2>
+        <div id="video-carousel-container" className="container">
+          <h2 id="video-carousel-title" className="text-center"> Video Posts </h2>
           <div className="vid-carousel">
             {currentVids.vids.map((video, index, vids) => (
               // eslint-disable-next-line max-len
@@ -39,8 +39,8 @@ function VideoCarousel({ videos, currentUser }) {
   }
   if (currentVids.place === 0) {
     return (
-      <div className="container-fluid">
-        <h2 className="text-center"> Video Posts </h2>
+      <div id="video-carousel-container" className="container-fluid">
+        <h2 id="video-carousel-title" className="text-center"> Video Posts </h2>
         <div className="row justify-content-between">
           <div className="col-2"></div>
           <div className="col-2">
@@ -57,11 +57,11 @@ function VideoCarousel({ videos, currentUser }) {
   }
   if (currentVids.place + 3 === videos.length) {
     return (
-      <div className="container-fluid">
-        <h2 className="text-center"> Video Posts </h2>
+      <div id="video-carousel-container" className="container-fluid">
+        <h2 id="video-carousel-title" className="text-center"> Video Posts </h2>
         <div className="row justify-content-between">
           <div className="col-2">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
           </div>
           <div className="col-2"></div>
         </div>
@@ -74,14 +74,14 @@ function VideoCarousel({ videos, currentUser }) {
     );
   }
   return (
-    <div className="container-fluid">
-      <h2 className="text-center"> Video Posts </h2>
+    <div id="video-carousel-container" className="container-fluid">
+      <h2 id="video-carousel-title" className="text-center"> Video Posts </h2>
       <div className="row justify-content-between">
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place - 1) }}>Prev Videos</button>
         </div>
         <div className="col-2">
-          <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+          <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
         </div>
       </div>
       <div className="vid-carousel">

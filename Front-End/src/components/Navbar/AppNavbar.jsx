@@ -1,11 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable object-shorthand */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -80,7 +72,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
   return (
     <Navbar id="nav" expand="lg">
       <Container fluid>
-        <Navbar.Brand id="nav" href="/">Old School</Navbar.Brand>
+        <Navbar.Brand id="logo" href="/">Old School</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -88,17 +80,13 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
+            <Link id="nav-button" to="/" className="nav-link active" aria-current="page">Home</Link>
 
             {isLoggedIn
-              ? (
-                <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">
-                  My Profile
-                </Link>
-              )
+              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
               : null}
 
-            <Form className="d-flex">
+            <Form id="nav-search" className="d-flex">
               <Form.Control
                 id="searchField"
                 type="search"
