@@ -145,9 +145,9 @@
 #largeButton {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #361118;
+  border: 1px solid #a7142c !important;
   border-radius: 6px;
-  background-color: #5d3754;
+  background-color: #a7142c !important;
   margin: 20px 10px 0px 10px;
 }
 
