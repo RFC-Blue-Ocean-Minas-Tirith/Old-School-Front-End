@@ -174,8 +174,8 @@ function VideoPage() {
   return (
     <Container fluid>
       <Row >
-        <Col xs={8}>
-          <div className="videoCreator">
+        <Col xs={7}>
+          <div className="videoTitle">
             <h2>{currentVid.title}</h2>
             <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
           </div>
@@ -186,14 +186,14 @@ function VideoPage() {
             <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>
               <h5 id={currentVid.username} className="videoUser"><strong>{currentVid.username}</strong></h5>
             </Link>
-            <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
+            <Badge id={favorited[0]} style={{ fontSize: '16px' }} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
           </div>
           <div className='videoDescription'>
             <p>{currentVid.description}</p>
             {reportField}
           </div>
           <div>
-            <Button variant="primary" id="insightful" className="vote" ref={target1} onClick={updateVote}>
+            <Button variant="warning" id="insightful" className="vote" ref={target1} onClick={updateVote}>
               Insightful
               <br></br>
               <Badge bg="secondary" className="voteCount" >{currentVid.votes.insightful.usernames.length}</Badge>
@@ -205,7 +205,7 @@ function VideoPage() {
                 </Tooltip>
               )}
             </Overlay>
-            <Button variant="primary" id="informative" className="vote" ref={target2} onClick={updateVote}>
+            <Button variant="warning" id="informative" className="vote" ref={target2} onClick={updateVote}>
               Informative
               <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
@@ -217,7 +217,7 @@ function VideoPage() {
                 </Tooltip>
               )}
             </Overlay>
-            <Button variant="primary" id="funny" className="vote" ref={target3} onClick={updateVote}>
+            <Button variant="warning" id="funny" className="vote" ref={target3} onClick={updateVote}>
               Funny
               <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
@@ -232,13 +232,15 @@ function VideoPage() {
           </div>
         </Col>
         <Col>
-          <h2>Comments</h2>
+          <div className="videoTitle">
+            <h2>Comments</h2>
+          </div>
           <ListGroup
             variant="flush"
             style={{
               overflowX: 'overflow',
               overflowY: 'scroll',
-              maxHeight: '70%',
+              maxHeight: '79%',
             }}
           >
             {currentVid.comments.map((comment, index) => {
@@ -255,7 +257,7 @@ function VideoPage() {
             })}
           </ListGroup>
           <div id="commentSpacer"></div>
-          <Button id="redButton" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
+          <Button id="clickButton" style={{ width: '100%', height: '8%' }} bg="primary" variant="warning" onClick={toggleModal}>Add Comment</Button>
         </Col>
       </Row>
       <AddComment

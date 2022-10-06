@@ -1,7 +1,13 @@
 
 .vote {
   margin: 5px;
-  width: 30%
+  width: 27%
+}
+
+#buttonRow {
+  display: flex;
+  flex-direction: flex-start;
+  justify-content: space-between;
 }
 
 .nonclick {
@@ -19,6 +25,10 @@
 .videoUser {
   margin-bottom: 0px;
   margin-right: 5px;
+  color: #5d3754;
+  text-decoration: underline;
+  text-decoration-color: #5d3754;
+  -webkit-text-decoration-color: #5d3754;
 }
 
 #favorited, #unfavorited {
@@ -31,17 +41,32 @@
   justify-content: space-between;
 }
 
+.commentUser {
+  font-size: 24px;
+  color: #a7142c
+}
+
+#commentSpacer {
+  margin-top: 15px;
+}
+
+.commentText {
+  font-size: 20px;
+}
+
 .date {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .report {
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
+  float: right;
 }
 
 .report:hover {
   color: red;
+  font-weight: bold;
 }
 
 .videoMetaData {
@@ -49,6 +74,18 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.videoTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a7142c;
+  color: white;
+  border-radius: 15px;
+  padding: 8px 10px 0px 10px;
+  margin-bottom: 10px;
 }
 
 .videoCreator {
@@ -97,20 +134,34 @@
 }
 
 /* only ids work to change the button color */
-#informative, #funny, #insightful {
+#informative,
+#funny,
+#insightful,
+#informative-landing,
+#funny-landing,
+#insightful-landing,
+#clickButton,
+#clickButtonFlag,
+#largeButton {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #a7142c;
+  border: 1px solid #361118;
   border-radius: 6px;
-  background-color: #a7142c;
+  background-color: #5d3754;
   margin: 20px 10px 0px 10px;
 }
+
+#informative,
+#funny,
+#insightful {
+
+}
 #informative-landing, #funny-landing, #insightful-landing {
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   font-size: 1em;
-  border: 1px solid #a7142c;
+  /* border: 1px solid #a7142c; */
   border-radius: 6px;
-  background-color: #a7142c;
+  /* background-color: #a7142c; */
   margin: 20px 10px 0px 10px;
   cursor: auto;
 }
@@ -145,7 +196,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 90%;
-  background-color: #a7142c;
+  /* background-color: #a7142c; */
   padding: 30px;
 }
 
@@ -176,12 +227,20 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
+<<<<<<< HEAD
   background: #a7142c;
   color: white;
   text-align: center;
   border-radius: 0px 0px 15px 15px;
   /* margin: 2%; */
   /* font-weight: bold;*/
+=======
+  font-weight: bold;
+}
+
+.videoDescription {
+  max-height: 30%;
+>>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
 #dropdown-sorter {
   background: #a7142c;
@@ -213,6 +272,10 @@ html body {
   max-height: 110px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 .flaggedRow {
   display: flex;
   flex-direction: row;
@@ -220,9 +283,18 @@ html body {
 }
 
 #link {
-  color: blue;
-  border-bottom: 1px solid blue;
+  color: #5d3754;
+  border-bottom: 1px solid #5d3754;
   padding-left: 5px;
+<<<<<<< HEAD
+=======
+  font-weight: bold;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+>>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
 
 
@@ -230,6 +302,7 @@ html body {
 .carousel-control-prev-icon /*, .carousel-indicators */ {
     background-color:#a7142c;
     border-radius: 50%;
+<<<<<<< HEAD
     opacity: 1;
 }
 
@@ -318,4 +391,8 @@ html body {
   border-radius: 0px;
   background-color:#a7142c;
   color: white;
+=======
+    opacity: 0.8;
+
+>>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
