@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable semi */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import emailjs from '@emailjs/browser';
 import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
-import { cloudName, uploadPreset } from './config';
+import { cloudName, uploadPreset, serviceID, templateID, publicKey } from './config';
+
+
 
 const initialValues = {
   description: '',
@@ -75,11 +81,11 @@ function UploadVideo(props) {
       informative: {
         usernames: [],
         count: 0,
-      },
-    };
+      }
+    }
     const params = {
       params: {
-        username: props.username,
+        username: props.currentUser.username,
         title: values.title,
         description: values.description,
         dateUploaded: new Date(),
@@ -88,52 +94,76 @@ function UploadVideo(props) {
         url: videoUrl,
         votes: votesInfo,
         thumbnail: thumbnailUrl,
-      },
-    };
+      }
+    }
     axios.post('http://localhost:8080/video', params)
       .then(() => {
         props.setModalShow(false);
-        setSubmitted(true);
+        setSubmitted(true)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(() => {
+      axios.get('http://localhost:8080/usersForFaveCreator', {
+        params: {
+          favoriteUser: props.currentUser.username,
+        },
+      })
+    })
+    .then((response) => {
+      for (let user of response.data) {
+        setTimeout(() => {
+          const templateParams = {
+            currentUser: user.email,
+            faveCreator: props.currentUser.username,
+            to_name: user.username,
+            from_name: 'Old School',
+          }
+          emailjs.send(serviceID, templateID, templateParams, publicKey)
+          .then((result) => {
+            console.log(result.text);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        }, 1010)
+      }
+    })
   }
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    setKeyword(value);
-  };
 
-  const onKeyDown = (e) => {
-    const { key } = e;
-    const trimmedInput = keyword.trim();
+const onChange = (e) => {
+  const { value } = e.target;
+  setKeyword(value);
+};
 
-    if (key === ',' && trimmedInput.length && !keywords.includes(trimmedInput)) {
-      e.preventDefault();
-      setKeywords(prevState => [...prevState, trimmedInput]);
-      setKeyword('');
-    }
+const onKeyDown = (e) => {
+  const { key } = e;
+  const trimmedInput = keyword.trim();
 
-    if (key === "Backspace" && !keyword.length && keywords.length && isKeyReleased) {
-      e.preventDefault();
-      const keywordsCopy = [...keywords];
-      const poppedTag = keywordsCopy.pop();
-
-      setKeywords(keywordsCopy);
-      setKeyword(poppedTag);
-    }
-
-    setIsKeyReleased(false);
-  };
-
-  const onKeyUp = () => {
-    setIsKeyReleased(true);
+  if (key === ',' && trimmedInput.length && !keywords.includes(trimmedInput)) {
+    e.preventDefault();
+    setKeywords(prevState => [...prevState, trimmedInput]);
+    setKeyword('');
   }
 
-  const deleteTag = (index) => {
-    setKeywords(prevState => prevState.filter((tag, i) => i !== index));
+  if (key === "Backspace" && !keyword.length && keywords.length && isKeyReleased) {
+    e.preventDefault();
+    const keywordsCopy = [...keywords];
+    const poppedTag = keywordsCopy.pop();
+
+    setKeywords(keywordsCopy);
+    setKeyword(poppedTag);
   }
+
+  setIsKeyReleased(false);
+};
+
+const onKeyUp = () => {
+  setIsKeyReleased(true);
+}
+
+const deleteTag = (index) => {
+  setKeywords(prevState => prevState.filter((tag, i) => i !== index));
+}
 
   if (submitted) {
     return (
@@ -162,8 +192,8 @@ function UploadVideo(props) {
           </Button>
         </Modal.Footer>
     </Modal>
-    )
-  } else {
+  )
+} else {
   return (
       <Modal
         show={props.videoModalShow}
@@ -220,7 +250,7 @@ function UploadVideo(props) {
         </Modal.Footer>
       </Modal>
   );
-  }
 }
+  }
 
 export default UploadVideo;

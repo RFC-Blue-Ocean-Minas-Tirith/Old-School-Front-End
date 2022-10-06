@@ -1,9 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
-/* eslint-disable object-shorthand */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -61,6 +55,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
     return axios.get('http://localhost:8080/video')
       .then((res) => {
         setVideoData(res.data);
+        navigate('/');
         //console.log(res.data);
       })
       .catch((err) => {
