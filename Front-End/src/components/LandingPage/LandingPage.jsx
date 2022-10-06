@@ -48,7 +48,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         }
       })
         .then((data) => {
-          console.log(data);
           for (let i = 0; i < videoData.length; i++) {
             for (let j = 0; j < data.data.length; j++) {
               if (data.data[j] === videoData[i].username) {
