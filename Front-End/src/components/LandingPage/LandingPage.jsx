@@ -182,13 +182,13 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <h5 id="description">{videoData[index].description}</h5>
                   </div>
                 </Col>
-                <Col id="carousel" className="border-success" xs={7}>
+                <Col id="carousel" className="border-success" xs={8}>
                   <Carousel activeIndex={index} onSelect={handleSelect} interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
                           <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '400px'}} src={thumbnail} />
+                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px'}} src={thumbnail} />
                             <div id='carousel-margin'> </div>
                           </Link>
                         </Carousel.Item>)
