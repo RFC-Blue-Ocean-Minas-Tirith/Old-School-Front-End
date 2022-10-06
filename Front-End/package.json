@@ -11,6 +11,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.5.0",
     "@cloudinary/url-gen": "^1.8.6",
+    "@emailjs/browser": "^3.7.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "firebase": "^9.10.0",
@@ -25,8 +26,8 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@testing-library/react": "^13.4.0",
     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",

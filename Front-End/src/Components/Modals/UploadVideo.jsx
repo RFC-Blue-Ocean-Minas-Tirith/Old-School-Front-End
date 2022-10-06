@@ -27,7 +27,7 @@ function UploadVideo(props) {
     setKeywords([]);
     setKeyword('');
     setVideoUrl('');
-  }, [props]);
+  }, [props.setModalShow]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -92,7 +92,7 @@ function UploadVideo(props) {
     };
     axios.post('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video', params)
       .then(() => {
-        console.log('submitted')
+        props.setModalShow(false);
         setSubmitted(true);
       })
       .catch((err) => {
