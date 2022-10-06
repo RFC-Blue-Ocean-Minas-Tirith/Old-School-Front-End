@@ -112,7 +112,7 @@ function UploadBlog(props) {
           <h4>Blog Post: </h4> {values.description}
         </Modal.Body>
         <Modal.Footer>
-          <Button id="redButton" onClick={() => {
+          <Button id="clickButton" onClick={() => {
             props.setBlogModalShow(false);
           }}>
             Close
@@ -167,8 +167,8 @@ function UploadBlog(props) {
           </Column>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="redButton" onClick={handleAdd}>Add</Button>
-          <Button id="redButton" onClick={() => {
+          <Button id="clickButton" onClick={handleAdd}>Add</Button>
+          <Button id="clickButton" onClick={() => {
             props.setBlogModalShow(false);
           }}>
             Close
