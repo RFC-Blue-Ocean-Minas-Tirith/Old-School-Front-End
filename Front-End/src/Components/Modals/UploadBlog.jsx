@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
+import { Tags, Input, Tag, TagButton, Row2, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
 import axios from 'axios';
 
 const initialValues = {
@@ -23,7 +23,7 @@ function UploadBlog(props) {
     setIsPrivate(false);
     setKeywords([]);
     setKeyword('');
-  }, [props]);
+  }, [props.setModalShow]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -46,10 +46,11 @@ function UploadBlog(props) {
         dateUploaded: new Date(),
         keywords,
         private: isPrivate,
-      }
+      },
     };
     axios.post('http://localhost:8080/blog', params)
       .then(() => {
+        props.setModalShow(false);
         setSubmitted(true);
       })
       .catch((err) => {
@@ -136,7 +137,7 @@ function UploadBlog(props) {
         <Modal.Body>
           <Column>
             <form>
-              <Row>
+              <Row2>
                 <LeftLabel>
                   Title:
                 </LeftLabel>
@@ -145,7 +146,7 @@ function UploadBlog(props) {
                   Private
                 </RightLabel>
                 <Checkbox type="checkbox" name="private" value={values.private} onChange={handlePrivate} />
-              </Row>
+              </Row2>
               <LeftLabel>
                 Blog Post:
               </LeftLabel><br />
@@ -154,13 +155,13 @@ function UploadBlog(props) {
               <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
               {keywords.length > 0 && (
               <Tags>
-                <Row>
+                <Row2>
                   {keywords.map((word, index) => (
                     <Tag key={index}>
                       {word}
                       <TagButton onClick={() => deleteTag(index)}>x</TagButton></Tag>
                   ))}
-                </Row>
+                </Row2>
               </Tags>
               )}
             </form>
