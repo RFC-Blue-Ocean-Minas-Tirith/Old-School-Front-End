@@ -31,21 +31,32 @@
   justify-content: space-between;
 }
 
+.commentUser {
+  font-size: 24px;
+  color: #a7142c
+}
+
 #commentSpacer {
   margin-top: 15px;
 }
 
+.commentText {
+  font-size: 20px;
+}
+
 .date {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .report {
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
+  float: right;
 }
 
 .report:hover {
   color: red;
+  font-weight: bold;
 }
 
 .videoMetaData {
@@ -53,6 +64,18 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.videoTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #a7142c;
+  color: white;
+  border-radius: 15px;
+  padding: 8px 10px 0px 10px;
+  margin-bottom: 10px;
 }
 
 .videoCreator {
@@ -98,7 +121,7 @@
 }
 
 /* only ids work to change the button color */
-#informative, #funny, #insightful {
+#informative, #funny, #insightful, #addComment {
   color: #FFFFFF;
   font-size: 1em;
   border: 1px solid #361118;
@@ -171,7 +194,11 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
-  /* font-weight: bold;*/
+  font-weight: bold;
+}
+
+.videoDescription {
+  max-height: 30%;
 }
 
 #time {
@@ -197,7 +224,7 @@ html body {
   max-height: 110px;
 }
 
-<<<<<<< HEAD
+
 .flaggedRow {
   display: flex;
   flex-direction: row;
@@ -208,7 +235,8 @@ html body {
   color: blue;
   border-bottom: 1px solid blue;
   padding-left: 5px;
-=======
+}
+
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
@@ -219,5 +247,5 @@ html body {
     background-color: black;
     border-radius: 50%;
     opacity: 0.8;
->>>>>>> e40665a800c273c57320f9a8eb3e36db0cfd3fe4
+
 }
