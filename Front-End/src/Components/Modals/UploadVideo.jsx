@@ -5,11 +5,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Tags, Input, Tag, TagButton, Row2, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
 import emailjs from '@emailjs/browser';
-import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
 import { cloudName, uploadPreset, serviceID, templateID, publicKey } from './config';
-
-
 
 const initialValues = {
   description: '',
@@ -209,7 +207,7 @@ const deleteTag = (index) => {
         </Modal.Header>
         <Modal.Body>
           <Column>
-            <Row>
+            <Row2>
               <LeftLabel>
                 Title:
               </LeftLabel>
@@ -218,7 +216,7 @@ const deleteTag = (index) => {
                 Private
               </RightLabel>
               <Checkbox type="checkbox" onChange={handlePrivate} />
-            </Row>
+            </Row2>
             <LeftLabel>
               Description:
             </LeftLabel>
