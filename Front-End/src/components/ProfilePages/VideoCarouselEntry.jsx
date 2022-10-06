@@ -11,11 +11,11 @@ function VideoCarouselEntry({ video, currentUser }) {
       <Link to="/video_page" className="nav-link active" aria-current="page" state={{currentUser: currentUser, video: video}}>
       <img src={thumb} width="250px" height="250px" style={{ objectFit: 'cover' }} alt="video" className="card-img-top" />
       </Link>
-        <div id="carousel-card-title" className="card-title text-center">
+        <div id="carousel-card-title" className="card-title text-center" style={{ fontSize: '20px'}}>
           {video.title}
         </div>
         <div id="carousel-card-title" className="card-text">
-          {video.description}
+          {`${video.description.slice(0, 50)}...`}
         </div>
       </div>
     </div>
