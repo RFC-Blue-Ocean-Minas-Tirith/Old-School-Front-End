@@ -44,7 +44,7 @@ function VideoCarousel({ videos, currentUser }) {
         <div className="row justify-content-between">
           <div className="col-2"></div>
           <div className="col-2">
-            <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
+            <button id="clickButton" type="button" className="btn btn-primary me-2" onClick={() => { sortThumbs(currentVids.place + 1) }}>More Videos</button>
           </div>
         </div>
         <div className="vid-carousel">
