@@ -121,53 +121,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     }
   }, [videoData]);
   // ================ handle button updates to the database ==================
-  const handleInsightful = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video/insightful`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-      })
-      .catch(err => console.log(err));
-  }
-  const handleUnInsightful = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comvideo/insightfulx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-      })
-      .catch(err => console.log(err));
-  }
-  const handleInformative = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comvideo/informative`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-        if (videoData[index].votes.informative.usernames.includes(currentUser)) {
-          setInformative(true);
-        } else {
-          setInformative(false);
-        }
-      })
-      .catch(err => console.log(err));
-  }
-  const handleUnInformative = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comvideo/informativex`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-      })
-      .catch(err => console.log(err));
-  }
-  const handleFunny = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comvideo/funny`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-      })
-      .catch(err => console.log(err));
-  }
-  const handleUnFunny = () => {
-    axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.comvideo/funnyx`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
-      .then(() => {
-        getThumbnails();
-      })
-      .catch(err => console.log(err));
-  }
   function handleFave() {
     return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
