@@ -127,8 +127,8 @@ function Flagged(props) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header id="contained-modal-title-vcenter" closeButton>
+            <Modal.Title >
               Flagged Videos
             </Modal.Title>
           </Modal.Header>
@@ -153,8 +153,8 @@ function Flagged(props) {
             ))}
             </ListGroup>
           </Modal.Body>
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header id="contained-modal-title-vcenter2" closeButton>
+            <Modal.Title >
               Flagged Comments
             </Modal.Title>
           </Modal.Header>
@@ -175,8 +175,8 @@ function Flagged(props) {
                 <strong>Comment:</strong> {item.comment}</div>
                 </Column>
                 <Column>
-                <Button id="redButtonFlag" value={i} onClick={handleDelete}>Delete</Button>
-                <Button id="redButtonFlag" value={i} onClick={handleKeep}>Keep</Button>
+                <Button id="clickButtonFlag" value={i} onClick={handleDelete}>Delete</Button>
+                <Button id="clickButtonFlag" value={i} onClick={handleKeep}>Keep</Button>
                 </Column>
                 </Row>
               </ListGroup.Item>
@@ -184,7 +184,7 @@ function Flagged(props) {
             </ListGroup>
           </Modal.Body>
           <Modal.Footer>
-            <Button id="redButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
+            <Button id="clickButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
       </Container>

@@ -10,19 +10,17 @@ import Form from 'react-bootstrap/Form';
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 //TODO:  Add an alt description for each img
+
 function LandingPage({ currentUser, videoData, setVideoData }) {
   const [index, setIndex] = useState(0);
   const [thumbnails, setThumbnails] = useState('');
   const [sortOn, setSortOn] = useState('insightful');
-  // const [button, setButton] = useState(true);
   const [favorited, setFavorited] = useState(['unfavorited', 'Favorite this Creator!']);
-  // const [isFavorite, setIsFavorite] = useState(false);
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData && currentUser) {
       axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user')
         .then(res => {
-          //console.log('get user res', res.data);
           res.data.forEach(profile => {
             if (profile.username === currentUser.username) {
               if (profile.favCreator.includes(videoData[index].username)) {
@@ -32,10 +30,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
               }
             }
           })
-        })
-        .then(() => {
-          console.log('index =', index);
-          console.log('this is the favorited data =', favorited)
         })
     }
   }, [index, videoData]);
@@ -47,7 +41,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
 
   const getThumbnails = () => {
     let results = videoData;
-    // console.log('sortOn =', sortOn);
     if (sortOn === 'favorited') {
       results = [];
       axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
@@ -67,6 +60,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         })
         .then(() => {
           setVideoData(results);
+          setIndex(0);
           let temp = [];
           for (var i = 0; i < results.length; i++) {
             if (results[i]) {
@@ -106,6 +100,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       }
     }
     setVideoData(results);
+    setIndex(0);
     let temp = [];
     for (var i = 0; i < results.length; i++) {
       if (results[i]) {
@@ -114,9 +109,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     }
     setThumbnails(temp);
   }
-  // ============ create a map of the thumbnails ===================
   useEffect(() => {
-    //console.log('this is the videoData', videoData);
     if (videoData) {
       let temp = [];
       for (var i = 0; i < videoData.length; i++) {
@@ -127,11 +120,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
       setThumbnails(temp);
     }
   }, [videoData]);
-  // ============= navigation function ====================
-  // const navigateToVideoPage = () => {
-  //   //   //navigate('/video_page');
-  //   console.log('navigating to VideoPage...')
-  // };
   // ================ handle button updates to the database ==================
   const handleInsightful = () => {
     axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video/insightful`, { currentUser: currentUser, username: videoData[index].username, videoID: videoData[index]._id })
@@ -192,13 +180,10 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         setFavorited(['unfavorited', 'Favorite this Creator!']);
       });
   }
-  // const favorites = () => {
-  //   if (isFavorite) {
-  //     setFavorited('This is one of your Favorite Creators');
-  //   } else {
-  //     setFavorited('Favorite this Creator!');
-  //   }
-  // }
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
   if (videoData.length) {
     return (
       <div>
@@ -241,8 +226,8 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <h5 id="description">{videoData[index].description}</h5>
                   </div>
                 </Col>
-                <Col id="carousel" class="border-success" md={8}>
-                  <Carousel interval={null} onSlide={setIndex}>
+                <Col id="carousel" className="border-success" md={8}>
+                  <Carousel activeIndex={index} onSelect={handleSelect} interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
