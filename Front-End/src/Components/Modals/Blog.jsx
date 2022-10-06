@@ -16,9 +16,9 @@ export default function Blog({ blog, currentUser, toggle, show }) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-              <Heading>{blog.title}</Heading>
+          <Modal.Header id="contained-modal-title-vcenter" closeButton>
+            <Modal.Title >
+              <Heading style={{ color: 'white' }}>{blog.title}</Heading>
               <h4>{blog.username}</h4>
               <h5>{blog.date}</h5>
             </Modal.Title>

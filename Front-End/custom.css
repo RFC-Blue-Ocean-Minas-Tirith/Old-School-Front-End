@@ -335,6 +335,11 @@ html body {
   margin-top: 2%;
 }
 
+#about-me-bio-text {
+  margin-left: 2%;
+  width: 95%;
+}
+
 #logo {
   color: white;
   font-size: 50px;
