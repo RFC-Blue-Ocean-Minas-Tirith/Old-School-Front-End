@@ -209,7 +209,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </Carousel>
                 </Col>
               </Row>
-              <Row>
+              <Row className="text-center">
                 <div >
                   <div>
                     <Button variant="primary" id="insightful-landing" className="vote nonclick">Insightful

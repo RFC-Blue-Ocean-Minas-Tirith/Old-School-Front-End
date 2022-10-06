@@ -225,16 +225,12 @@ html body {
   padding-left: 5px;
 }
 
-.carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
-}
 
 .carousel-control-next-icon,
 .carousel-control-prev-icon /*, .carousel-indicators */ {
-    background-color: black;
+    background-color:#a7142c;
     border-radius: 50%;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 #video-carousel-container {
@@ -311,4 +307,9 @@ html body {
   top: 13%;
   position: absolute;
   width: 29%;
+}
+
+#contained-modal-title-vcenter {
+  background-color:#a7142c;
+  color: white;
 }
