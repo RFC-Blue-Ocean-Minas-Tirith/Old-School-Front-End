@@ -234,8 +234,8 @@ function VideoPage() {
           </div>
         </Col>
         <Col >
-          <div className="videoTitle">
-            <h2>Comments</h2>
+          <div className="videoTitle" style={{marginTop: '2%'}}>
+            <h2 >Comments</h2>
           </div>
           <ListGroup
             variant="flush"
