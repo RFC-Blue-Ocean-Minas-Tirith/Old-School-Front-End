@@ -24,7 +24,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           res.data.forEach(profile => {
             if (profile.username === currentUser.username) {
               if (profile.favCreator.includes(videoData[index].username)) {
-                setFavorited(['favorited', 'This is one of your Favorite Creators']);
+                setFavorited(['favorited', 'Favorite Creator']);
               } else {
                 setFavorited(['unfavorited', 'Favorite this Creator!']);
               }
@@ -128,7 +128,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   function handleFave() {
     return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
-        setFavorited(['favorited', 'This is one of your Favorite Creators']);
+        setFavorited(['favorited', 'Favorite Creator']);
       });
   }
   function handleUnFave() {
@@ -173,7 +173,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
                       <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
                     </Link>
-                    <Badge id={favorited[0]} className="border border-warning" pill bg="warning" text="dark" onClick={() => {
+                    <Badge id={favorited[0]} style={{fontSize: '16px'}} className="border border-warning" pill bg="warning" text="dark" onClick={() => {
                       (favorited[0] === 'favorited') ? handleUnFave() : handleFave()
                     }
                     }
@@ -183,19 +183,21 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <h5 id="description">{videoData[index].description}</h5>
                   </div>
                 </Col>
-                <Col id="carousel" className="border-success" md={8}>
+                <Col id="carousel" className="border-success" xs={8}>
                   <Carousel activeIndex={index} onSelect={handleSelect} interval={null} onSlide={setIndex}>
                     {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
                           <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px' }} src={thumbnail} />
+                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px'}} src={thumbnail} />
+                            <div id='carousel-margin'> </div>
                           </Link>
                         </Carousel.Item>)
                       })
                     }
                   </Carousel>
                 </Col>
+                {/* <Col xs={1}></Col> */}
               </Row>
               <Row className="text-center">
                 <div >

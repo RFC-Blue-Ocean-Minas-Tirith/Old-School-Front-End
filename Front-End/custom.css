@@ -105,6 +105,9 @@
 #carousel img{
   border-radius: 15px;
 }
+
+
+
 .prev,
 .next {
 	cursor: pointer;
@@ -148,12 +151,12 @@
   border: 1px solid #361118;
   border-radius: 6px;
   background-color: #5d3754;
-  margin: 20px 10px 0px 10px;
 }
 
 #informative,
 #funny,
 #insightful {
+  margin: 10px 10px 0px 10px;
 
 }
 #informative-landing, #funny-landing, #insightful-landing {
@@ -258,7 +261,7 @@ html body {
 
 #des {
   width: 100%;
-  height: 100%;
+    height: 100%;
   overflow: hidden;
 }
 
@@ -361,6 +364,7 @@ html body {
   margin-top: 1%;
   /* text-decoration: underline white; */
 }
+
 
 #dropdown-selector {
   top: 13%;
