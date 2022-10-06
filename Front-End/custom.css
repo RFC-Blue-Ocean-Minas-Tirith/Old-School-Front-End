@@ -176,7 +176,7 @@ html body {
 
 #des {
   width: 100%;
-    height: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -184,7 +184,6 @@ html body {
   max-height: 110px;
 }
 
-<<<<<<< HEAD
 .flaggedRow {
   display: flex;
   flex-direction: row;
@@ -195,7 +194,8 @@ html body {
   color: blue;
   border-bottom: 1px solid blue;
   padding-left: 5px;
-=======
+}
+
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
@@ -206,5 +206,4 @@ html body {
     background-color: black;
     border-radius: 50%;
     opacity: 0.8;
->>>>>>> e40665a800c273c57320f9a8eb3e36db0cfd3fe4
 }

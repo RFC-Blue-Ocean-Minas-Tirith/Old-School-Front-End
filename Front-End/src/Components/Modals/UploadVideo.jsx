@@ -27,7 +27,7 @@ function UploadVideo(props) {
     setKeywords([]);
     setKeyword('');
     setVideoUrl('');
-  }, [props]);
+  }, [props.setModalShow]);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -92,7 +92,7 @@ function UploadVideo(props) {
     };
     axios.post('http://localhost:8080/video', params)
       .then(() => {
-        console.log('submitted')
+        props.setModalShow(false);
         setSubmitted(true);
       })
       .catch((err) => {
