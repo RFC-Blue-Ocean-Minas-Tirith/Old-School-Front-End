@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable semi */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import emailjs from '@emailjs/browser';
 import { Tags, Input, Tag, TagButton, Row, Column, RightLabel, LeftLabel, Checkbox } from './Modals.styled';
-import { cloudName, uploadPreset } from './config';
+import { cloudName, uploadPreset, serviceID, templateID, publicKey } from './config';
+
+
 
 const initialValues = {
   description: '',
@@ -75,11 +81,11 @@ function UploadVideo(props) {
       informative: {
         usernames: [],
         count: 0,
-      },
-    };
+      }
+    }
     const params = {
       params: {
-        username: props.username,
+        username: props.currentUser.username,
         title: values.title,
         description: values.description,
         dateUploaded: new Date(),
@@ -88,116 +94,140 @@ function UploadVideo(props) {
         url: videoUrl,
         votes: votesInfo,
         thumbnail: thumbnailUrl,
-      },
-    };
+      }
+    }
     axios.post('http://localhost:8080/video', params)
       .then(() => {
         console.log('submitted')
-        setSubmitted(true);
+        setSubmitted(true)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(() => {
+      axios.get('http://localhost:8080/usersForFaveCreator', {
+        params: {
+          favoriteUser: props.currentUser.username,
+        },
+      })
+    })
+    .then((response) => {
+      for (let user of response.data) {
+        setTimeout(() => {
+          const templateParams = {
+            currentUser: user.email,
+            faveCreator: props.currentUser.username,
+            to_name: user.username,
+            from_name: 'Old School',
+          }
+          emailjs.send(serviceID, templateID, templateParams, publicKey)
+          .then((result) => {
+            console.log(result.text);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        }, 1010)
+      }
+    })
   }
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    setKeyword(value);
-  };
 
-  const onKeyDown = (e) => {
-    const { key } = e;
-    const trimmedInput = keyword.trim();
+const onChange = (e) => {
+  const { value } = e.target;
+  setKeyword(value);
+};
 
-    if (key === ',' && trimmedInput.length && !keywords.includes(trimmedInput)) {
-      e.preventDefault();
-      setKeywords(prevState => [...prevState, trimmedInput]);
-      setKeyword('');
-    }
+const onKeyDown = (e) => {
+  const { key } = e;
+  const trimmedInput = keyword.trim();
 
-    if (key === "Backspace" && !keyword.length && keywords.length && isKeyReleased) {
-      e.preventDefault();
-      const keywordsCopy = [...keywords];
-      const poppedTag = keywordsCopy.pop();
-
-      setKeywords(keywordsCopy);
-      setKeyword(poppedTag);
-    }
-
-    setIsKeyReleased(false);
-  };
-
-  const onKeyUp = () => {
-    setIsKeyReleased(true);
+  if (key === ',' && trimmedInput.length && !keywords.includes(trimmedInput)) {
+    e.preventDefault();
+    setKeywords(prevState => [...prevState, trimmedInput]);
+    setKeyword('');
   }
 
-  const deleteTag = (index) => {
-    setKeywords(prevState => prevState.filter((tag, i) => i !== index));
+  if (key === "Backspace" && !keyword.length && keywords.length && isKeyReleased) {
+    e.preventDefault();
+    const keywordsCopy = [...keywords];
+    const poppedTag = keywordsCopy.pop();
+
+    setKeywords(keywordsCopy);
+    setKeyword(poppedTag);
   }
 
-  if (submitted) {
-    return (
-      <Modal
-        show={props.videoModalShow}
-        onHide={() => props.setVideoModalShow(false)}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Add a Video
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h2>Video Submitted!</h2>
-          <h4>Video Title: </h4> {values.title}
-          <h4>Video Description: </h4> {values.description}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button id="redButton" onClick={() => {
-            props.setVideoModalShow(false);
-          }}>
-            Close
-          </Button>
-        </Modal.Footer>
-    </Modal>
-    )
-  } else {
+  setIsKeyReleased(false);
+};
+
+const onKeyUp = () => {
+  setIsKeyReleased(true);
+}
+
+const deleteTag = (index) => {
+  setKeywords(prevState => prevState.filter((tag, i) => i !== index));
+}
+
+if (submitted) {
   return (
-      <Modal
-        show={props.videoModalShow}
-        onHide={() => props.setVideoModalShow(false)}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Add a Video
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Column>
-            <Row>
-              <LeftLabel>
-                Title:
-              </LeftLabel>
-              <input type="text" placeholder="Title" name="title" onChange={handleInputChange}/>
-              <RightLabel>
-                Private
-              </RightLabel>
-              <Checkbox type="checkbox" onChange={handlePrivate} />
-            </Row>
+    <Modal
+      show={props.videoModalShow}
+      onHide={() => props.setVideoModalShow(false)}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add a Video
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h2>Video Submitted!</h2>
+        <h4>Video Title: </h4> {values.title}
+        <h4>Video Description: </h4> {values.description}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button id="redButton" onClick={() => {
+          props.setVideoModalShow(false);
+        }}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
+} else {
+  return (
+    <Modal
+      show={props.videoModalShow}
+      onHide={() => props.setVideoModalShow(false)}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add a Video
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Column>
+          <Row>
             <LeftLabel>
-              Description:
+              Title:
             </LeftLabel>
-            <textarea rows="4" cols="50" placeholder="Write your description here..." onChange={handleInputChange} name="description"/>
-            <LeftLabel>Video: </LeftLabel>
-            <button id="redButton" type="button" onClick={showWidget}>Upload</button>
-            <LeftLabel>Keywords:</LeftLabel>
-            <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
-            {keywords.length > 0 && (
+            <input type="text" placeholder="Title" name="title" onChange={handleInputChange} />
+            <RightLabel>
+              Private
+            </RightLabel>
+            <Checkbox type="checkbox" onChange={handlePrivate} />
+          </Row>
+          <LeftLabel>
+            Description:
+          </LeftLabel>
+          <textarea rows="4" cols="50" placeholder="Write your description here..." onChange={handleInputChange} name="description" />
+          <LeftLabel>Video: </LeftLabel>
+          <button id="redButton" type="button" onClick={showWidget}>Upload</button>
+          <LeftLabel>Keywords:</LeftLabel>
+          <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
+          {keywords.length > 0 && (
             <Tags>
               <Row>
                 {keywords.map((word, index) => (
@@ -207,20 +237,20 @@ function UploadVideo(props) {
                 ))}
               </Row>
             </Tags>
-            )}
-          </Column>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button id="redButton" onClick={handleAdd}>Add</Button>
-          <Button id="redButton" onClick={() => {
-            props.setVideoModalShow(false);
-          }}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          )}
+        </Column>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button id="redButton" onClick={handleAdd}>Add</Button>
+        <Button id="redButton" onClick={() => {
+          props.setVideoModalShow(false);
+        }}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
-  }
 }
+  }
 
 export default UploadVideo;

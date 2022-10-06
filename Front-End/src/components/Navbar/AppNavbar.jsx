@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable object-shorthand */
 /* eslint-disable react/prop-types */
@@ -61,6 +63,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
     return axios.get('http://localhost:8080/video')
       .then((res) => {
         setVideoData(res.data);
+        navigate('/');
         //console.log(res.data);
       })
       .catch((err) => {
@@ -88,7 +91,11 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
             <Link id="nav" to="/" className="nav-link active" aria-current="page">Home</Link>
 
             {isLoggedIn
-              ? <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+              ? (
+                <Link id="nav" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">
+                  My Profile
+                </Link>
+              )
               : null}
 
             <Form className="d-flex">
