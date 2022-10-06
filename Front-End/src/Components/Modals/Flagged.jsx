@@ -1,24 +1,41 @@
+/* eslint-disable */
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Container, Comment } from './Modals.styled';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Container, Comment, Column, Row } from './Modals.styled';
 import Theme from './Theme';
 
 function Flagged(props) {
   const [flagged, setFlagged] = useState();
+  const [flaggedVideos, setFlaggedVideos] = useState();
 
   useEffect(() => {
     axios.get('http://localhost:8080/flaggedComments')
       .then((results) => {
-        console.log(results);
         let array = [];
         results.data.forEach((video) => {
           video.comments.forEach((comment) => {
-            array.push(comment);
+            if (comment.isReported) {
+              comment.title = video.title;
+              comment.videoId = video._id;
+              array.push(comment);
+            }
           });
         });
         setFlagged(array);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [props.flaggedModalShow]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/flaggedVideos')
+      .then((results) => {
+        setFlaggedVideos(results.data);
       })
       .catch((err) => {
         console.log(err);
@@ -32,11 +49,9 @@ function Flagged(props) {
     const params = {
       params: {
         'comment': flagged[e.target.value].comment,
-        id: flagged[e.target.value]._id,
+        id: flagged[e.target.value].videoId,
       },
     };
-    console.log(params);
-    // needs work
     axios.patch('http://localhost:8080/flaggedComments', params)
       .then((results) => {
         console.log(results);
@@ -50,14 +65,56 @@ function Flagged(props) {
     let copy = flagged.slice();
     copy.splice(e.target.value, 1);
     setFlagged(copy);
-    // write request to set reported to true in database
-    // axios.patch('http://localhost:8080/flaggedComments')
-    //   .then((results) => {
-    //     console.log(results);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    const params = {
+      params: {
+        'comment': flagged[e.target.value].comment,
+        id: flagged[e.target.value].videoId,
+        commentID: flagged[e.target.value]._id
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedCommentsKeep', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleVideoDelete(e) {
+    let copy = flaggedVideos.slice();
+    copy.splice(e.target.value, 1);
+    setFlaggedVideos(copy);
+    const params = {
+      params: {
+        id: flaggedVideos[e.target.value]._id,
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedVideos', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleVideoKeep(e) {
+    let copy = flaggedVideos.slice();
+    copy.splice(e.target.value, 1);
+    setFlaggedVideos(copy);
+    const params = {
+      params: {
+        id: flaggedVideos[e.target.value]._id,
+      },
+    };
+    axios.patch('http://localhost:8080/flaggedVideosKeep', params)
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -72,19 +129,59 @@ function Flagged(props) {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
+              Flagged Videos
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ListGroup
+                variant="flush"
+              >
+            {flaggedVideos && flaggedVideos.map((item, i) => (
+              <ListGroup.Item as="li" key={i}>
+                <Row>
+                <Column>
+                <div><strong>Username:</strong> {item.username}</div>
+                <div className="flaggedRow"><strong>Video:</strong>
+                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link">{item.title}</h6></Link></div>
+                </Column>
+                <Column>
+                <Button id="redButtonFlag" value={i} onClick={handleVideoDelete}>Delete</Button>
+                <Button id="redButtonFlag" value={i} onClick={handleVideoKeep}>Keep</Button>
+                </Column>
+                </Row>
+                </ListGroup.Item>
+            ))}
+            </ListGroup>
+          </Modal.Body>
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
               Flagged Comments
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <ListGroup
+              variant="flush"
+            >
             {flagged && flagged.map((item, i) => (
-              <Comment key={i}>
-                <p><strong>Username:</strong> {item.author}</p>
-                <p><strong>Video:</strong> {item.title}</p>
-                <p><strong>Comment:</strong> {item.comment}</p>
-                <Button id="redButton" value={i} onClick={handleDelete}>Delete</Button>
-                <Button id="redButton" value={i} onClick={handleKeep}>Keep</Button>
-              </Comment>
+              <ListGroup.Item className="flaggedRow" as="li" key={i}>
+                <Row>
+                <Column>
+                <div>
+                <strong>Username:</strong> {item.author}
+                </div>
+                <div className="flaggedRow"><strong>Video:</strong>
+                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link"> {item.title}</h6></Link></div>
+                <div>
+                <strong>Comment:</strong> {item.comment}</div>
+                </Column>
+                <Column>
+                <Button id="redButtonFlag" value={i} onClick={handleDelete}>Delete</Button>
+                <Button id="redButtonFlag" value={i} onClick={handleKeep}>Keep</Button>
+                </Column>
+                </Row>
+              </ListGroup.Item>
             ))}
+            </ListGroup>
           </Modal.Body>
           <Modal.Footer>
             <Button id="redButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
