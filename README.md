@@ -1,31 +1,72 @@
 # Old-School
 
-1. Clone main branch to local machine
-2. Git the file from the main branch onto your local machine. 
+## Contributors
+- UI Owner - [Alice Blank](https://github.com/AllEyesBlank)
+- Product Manager - [Kevin Moyer](https://github.com/kjmoyer)
+- Architecture Owner - [Melissa Gil](https://github.com/melissa-gv)
+- QA and Testing Lead - [Vicki Wong](https://github.com/vickiwong85)
+- Deployment Manager - [Zachary Vallow](https://github.com/Zachariah1618)
+- Accountability and Encouragement Lead - [Adam Blomberg](https://github.com/AdamABlomberg)
 
-         git checkout origin main
-         THEN
-         git pull origin main
-        
-    
-3. This command will let you create a new Branch to start your work not on the main branch. Use this to send pull request to the main branch. 
-    
-         git checkout -b new-feature
-    
-4. Update, add, commit, and push changes
+## Introduction
+This project was a 1 week spring where our team completed a MVP for our client L. Derely. 
+*Add any additional content here pertaining to the timeline, any personal goals, etc.*
 
-          git status
-          git add <some-file>
-          git commit
-       
-    
-5. Push feature branch to remote
-It’s a good idea to push the feature branch up to the central repository. This serves as a convenient backup, when collaborating with other developers, this would give them access to view commits to the new branch.
+## What does the app do?
+Our client wanted to create a video platform specificly for our older generation to share their wisdom and experiences. 
+Taking into account our target users, accessability for those users, and our time frame, we created exactly that. 
+Users are able create profiles through google authentication, upload videos and blogs, favorite other creators and receive notifications when those creators upload, vote on video categories, and more!
 
-          git push -u origin new-feature
-    
-6. Resolve feedback
-Now teammates comment and approve the pushed commits. Resolve their comments locally, commit, and push the suggested changes. Your updates appear in the pull request.
-    
-7. Merge your pull request
-Before you merge, you may have to resolve merge conflicts if others have made changes to the repo. When your pull request is approved and conflict-free, you can add your code to the main branch. This is when code review process will happen BEFORE the merge is approved. 
+## Tech Stack
+#### Front End:
+- React (Hooks)
+- Javascript
+- Axios
+- Airbnb Linter
+- Vite
+
+#### Styling:
+- Bootstrap
+- Styled Components 
+- React Icons
+
+#### Back End:
+- Express
+- MongoDB
+- Nodemon
+- Dotenv
+- CORS
+- Morgan
+
+#### Authentication: 
+- Firebase
+
+#### Developer Tools:
+- Package manager: NPM
+
+#### Deployment:
+- AWS EC2
+- Nginx
+
+#### Testing:
+- Loader.io (deployed version)
+- K-6 (local)
+
+
+## Anticipated Technical Challenges 
+
+## Non-Anticipated Technical Challenges 
+
+## Video Demo
+
+## How does the app work?
+
+## What research was required?
+
+## Workflow and Key lessons
+
+## Sprint Retro Notes
+
+## Additional Features
+
+
