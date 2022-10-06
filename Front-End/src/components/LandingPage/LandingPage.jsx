@@ -225,7 +225,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </div>
                 </div>
               </Row>
-
             </Container>
         }
       </div>
