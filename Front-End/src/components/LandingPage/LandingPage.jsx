@@ -142,23 +142,25 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
         {
           (!thumbnails.length) ? <div></div> :
             <Container className="w-auto p-11">
+              <Form.Select id="dropdown-selector" size="lg" onChange={(e) => {
+                const selectedMenuOption = e.target.value;
+                setSortOn(selectedMenuOption);
+              }}>
+                <option value='recent'>most recent</option>
+                <option value='informative'>Informative</option>
+                <option value='favorited'>most favorited creators</option>
+                <option value='insightful'>Insightful</option>
+                <option value='funny'>Funny</option>
+              </Form.Select>
               <Row >
-                <Col className="border-success">
-                  <Form.Select size="lg" onChange={(e) => {
-                    const selectedMenuOption = e.target.value;
-                    setSortOn(selectedMenuOption);
-                  }}>
-                    <option value='recent'>most recent</option>
-                    <option value='informative'>Informative</option>
-                    <option value='favorited'>most favorited creators</option>
-                    <option value='insightful'>Insightful</option>
-                    <option value='funny'>Funny</option>
-                  </Form.Select>
-                  <Row>
-                    <Col id="data">
-                      <h1 id="VideoTitle">{videoData[index].title}</h1>
-                    </Col>
-                  </Row>
+                <Col id="video-carousel-container" className="border-success">
+                  <div id="landing-page-topbar">
+                    <Row>
+                      <Col id="data">
+                        <h1 id="VideoTitle">{videoData[index].title}</h1>
+                      </Col>
+                    </Row>
+                  </div>
                   <Row>
                     <div id="time" className="board-primary">{timeAgo.format(new Date(videoData[index].dateUploaded).getTime(), 'round-minute')}</div>
                   </Row>
@@ -190,7 +192,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </Carousel>
                 </Col>
               </Row>
-              <Row>
+              <Row className="text-center">
                 <div >
                   <div>
                     <Button variant="primary" id="insightful-landing" className="vote nonclick">Insightful
