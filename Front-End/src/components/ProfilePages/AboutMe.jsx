@@ -86,7 +86,7 @@ function AboutMe({ user, currentUser }) {
             <label for="Biography Text Area"></label>
             <textarea className="form-control" rows="10" placeholder="Write your bio here..." onChange={(e) => {handleBioWriting(e)}}></textarea>
           </div>
-          <div className="row justify-content-center">
+          <div className="row text-center justify-content-center">
             <div className="col-md-5">
               <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {bioSubmit()}}>Submit</button>
             </div>
@@ -119,7 +119,7 @@ function AboutMe({ user, currentUser }) {
         <div id="about-me-bio" className="row">
           <p className="text-center">{user.aboutMe}</p>
         </div>
-        <div className="row justify-content-center">
+        <div className="row text-center justify-content-center">
           <div className="col-md-5">
             <button id="redButton" type="button" className="btn btn-primary me-2" onClick={() => {setEditing(true)}}>Edit</button>
           </div>

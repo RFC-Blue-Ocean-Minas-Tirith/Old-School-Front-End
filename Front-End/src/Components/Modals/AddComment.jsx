@@ -41,7 +41,7 @@ function AddComment({ currUser, videoID, toggleModal, show, addComment}) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header id="contained-modal-title-vcenter" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Add Comment
           </Modal.Title>
