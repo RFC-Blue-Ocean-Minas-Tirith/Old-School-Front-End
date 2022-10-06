@@ -25,6 +25,12 @@ export const Row = styled.div`
   justify-content: space-between;
 `;
 
+export const Row2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 export const StyledButton = styled.button`
   color: #FFFFFF;
   font-size: 1em;
