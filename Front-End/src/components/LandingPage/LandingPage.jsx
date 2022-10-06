@@ -69,6 +69,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
           }
         }
         setThumbnails(temp)
+        return;
       })
     }
     if (sortOn === 'insightful') {
