@@ -174,13 +174,13 @@ function VideoPage() {
   return (
     <Container fluid>
       <Row >
-        <Col xs={7}>
+        <Col xs={7} className="text-center">
           <div className="videoTitle">
             <h2>{currentVid.title}</h2>
             <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
           </div>
           <div>
-            <AdvancedVideo style={{ maxWidth: '100%' }} cldVid={myVideo} controls preload="true" poster={firstPic} />
+            <AdvancedVideo style={{ maxWidth: '100%', maxHeight: "500px" }} cldVid={myVideo} controls preload="true" poster={firstPic} />
           </div>
           <div className="videoCreator">
             <Link to="/profile_page" state={{ user: currentVid.username, currentUser: currUser }}>

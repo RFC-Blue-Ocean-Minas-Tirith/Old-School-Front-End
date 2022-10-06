@@ -227,20 +227,12 @@ html body {
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
-<<<<<<< HEAD
   background: #a7142c;
   color: white;
   text-align: center;
   border-radius: 0px 0px 15px 15px;
   /* margin: 2%; */
   /* font-weight: bold;*/
-=======
-  font-weight: bold;
-}
-
-.videoDescription {
-  max-height: 30%;
->>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
 #dropdown-sorter {
   background: #a7142c;
@@ -272,10 +264,6 @@ html body {
   max-height: 110px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 .flaggedRow {
   display: flex;
   flex-direction: row;
@@ -286,15 +274,6 @@ html body {
   color: #5d3754;
   border-bottom: 1px solid #5d3754;
   padding-left: 5px;
-<<<<<<< HEAD
-=======
-  font-weight: bold;
-}
-
-.carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
->>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
 
 
@@ -302,7 +281,6 @@ html body {
 .carousel-control-prev-icon /*, .carousel-indicators */ {
     background-color:#a7142c;
     border-radius: 50%;
-<<<<<<< HEAD
     opacity: 1;
 }
 
@@ -391,8 +369,4 @@ html body {
   border-radius: 0px;
   background-color:#a7142c;
   color: white;
-=======
-    opacity: 0.8;
-
->>>>>>> d96bb22e7b990ca3e9167e46982f73b358fede81
 }
