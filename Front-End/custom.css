@@ -61,7 +61,7 @@
 .report {
   font-size: 14px;
   cursor: pointer;
-  float: right;
+  text-align: right;
 }
 
 .report:hover {
@@ -145,9 +145,9 @@
 #largeButton {
   color: #FFFFFF;
   font-size: 1em;
-  border: 1px solid #a7142c !important;
+  border: 1px solid #361118;
   border-radius: 6px;
-  background-color: #a7142c !important;
+  background-color: #5d3754;
   margin: 20px 10px 0px 10px;
 }
 
@@ -158,6 +158,8 @@
 }
 #informative-landing, #funny-landing, #insightful-landing {
   /* color: #FFFFFF; */
+  background-color: #a7142c;
+  border: 1px solid #a7142c;
   font-size: 1em;
   /* border: 1px solid #a7142c; */
   border-radius: 6px;
@@ -370,4 +372,8 @@ html body {
   border-radius: 0px;
   background-color:#a7142c;
   color: white;
+}
+
+#video-page-description {
+  text-align: left;
 }

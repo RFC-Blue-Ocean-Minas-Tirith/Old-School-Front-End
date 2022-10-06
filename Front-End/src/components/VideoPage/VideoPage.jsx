@@ -174,7 +174,7 @@ function VideoPage() {
   return (
     <Container fluid>
       <Row >
-        <Col xs={7} className="text-center">
+        <Col id="video-carousel-container" xs={7} className="text-center">
           <div className="videoTitle">
             <h2>{currentVid.title}</h2>
             <h6>{timeAgo.format(new Date(currentVid.dateUploaded))}</h6>
@@ -189,7 +189,9 @@ function VideoPage() {
             <Badge id={favorited[0]} style={{ fontSize: '16px' }} className="border border-warning" pill bg="warning" text="dark" onClick={favorite}>{favorited[1]}</Badge>
           </div>
           <div className='videoDescription'>
-            <p>{currentVid.description}</p>
+            <p id="video-page-description">{currentVid.description}</p>
+          </div>
+          <div id="report-field">
             {reportField}
           </div>
           <div>
@@ -231,7 +233,7 @@ function VideoPage() {
             </Overlay>
           </div>
         </Col>
-        <Col>
+        <Col >
           <div className="videoTitle">
             <h2>Comments</h2>
           </div>
