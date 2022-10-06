@@ -227,13 +227,13 @@ const deleteTag = (index) => {
             <Input value={keyword} placeholder="Enter a keyword followed by a comma ','" onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={onChange} />
             {keywords.length > 0 && (
             <Tags>
-              <Row>
+              <Row2>
                 {keywords.map((word, index) => (
                   <Tag key={index}>
                     {word}
                     <TagButton id="clickButton" onClick={() => deleteTag(index)}>x</TagButton></Tag>
                 ))}
-              </Row>
+              </Row2>
             </Tags>
             )}
           </Column>
