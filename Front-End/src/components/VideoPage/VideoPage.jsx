@@ -255,7 +255,7 @@ function VideoPage() {
             })}
           </ListGroup>
           <div id="commentSpacer"></div>
-          <Button id="redButton" style={{ width: '100%', height: '10%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
+          <Button id="redButton" style={{ width: '100%', height: '8%' }} bg="primary" onClick={toggleModal}>Add Comment</Button>
         </Col>
       </Row>
       <AddComment
