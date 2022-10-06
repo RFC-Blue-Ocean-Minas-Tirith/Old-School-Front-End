@@ -34,7 +34,7 @@ function Upload(props) {
           </ColumnCentered>
         </Modal.Body>
         <Modal.Footer>
-          <Button id="redButton" onClick={handleClose}>Close</Button>
+          <Button id="clickButton" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
       <UploadVideo
