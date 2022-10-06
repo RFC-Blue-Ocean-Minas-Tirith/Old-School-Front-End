@@ -281,6 +281,7 @@ html body {
 .carousel-control-prev-icon /*, .carousel-indicators */ {
     background-color:#a7142c;
     border-radius: 50%;
+    opacity: 0.8;
     opacity: 1;
 }
 
