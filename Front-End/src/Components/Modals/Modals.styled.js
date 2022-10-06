@@ -22,6 +22,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 export const StyledButton = styled.button`
@@ -93,9 +94,9 @@ export const LeftLabel = styled.label`
 
 export const Checkbox = styled.input`
   width: 5%;
-`
+`;
 
 export const Comment = styled.div`
-  border: 1px solid black;
-  border-radius: 5px;
-`
+  /* border: 1px solid black;
+  border-radius: 5px; */
+`;
