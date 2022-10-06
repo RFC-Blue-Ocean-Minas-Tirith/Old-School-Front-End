@@ -127,8 +127,8 @@ function Flagged(props) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header id="contained-modal-title-vcenter" closeButton>
+            <Modal.Title >
               Flagged Videos
             </Modal.Title>
           </Modal.Header>
@@ -153,8 +153,8 @@ function Flagged(props) {
             ))}
             </ListGroup>
           </Modal.Body>
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header id="contained-modal-title-vcenter2" closeButton>
+            <Modal.Title >
               Flagged Comments
             </Modal.Title>
           </Modal.Header>

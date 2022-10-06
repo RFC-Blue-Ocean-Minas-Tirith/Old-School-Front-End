@@ -313,3 +313,9 @@ html body {
   background-color:#a7142c;
   color: white;
 }
+
+#contained-modal-title-vcenter2 {
+  border-radius: 0px;
+  background-color:#a7142c;
+  color: white;
+}
