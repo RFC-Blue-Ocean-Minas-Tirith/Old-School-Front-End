@@ -72,7 +72,6 @@ function VideoPage() {
 
   // -----Event Handlers-----
   const updateVote = (e) => {
-    // FIXME: why does this reload the video?
     if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
@@ -206,6 +205,7 @@ function VideoPage() {
                   Already Voted, Thank You!
                 </Tooltip>
               )}
+            </Overlay>
             <Button variant="warning" id="funny" className="vote" ref={target3} onClick={updateVote}>
               Funny
               <br></br>
@@ -217,7 +217,6 @@ function VideoPage() {
                   Already Voted, Thank You!
                 </Tooltip>
               )}
-            </Overlay>
             </Overlay>
             <Button variant="warning" id="informative" className="vote" ref={target2} onClick={updateVote}>
               Informative
