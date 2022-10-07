@@ -206,6 +206,18 @@ function VideoPage() {
                   Already Voted, Thank You!
                 </Tooltip>
               )}
+            <Button variant="warning" id="funny" className="vote" ref={target3} onClick={updateVote}>
+              Funny
+              <br></br>
+              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
+            </Button>
+            <Overlay target={target3.current} show={showFunny} placement='bottom'>
+              {(props) => (
+                <Tooltip id='funnyTT' {...props}>
+                  Already Voted, Thank You!
+                </Tooltip>
+              )}
+            </Overlay>
             </Overlay>
             <Button variant="warning" id="informative" className="vote" ref={target2} onClick={updateVote}>
               Informative
@@ -215,18 +227,6 @@ function VideoPage() {
             <Overlay target={target2.current} show={showInformative} placement='bottom'>
               {(props) => (
                 <Tooltip id='informativeTT' {...props}>
-                  Already Voted, Thank You!
-                </Tooltip>
-              )}
-            </Overlay>
-            <Button variant="warning" id="funny" className="vote" ref={target3} onClick={updateVote}>
-              Funny
-              <br></br>
-              <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
-            </Button>
-            <Overlay target={target3.current} show={showFunny} placement='bottom'>
-              {(props) => (
-                <Tooltip id='funnyTT' {...props}>
                   Already Voted, Thank You!
                 </Tooltip>
               )}
