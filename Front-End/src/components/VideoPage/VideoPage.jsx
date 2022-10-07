@@ -72,7 +72,6 @@ function VideoPage() {
 
   // -----Event Handlers-----
   const updateVote = (e) => {
-    // FIXME: why does this reload the video?
     if (Object.keys(currUser).length === 0) {
       signInWithGoogle();
       return;
