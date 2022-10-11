@@ -15,7 +15,7 @@ function AboutMe({ user, currentUser }) {
     setBio(e.target.value)
   };
   function bioSubmit() {
-    return axios.put(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile/${user.username}`, { user: user.username, bio: bio })
+    return axios.put(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/userprofile/${user.username}`, { user: user.username, bio: bio })
       .then(() => {
         user.aboutMe = bio;
         setEditing(false);
@@ -24,7 +24,7 @@ function AboutMe({ user, currentUser }) {
 
   function handleFave() {
     if (currentUser) {
-      return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: user.username })
+      return axios.put('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: user.username })
       .then((data) => {
         setFaved(true);
       })
@@ -34,7 +34,7 @@ function AboutMe({ user, currentUser }) {
 
   function handleUnfave() {
     if (currentUser) {
-      return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: user.username})
+      return axios.put('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: user.username})
         .then((data) => {
           setFaved(false);
         })
@@ -44,7 +44,7 @@ function AboutMe({ user, currentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
+      axios.get(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user/favs`, {
         params: {
           user: currentUser.username
         }

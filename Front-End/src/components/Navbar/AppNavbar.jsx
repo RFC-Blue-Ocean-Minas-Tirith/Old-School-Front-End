@@ -21,7 +21,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
 
   function handleSearch() {
     if (videoData) {
-      axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/videos', { params: { searchTerm } })
+      axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/videos', { params: { searchTerm } })
         .then((response) => {
           console.log('video search results:', response.data)
           setVideoData(response.data);
@@ -36,7 +36,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
 
   function checkIfAdmin() {
     if (isLoggedIn) {
-      return axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/data', {
+      return axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user/data', {
         params: {
           user: currentUser.username
         }
@@ -52,7 +52,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
   function resetFilter() {
     setIsFiltered(false);
     document.getElementById('searchField').value = '';
-    return axios.get('http://http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video')
+    return axios.get('http://http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/video')
       .then((res) => {
         setVideoData(res.data);
         navigate('/');

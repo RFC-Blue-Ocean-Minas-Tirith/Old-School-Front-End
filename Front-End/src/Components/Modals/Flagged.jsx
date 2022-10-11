@@ -15,7 +15,7 @@ function Flagged(props) {
   const [flaggedVideos, setFlaggedVideos] = useState();
 
   useEffect(() => {
-    axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedComments')
+    axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedComments')
       .then((results) => {
         let array = [];
         results.data.forEach((video) => {
@@ -35,7 +35,7 @@ function Flagged(props) {
   }, [props.flaggedModalShow]);
 
   useEffect(() => {
-    axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedVideos')
+    axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedVideos')
       .then((results) => {
         setFlaggedVideos(results.data);
       })
@@ -54,10 +54,10 @@ function Flagged(props) {
         id: flagged[e.target.value].videoId,
       },
     };
-    axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedComments', params)
+    axios.patch('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedComments', params)
       .then((results) => {
         console.log(results);
-        return axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/data', {
+        return axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user/data', {
           params: {
             user: flagged[e.target.value].author
           }
@@ -97,7 +97,7 @@ function Flagged(props) {
         commentID: flagged[e.target.value]._id
       },
     };
-    axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedCommentsKeep', params)
+    axios.patch('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedCommentsKeep', params)
       .then((results) => {
         console.log(results);
       })
@@ -115,7 +115,7 @@ function Flagged(props) {
         id: flaggedVideos[e.target.value]._id,
       },
     };
-    axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedVideos', params)
+    axios.patch('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedVideos', params)
       .then((results) => {
         console.log(results);
       })
@@ -133,7 +133,7 @@ function Flagged(props) {
         id: flaggedVideos[e.target.value]._id,
       },
     };
-    axios.patch('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/flaggedVideosKeep', params)
+    axios.patch('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/flaggedVideosKeep', params)
       .then((results) => {
         console.log(results);
       })

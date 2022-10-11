@@ -19,7 +19,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   // ============= is the user a favorite ==================
   useEffect(() => {
     if (videoData && currentUser) {
-      axios.get('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user')
+      axios.get('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user')
         .then(res => {
           res.data.forEach(profile => {
             if (profile.username === currentUser.username) {
@@ -80,7 +80,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     setThumbnails(temp);
     if (sortOn === 'favorited') {
       results = [];
-      axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/favs`, {
+      axios.get(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user/favs`, {
         params: {
           user: currentUser.username
         }
@@ -126,13 +126,13 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
   }, [videoData]);
   // ================ handle button updates to the database ==================
   function handleFave() {
-    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/userprofile', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setFavorited(['favorited', 'Favorite Creator']);
       });
   }
   function handleUnFave() {
-    return axios.put('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: videoData[index].username })
+    return axios.put('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/userprofilex', { currentUser: currentUser, user: videoData[index].username })
       .then((data) => {
         setFavorited(['unfavorited', 'Favorite this Creator!']);
       });

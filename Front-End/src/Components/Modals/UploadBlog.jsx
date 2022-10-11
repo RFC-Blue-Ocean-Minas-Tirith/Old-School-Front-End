@@ -48,7 +48,7 @@ function UploadBlog(props) {
         private: isPrivate,
       },
     };
-    axios.post('http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/blog', params)
+    axios.post('http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/blog', params)
       .then(() => {
         props.setModalShow(false);
         setSubmitted(true);

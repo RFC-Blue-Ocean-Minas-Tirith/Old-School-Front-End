@@ -16,20 +16,20 @@ function ProfilePage() {
   const { user, currentUser } = location.state;
 
   function fetchData() {
-    return axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/user/data`, {
+    return axios.get(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/user/data`, {
       params: {
         user: user
       }
     })
     .then((data) => {
       setUser(data.data)
-      return axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/video/user/${user}`)
+      return axios.get(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/video/user/${user}`)
     })
     .then((data) => {
       setVideos(data.data);
     })
     .then(() => {
-      return axios.get(`http://ec2-18-217-242-14.us-east-2.compute.amazonaws.com/blog/user/${user}`);
+      return axios.get(`http://ec2-18-220-24-246.us-east-2.compute.amazonaws.com/blog/user/${user}`);
     })
     .then((data) => {
       setBlogs(data.data);
