@@ -18,22 +18,22 @@ Taking into account our target users, accessability for those users, and our tim
 Users are able create profiles through google authentication, upload videos and blogs, favorite other creators and receive notifications when those creators upload, vote on video categories, and more!
 
 ## Video Demo
-Login using Firebase Authentication
+#### Login using Firebase Authentication
 ![gif](https://media.giphy.com/media/eX9JBf8ld6DCTuXKqK/giphy.gif)
 
-Landing Page Carousel & Video Filter
+#### Landing Page Carousel & Video Filter
 ![gif](https://media.giphy.com/media/MGg7l0zWCzmRAgr6vn/giphy.gif)
 
-Video Page
+#### Video Page
 ![gif](https://media.giphy.com/media/3HhjgZkK6aT8QAN08u/giphy.gif)
 
-Profile Page
+#### Profile Page
 ![gif](https://media.giphy.com/media/9dRubOlKhQZkNlIr5s/giphy.gif)
 
-Upload Video
+#### Upload Video
 ![gif](https://media.giphy.com/media/NuYHZZrJZX9DqH6iIX/giphy.gif)
 
-Search for a Video
+#### Search for a Video
 ![gif](https://media.giphy.com/media/Tx77eeyl2VkUx1eb4Z/giphy.gif)
 
 ## Tech Stack
