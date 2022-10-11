@@ -9,13 +9,32 @@
 - Accountability and Encouragement Lead - [Adam Blomberg](https://github.com/AdamABlomberg)
 
 ## Introduction
-This project was a 1 week spring where our team completed a MVP for our client L. Derely. 
+This project was a 1 week spring where our team completed a MVP for our client L. Derely.
 *Add any additional content here pertaining to the timeline, any personal goals, etc.*
 
 ## What does the app do?
-Our client wanted to create a video platform specificly for our older generation to share their wisdom and experiences. 
-Taking into account our target users, accessability for those users, and our time frame, we created exactly that. 
+Our client wanted to create a video platform specificly for our older generation to share their wisdom and experiences.
+Taking into account our target users, accessability for those users, and our time frame, we created exactly that.
 Users are able create profiles through google authentication, upload videos and blogs, favorite other creators and receive notifications when those creators upload, vote on video categories, and more!
+
+## Video Demo
+Login using Firebase Authentication
+![gif](https://media.giphy.com/media/eX9JBf8ld6DCTuXKqK/giphy.gif)
+
+Landing Page Carousel & Video Filter
+![gif](https://media.giphy.com/media/MGg7l0zWCzmRAgr6vn/giphy.gif)
+
+Video Page
+![gif](https://media.giphy.com/media/3HhjgZkK6aT8QAN08u/giphy.gif)
+
+Profile Page
+![gif](https://media.giphy.com/media/9dRubOlKhQZkNlIr5s/giphy.gif)
+
+Upload Video
+![gif](https://media.giphy.com/media/NuYHZZrJZX9DqH6iIX/giphy.gif)
+
+Search for a Video
+![gif](https://media.giphy.com/media/Tx77eeyl2VkUx1eb4Z/giphy.gif)
 
 ## Tech Stack
 #### Front End:
@@ -27,7 +46,7 @@ Users are able create profiles through google authentication, upload videos and 
 
 #### Styling:
 - Bootstrap
-- Styled Components 
+- Styled Components
 - React Icons
 
 #### Back End:
@@ -38,7 +57,7 @@ Users are able create profiles through google authentication, upload videos and 
 - CORS
 - Morgan
 
-#### Authentication: 
+#### Authentication:
 - Firebase
 
 #### Developer Tools:
@@ -52,21 +71,5 @@ Users are able create profiles through google authentication, upload videos and 
 - Loader.io (deployed version)
 - K-6 (local)
 
-
-## Anticipated Technical Challenges 
-
-## Non-Anticipated Technical Challenges 
-
-## Video Demo
-
-## How does the app work?
-
-## What research was required?
-
-## Workflow and Key lessons
-
-## Sprint Retro Notes
-
-## Additional Features
 
 
