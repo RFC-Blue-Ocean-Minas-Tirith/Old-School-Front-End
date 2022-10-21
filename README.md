@@ -4,7 +4,7 @@
 - UI Owner - [Alice Blank](https://github.com/AllEyesBlank)
 - Product Manager - [Kevin Moyer](https://github.com/kjmoyer)
 - Architecture Owner - [Melissa Gil](https://github.com/melissa-gv)
-- QA and Testing Lead - [Vicki Wong](https://github.com/vickiwong85)
+- QA and Accessibility Lead - [Vicki Wong](https://github.com/vickiwong85)
 - Deployment Manager - [Zachary Vallow](https://github.com/Zachariah1618)
 - Accountability and Encouragement Lead - [Adam Blomberg](https://github.com/AdamABlomberg)
 
