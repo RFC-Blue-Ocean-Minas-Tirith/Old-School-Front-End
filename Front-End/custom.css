@@ -218,6 +218,7 @@ html body {
 #nav {
   background-color: #a7142c;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 
 #nav-button {
@@ -233,6 +234,7 @@ html body {
 #nav-search-result {
   color: white;
   align-self: center;
+  font-size: 1.25rem;
 }
 
 #VideoTitle {

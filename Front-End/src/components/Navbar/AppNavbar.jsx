@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -83,55 +84,57 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '300px' }}
+            style={{ maxHeight: '320px' }}
             navbarScroll
           >
-            <Link id="nav-button" to="/" className="nav-link" aria-current="page">Home</Link>
+            <Link id="nav-button" to="/" className="nav-link mx-1" aria-current="page">Home</Link>
 
             {isLoggedIn
-              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link active" aria-current="page">My Profile</Link>
+              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link mx-1" aria-current="page">My Profile</Link>
               : null}
 
-            <Form className="d-flex" onSubmit={handleSearch}>
-              <Form.Control
-                id="nav-search-field"
-                type="search"
-                placeholder="Search videos & users..."
-                className="mx-2"
-                aria-label="Search"
-                onChange={handleSearchChange}
-              />
-              <Button id="whiteButton" size="lg" type="submit">Search</Button>
-            </Form>
-            {isFiltered
-              ? (
-                <>
-                  <Navbar.Text id="nav-search-result" className="mx-2">
-                    Results:&nbsp;
-                    {videoData.length}&nbsp;
-                    {videoData.length === 1 ? 'video' : 'videos'}
-                  </Navbar.Text>
-                  <div className="vr" />
-                  <Button size="lg" id="whiteButton" className="mx-2" type="reset" onClick={resetFilter}>Reset</Button>
-                </>
-              )
-              : null}
+            <Stack direction="horizontal">
+              <Form className="d-flex" onSubmit={handleSearch}>
+                <Form.Control
+                  id="nav-search-field"
+                  type="search"
+                  placeholder="Search videos & users..."
+                  className="mx-2"
+                  aria-label="Search"
+                  onChange={handleSearchChange}
+                />
+                <Button id="whiteButton" size="lg" type="submit" className="mx-1">Search</Button>
+              </Form>
+              {isFiltered
+                ? (
+                  <>
+                    <Navbar.Text id="nav-search-result" className="mx-2">
+                      Results:&nbsp;
+                      {videoData.length}&nbsp;
+                      {videoData.length === 1 ? 'video' : 'videos'}
+                    </Navbar.Text>
+                    <div className="vr" />
+                    <Button size="lg" id="whiteButton" className="mx-2" type="reset" onClick={resetFilter}>Reset</Button>
+                  </>
+                )
+                : null}
+            </Stack>
           </Nav>
 
           {isLoggedIn && isAdmin
-            ? <Button size="lg" id="flagged" className="mx-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
+            ? <Button size="lg" id="flagged" className="mx-2 my-1" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
 
           {isLoggedIn
-            ? <Button size="lg" id="whiteButton" className="mx-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-            : <Button size="lg" id="whiteButton" className="mx-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
+            ? <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signInWithGoogle}>Upload</Button>}
 
           {isLoggedIn
-            ? <Button size="lg" id="whiteButton" className="mx-2" type="button" onClick={signOutGoogle}>Logout</Button>
-            : <Button size="lg" id="whiteButton" className="mx-2" type="button" onClick={signInWithGoogle}>Login</Button>}
+            ? <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   )
 }
 
