@@ -144,18 +144,22 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
     return (
       <div>
         {
-          (!thumbnails.length) ? <div></div> :
-            <Container className="w-auto p-11">
-              <Form.Select id="dropdown-selector" size="lg" onChange={(e) => {
-                const selectedMenuOption = e.target.value;
-                setSortOn(selectedMenuOption);
-              }}>
-                <option value='recent'>most recent</option>
-                <option value='informative'>Informative</option>
-                <option value='favorited'>most favorited creators</option>
-                <option value='insightful'>Insightful</option>
-                <option value='funny'>Funny</option>
-              </Form.Select>
+          (!thumbnails.length) ? null :
+            <Container className="w-auto">
+              <Row>
+                <Form.Select id="dropdown-selector" size="lg" onChange={(e) => {
+                  const selectedMenuOption = e.target.value;
+                  setSortOn(selectedMenuOption);
+                }}>
+                  <option value='recent'>Most Recent</option>
+                  <option value='informative'>Informative</option>
+                  <option value='favorited'>Most Favorited Creators</option>
+                  <option value='insightful'>Insightful</option>
+                  <option value='funny'>Funny</option>
+                </Form.Select>
+              </Row>
+
+              <br />
               <Row >
                 <Col id="video-carousel-container" className="border-success">
                   <div id="landing-page-topbar">
@@ -196,7 +200,6 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     }
                   </Carousel>
                 </Col>
-                {/* <Col xs={1}></Col> */}
               </Row>
               <Row className="text-center">
                 <div >

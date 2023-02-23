@@ -12,6 +12,6 @@
     "plugin:react/jsx-runtime"
 ],
   "rules": {
-    "eslint-disable": "true"
+    "eslint-disable": "false"
   }
 }

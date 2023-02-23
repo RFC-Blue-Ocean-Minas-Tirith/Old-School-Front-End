@@ -62,7 +62,7 @@ function Flagged(props) {
             user: flagged[e.target.value].author
           }
         })
-          .then ((results) => {
+          .then((results) => {
             let templateParams = {
               currentUser: results.data.email,
               username: results.data.username,
@@ -74,7 +74,7 @@ function Flagged(props) {
               .then((result) => {
                 console.log('email sent!', result.status, result.text);
               }, (error) => {
-                  console.log('error', error);
+                console.log('error', error);
               });
           })
           .catch((err) => {
@@ -144,75 +144,73 @@ function Flagged(props) {
 
   return (
     <Theme>
-      <Container>
-        <Modal
-          show={props.flaggedModalShow}
-          onHide={() => props.setFlaggedModalShow(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header id="contained-modal-title-vcenter" closeButton>
-            <Modal.Title >
-              Flagged Videos
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ListGroup
-                variant="flush"
-              >
+      <Modal
+        show={props.flaggedModalShow}
+        onHide={() => props.setFlaggedModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header id="contained-modal-title-vcenter" closeButton>
+          <Modal.Title >
+            Flagged Videos
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ListGroup
+            variant="flush"
+          >
             {flaggedVideos && flaggedVideos.map((item, i) => (
               <ListGroup.Item as="li" key={i}>
                 <Row>
-                <Column>
-                <div><strong>Username:</strong> {item.username}</div>
-                <div className="flaggedRow"><strong>Video:</strong>
-                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link">{item.title}</h6></Link></div>
-                </Column>
-                <Column>
-                <Button id="clickButtonFlag" value={i} onClick={handleVideoDelete}>Delete</Button>
-                <Button id="clickButtonFlag" value={i} onClick={handleVideoKeep}>Keep</Button>
-                </Column>
-                </Row>
-                </ListGroup.Item>
-            ))}
-            </ListGroup>
-          </Modal.Body>
-          <Modal.Header id="contained-modal-title-vcenter2" closeButton>
-            <Modal.Title >
-              Flagged Comments
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ListGroup
-              variant="flush"
-            >
-            {flagged && flagged.map((item, i) => (
-              <ListGroup.Item className="flaggedRow" as="li" key={i}>
-                <Row>
-                <Column>
-                <div>
-                <strong>Username:</strong> {item.author}
-                </div>
-                <div className="flaggedRow"><strong>Video:</strong>
-                <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link"> {item.title}</h6></Link></div>
-                <div>
-                <strong>Comment:</strong> {item.comment}</div>
-                </Column>
-                <Column>
-                <Button id="clickButtonFlag" value={i} onClick={handleDelete}>Delete</Button>
-                <Button id="clickButtonFlag" value={i} onClick={handleKeep}>Keep</Button>
-                </Column>
+                  <Column>
+                    <div><strong>Username:</strong> {item.username}</div>
+                    <div className="flaggedRow"><strong>Video:</strong>
+                      <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link">{item.title}</h6></Link></div>
+                  </Column>
+                  <Column>
+                    <Button id="clickButtonFlag" value={i} onClick={handleVideoDelete}>Delete</Button>
+                    <Button id="clickButtonFlag" value={i} onClick={handleVideoKeep}>Keep</Button>
+                  </Column>
                 </Row>
               </ListGroup.Item>
             ))}
-            </ListGroup>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button id="clickButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </Container>
+          </ListGroup>
+        </Modal.Body>
+        <Modal.Header id="contained-modal-title-vcenter2" closeButton>
+          <Modal.Title >
+            Flagged Comments
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ListGroup
+            variant="flush"
+          >
+            {flagged && flagged.map((item, i) => (
+              <ListGroup.Item className="flaggedRow" as="li" key={i}>
+                <Row>
+                  <Column>
+                    <div>
+                      <strong>Username:</strong> {item.author}
+                    </div>
+                    <div className="flaggedRow"><strong>Video:</strong>
+                      <Link to="/video_page" className="nav-link active" aria-current="page" state={{ 'currentUser': props.currentUser, 'video': props.videoData[i] }} onClick={() => props.setFlaggedModalShow(false)}><h6 id="link"> {item.title}</h6></Link></div>
+                    <div>
+                      <strong>Comment:</strong> {item.comment}</div>
+                  </Column>
+                  <Column>
+                    <Button id="clickButtonFlag" value={i} onClick={handleDelete}>Delete</Button>
+                    <Button id="clickButtonFlag" value={i} onClick={handleKeep}>Keep</Button>
+                  </Column>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="clickButton" onClick={() => props.setFlaggedModalShow(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </Theme>
   );
 }

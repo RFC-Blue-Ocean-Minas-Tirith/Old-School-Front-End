@@ -1,6 +1,7 @@
 html body {
   background-color: rgb(227, 210, 210);
   font-family:'Georgia', 'Garamond','Times New Roman';
+  overflow-y: scroll;
 }
 
 
@@ -211,7 +212,6 @@ html body {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 90%;
-  /* background-color: #a7142c; */
   padding: 30px;
 }
 
@@ -237,6 +237,11 @@ html body {
   font-size: 1.25rem;
 }
 
+.navbar-toggler {
+  border: white solid !important;
+
+}
+
 #VideoTitle {
   font-size: 1.7em;
   padding: 15px 0px 5px;
@@ -247,6 +252,7 @@ html body {
   /* margin: 2%; */
   /* font-weight: bold;*/
 }
+
 #dropdown-sorter {
   background: #a7142c;
   border-radius: 15px 15px 0px 0px;
@@ -366,12 +372,8 @@ html body {
   /* text-decoration: underline white; */
 }
 
-
 #dropdown-selector {
-  top: 10%;
-  position: fixed;
-  left: 9.2%;
-  width: 27.1%;
+  width: 40%
 }
 
 #contained-modal-title-vcenter {

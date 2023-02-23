@@ -72,7 +72,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
   }, [isLoggedIn])
 
   return (
-    <Navbar id="nav" expand="xl">
+    <Navbar id="nav" expand="xl" >
       <Container fluid>
         <Navbar.Brand id="logo">
           <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
@@ -87,10 +87,10 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
             style={{ maxHeight: '320px' }}
             navbarScroll
           >
-            <Link id="nav-button" to="/" className="nav-link mx-1" aria-current="page">Home</Link>
+            <Link id="nav-button" to="/" className="nav-link m-2" aria-current="page">Home</Link>
 
             {isLoggedIn
-              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link mx-1" aria-current="page">My Profile</Link>
+              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link m-2" aria-current="page">My Profile</Link>
               : null}
 
             <Stack direction="horizontal">
@@ -99,22 +99,22 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
                   id="nav-search-field"
                   type="search"
                   placeholder="Search videos & users..."
-                  className="mx-2"
+                  className="m-2"
                   aria-label="Search"
                   onChange={handleSearchChange}
                 />
-                <Button id="whiteButton" size="lg" type="submit" className="mx-1">Search</Button>
+                <Button id="whiteButton" size="lg" type="submit" className="m-2">Search</Button>
               </Form>
               {isFiltered
                 ? (
                   <>
-                    <Navbar.Text id="nav-search-result" className="mx-2">
+                    <Navbar.Text id="nav-search-result" className="m-2">
                       Results:&nbsp;
                       {videoData.length}&nbsp;
                       {videoData.length === 1 ? 'video' : 'videos'}
                     </Navbar.Text>
                     <div className="vr" />
-                    <Button size="lg" id="whiteButton" className="mx-2" type="reset" onClick={resetFilter}>Reset</Button>
+                    <Button size="lg" id="whiteButton" className="m-2" type="reset" onClick={resetFilter}>Reset</Button>
                   </>
                 )
                 : null}
@@ -122,16 +122,16 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
           </Nav>
 
           {isLoggedIn && isAdmin
-            ? <Button size="lg" id="flagged" className="mx-2 my-1" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
+            ? <Button size="lg" id="flagged" className="m-2" type="button" onClick={() => setFlaggedModalShow(true)}>Review Flagged</Button>
             : null}
 
           {isLoggedIn
-            ? <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={() => setModalShow(true)}>Upload</Button>
-            : <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signInWithGoogle}>Upload</Button>}
+            ? <Button size="lg" id="whiteButton" className="m-2" type="button" onClick={() => setModalShow(true)}>Upload</Button>
+            : <Button size="lg" id="whiteButton" className="m-2" type="button" onClick={signInWithGoogle}>Upload</Button>}
 
           {isLoggedIn
-            ? <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signOutGoogle}>Logout</Button>
-            : <Button size="lg" id="whiteButton" className="mx-2 my-1" type="button" onClick={signInWithGoogle}>Login</Button>}
+            ? <Button size="lg" id="whiteButton" className="m-2" type="button" onClick={signOutGoogle}>Logout</Button>
+            : <Button size="lg" id="whiteButton" className="m-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar >

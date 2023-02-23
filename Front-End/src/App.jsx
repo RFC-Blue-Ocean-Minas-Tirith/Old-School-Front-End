@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
@@ -45,31 +45,41 @@ function App() {
   // const user = 'AllEyesBlank';
 
   return (
-    <div>
-      <div className="App">
-        <AppNavbar
-          setModalShow={setModalShow}
-          isLoggedIn={isLoggedIn}
-          setVideoData={setVideoData}
-          videoData={videoData}
-          currentUser={currentUser}
-          flaggedModalShow={flaggedModalShow}
-          setFlaggedModalShow={setFlaggedModalShow}
-        />
-        <Upload setModalShow={setModalShow} modalShow={modalShow} currentUser={currentUser} />
-        <Flagged flaggedModalShow={flaggedModalShow} setFlaggedModalShow={setFlaggedModalShow} currentUser={currentUser}
-            videoData={videoData}/>
-        <Routes>
-          <Route path="/" element={
+    <>
+      <AppNavbar
+        setModalShow={setModalShow}
+        isLoggedIn={isLoggedIn}
+        setVideoData={setVideoData}
+        videoData={videoData}
+        currentUser={currentUser}
+        flaggedModalShow={flaggedModalShow}
+        setFlaggedModalShow={setFlaggedModalShow}
+      />
+      <br />
+      <br />
+      <Upload
+        setModalShow={setModalShow}
+        modalShow={modalShow}
+        currentUser={currentUser}
+      />
+      <Flagged
+        flaggedModalShow={flaggedModalShow}
+        setFlaggedModalShow={setFlaggedModalShow}
+        currentUser={currentUser}
+        videoData={videoData}
+      />
+      <Routes>
+        <Route path="/" element={
           <LandingPage
             currentUser={currentUser}
             videoData={videoData}
-            setVideoData={setVideoData} />} />
-          <Route path="profile_page" element={<ProfilePage />} />
-          <Route path="video_page" element={<VideoPage />} />
-        </Routes>
-      </div>
-    </div>
+            setVideoData={setVideoData}
+          />
+        } />
+        <Route path="profile_page" element={<ProfilePage />} />
+        <Route path="video_page" element={<VideoPage />} />
+      </Routes>
+    </>
   );
 }
 
