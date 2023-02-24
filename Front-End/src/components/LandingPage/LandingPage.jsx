@@ -176,7 +176,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                     <Link to="profile_page" state={{ currentUser: currentUser, user: videoData[index].username }}>
                       <h5 className="videoUser"><strong>{videoData[index].username}</strong></h5>
                     </Link>
-                    <Badge id={favorited[0]} style={{fontSize: '16px'}} className="border border-warning" pill bg="warning" text="dark" onClick={() => {
+                    <Badge id={favorited[0]} style={{ fontSize: '16px' }} className="border border-warning" pill bg="warning" text="dark" onClick={() => {
                       (favorited[0] === 'favorited') ? handleUnFave() : handleFave()
                     }
                     }
@@ -192,7 +192,7 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                       thumbnails.map((thumbnail, i) => {
                         return (<Carousel.Item key={i}>
                           <Link to="video_page" state={{ 'currentUser': currentUser, 'video': videoData[index] }}>
-                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px'}} src={thumbnail} />
+                            <img className="d-block w-100" style={{ objectFit: 'cover', maxHeight: '500px' }} src={thumbnail} />
                             <div id='carousel-margin'> </div>
                           </Link>
                         </Carousel.Item>)
@@ -201,24 +201,22 @@ function LandingPage({ currentUser, videoData, setVideoData }) {
                   </Carousel>
                 </Col>
               </Row>
-              <Row className="text-center">
-                <div >
-                  <div>
-                    <Button variant="primary" id="insightful-landing" className="vote nonclick">Insightful
-                      <br>
-                      </br>
-                      <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
-                    </Button>
-                    <Button variant="primary" id="funny-landing" className="vote">Funny<br>
-                    </br><Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
-                    </Button>
-                    <Button variant="primary" id="informative-landing" className="vote" >Informative
-                      <br>
-                      </br>
-                      <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
-                    </Button>
-                  </div>
-                </div>
+              <Row className="justify-content-center">
+                <Button size="lg" id="video-char-non-vote" variant="primary">
+                  <i className="fa-solid fa-comments"></i>&nbsp; Insightful
+                  <br />
+                  <Badge bg="secondary">{videoData[index].votes.insightful.usernames.length}</Badge>
+                </Button>
+                <Button size="lg" id="video-char-non-vote" variant="primary" >
+                  <i className="fa-solid fa-face-laugh-beam"></i>&nbsp; Funny
+                  <br />
+                  <Badge bg="secondary" className="voteCount">{videoData[index].votes.funny.usernames.length}</Badge>
+                </Button>
+                <Button size="lg" id="video-char-non-vote" variant="primary" >
+                  <i className="fa-solid fa-book-open-reader"></i>&nbsp; Informative
+                  <br />
+                  <Badge bg="secondary" className="voteCount">{videoData[index].votes.informative.usernames.length}</Badge>
+                </Button>
               </Row>
             </Container>
         }

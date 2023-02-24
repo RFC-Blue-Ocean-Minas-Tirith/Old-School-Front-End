@@ -169,7 +169,7 @@ function VideoPage() {
     return <></>
   }
 
-  const reportField = !currentVid.reported ? (<h6 className="report" vidid={currentVid._id} type='video' filler={0} filler2={0} onClick={report}>{'<Report Video>'}</h6>) : (<Alert variant='warning'>Reported for admin review</Alert>);
+  const reportField = !currentVid.reported ? (<h6 className="report" vidid={currentVid._id} type='video' filler={0} filler2={0} onClick={report}>{'Report Video'}</h6>) : (<Alert variant='warning'>Reported for admin review</Alert>);
   return (
     <Container fluid>
       <Row >
@@ -194,9 +194,9 @@ function VideoPage() {
             {reportField}
           </div>
           <div>
-            <Button variant="warning" id="insightful" className="vote" ref={target1} onClick={updateVote}>
+            <Button id="insightful" variant="warning" className="video-char-non-vote" ref={target1} onClick={updateVote}>
               Insightful
-              <br></br>
+              <br/>
               <Badge bg="secondary" className="voteCount" >{currentVid.votes.insightful.usernames.length}</Badge>
             </Button>
             <Overlay target={target1.current} show={showInsightful} placement='bottom'>
@@ -206,7 +206,7 @@ function VideoPage() {
                 </Tooltip>
               )}
             </Overlay>
-            <Button variant="warning" id="funny" className="vote" ref={target3} onClick={updateVote}>
+            <Button id="funny" variant="warning" className="video-char-non-vote" ref={target3} onClick={updateVote}>
               Funny
               <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.funny.usernames.length}</Badge>
@@ -218,7 +218,7 @@ function VideoPage() {
                 </Tooltip>
               )}
             </Overlay>
-            <Button variant="warning" id="informative" className="vote" ref={target2} onClick={updateVote}>
+            <Button id="informative" variant="warning" className="video-char-non-vote" ref={target2} onClick={updateVote}>
               Informative
               <br></br>
               <Badge bg="secondary" className="voteCount">{currentVid.votes.informative.usernames.length}</Badge>
@@ -233,7 +233,7 @@ function VideoPage() {
           </div>
         </Col>
         <Col >
-          <div className="videoTitle" style={{marginTop: '2%'}}>
+          <div className="videoTitle" style={{ marginTop: '2%' }}>
             <h2 >Comments</h2>
           </div>
           <ListGroup

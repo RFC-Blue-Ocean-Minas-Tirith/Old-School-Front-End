@@ -4,26 +4,6 @@ html body {
   overflow-y: scroll;
 }
 
-
-.vote {
-  margin: 5px;
-  width: 27%
-}
-
-#buttonRow {
-  display: flex;
-  flex-direction: flex-start;
-  justify-content: space-between;
-}
-
-.nonclick {
-  cursor: scroll;
-}
-
-.voteCount {
-  margin-left: 3px;
-}
-
 #unfavorited.bg-warning {
   background-color: white !important;
 }
@@ -141,40 +121,6 @@ html body {
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* only ids work to change the button color */
-#informative,
-#funny,
-#insightful,
-#informative-landing,
-#funny-landing,
-#insightful-landing,
-#clickButton,
-#clickButtonFlag,
-#largeButton {
-  color: #FFFFFF;
-  font-size: 1em;
-  border: 1px solid #361118;
-  border-radius: 6px;
-  background-color: #5d3754;
-}
-
-#informative,
-#funny,
-#insightful {
-  margin: 10px 10px 0px 10px;
-
-}
-#informative-landing, #funny-landing, #insightful-landing {
-  /* color: #FFFFFF; */
-  background-color: #a7142c;
-  border: 1px solid #a7142c;
-  font-size: 1em;
-  /* border: 1px solid #a7142c; */
-  border-radius: 6px;
-  /* background-color: #a7142c; */
-  margin: 20px 10px 0px 10px;
-  cursor: auto;
-}
 
 #redButton {
   color: #FFFFFF;
@@ -215,6 +161,37 @@ html body {
   padding: 30px;
 }
 
+#video-char-non-vote {
+  background-color: #a7142c;
+  border-color: #a7142c;
+  margin: 1rem;
+  width: 250px;
+  cursor: default;
+}
+
+.btn.video-char-non-vote {
+  background-color: #5d3754;
+  border-color: #5d3754;
+  margin: 1rem;
+  width: 250px;
+  color: #FFFFFF;
+}
+
+.voteCount {
+  margin-left: 3px;
+}
+
+
+#clickButton,
+#clickButtonFlag,
+#largeButton {
+  color: #FFFFFF;
+  font-size: 1em;
+  border: 1px solid #361118;
+  border-radius: 6px;
+  background-color: #5d3754;
+}
+
 #nav {
   background-color: #a7142c;
   color: #FFFFFF;
@@ -239,7 +216,10 @@ html body {
 
 .navbar-toggler {
   border: white solid !important;
+}
 
+.navbar-toggler-icon {
+  background-image: url(src/assets/bars-solid.svg) !important;
 }
 
 #VideoTitle {
