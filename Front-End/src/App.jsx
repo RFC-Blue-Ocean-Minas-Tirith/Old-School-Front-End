@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 import AppNavbar from './components/Navbar/AppNavbar';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -19,6 +19,11 @@ function App() {
 
   function handleAddUserToDB() {
     axios.post('http://localhost:8080/user', currentUser);
+  }
+
+  function scrollToMainContent(e) {
+    e.preventDefault()
+    useRef("#main-content".current.scrollIntoView())
   }
 
   useEffect(() => {
@@ -46,6 +51,7 @@ function App() {
 
   return (
     <>
+      <Link className="skip-link" onClick={scrollToMainContent}>Skip to content</Link  >
       <AppNavbar
         setModalShow={setModalShow}
         isLoggedIn={isLoggedIn}
@@ -68,6 +74,7 @@ function App() {
         currentUser={currentUser}
         videoData={videoData}
       />
+      <section id="main-content"/>
       <Routes>
         <Route path="/" element={
           <LandingPage

@@ -2,6 +2,23 @@ html body {
   background-color: rgb(227, 210, 210);
   font-family:'Georgia', 'Garamond','Times New Roman';
   overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.skip-link {
+  background: #F0B507;
+  color: #fff;
+  font-weight: 700;
+  left: .2%;
+  padding: 4px;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+  z-index: 1;
+}
+
+.skip-link:focus {
+  transform: translateY(10%);
 }
 
 #unfavorited.bg-warning {
