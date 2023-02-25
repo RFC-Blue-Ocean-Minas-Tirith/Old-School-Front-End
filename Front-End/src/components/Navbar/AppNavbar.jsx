@@ -9,70 +9,60 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { signInWithGoogle, signOutGoogle } from './firebase'
 
-function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentUser, setFlaggedModalShow }) {
+function AppNavbar({
+  setModalShow, isLoggedIn, videoData, setVideoData, currentUser, setFlaggedModalShow,
+}) {
   const navigate = useNavigate()
   const [searchTerm, setSearchTerm] = useState('')
   const [isAdmin, setIsAdmin] = useState('')
   const [isFiltered, setIsFiltered] = useState(false)
 
-  function handleSearchChange(e) {
+  const handleSearchChange = (e) => {
     e.preventDefault()
     setSearchTerm(e.target.value)
   }
 
-  function handleSearch(e) {
+  const handleSearch = (e) => {
     e.preventDefault()
     if (videoData) {
       axios.get('http://localhost:8080/videos', { params: { searchTerm } })
         .then((response) => {
-          console.log('video search results:', response.data)
           setVideoData(response.data)
           setIsFiltered(true)
           navigate('/')
         })
-        .catch((err) => {
-          console.log('err:', err)
-        })
     }
   }
 
-  function checkIfAdmin() {
-    if (isLoggedIn) {
-      return axios.get('http://localhost:8080/user/data', {
-        params: {
-          user: currentUser.username
-        }
-      })
-        .then((response) => {
-          if (response.data.isAdmin) {
-            setIsAdmin(true)
-          }
-        })
-    }
-  }
-
-  function resetFilter() {
+  const resetFilter = () => {
     setIsFiltered(false)
     document.getElementById('nav-search-field').value = ''
-    return axios.get('http://localhost:8080/video')
+    axios.get('http://localhost:8080/video')
       .then((res) => {
         setVideoData(res.data)
         navigate('/')
-        //console.log(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
       })
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      checkIfAdmin()
+    const checkIfAdmin = () => {
+      if (isLoggedIn) {
+        axios.get('http://localhost:8080/user/data', {
+          params: {
+            user: currentUser.username,
+          },
+        })
+          .then((response) => {
+            if (response.data.isAdmin) setIsAdmin(true)
+          })
+      }
     }
-  }, [isLoggedIn])
+
+    if (isLoggedIn) checkIfAdmin()
+  }, [isLoggedIn, currentUser.username])
 
   return (
-    <Navbar id="nav" expand="xl" >
+    <Navbar id="nav" expand="xl">
       <Container fluid>
         <Navbar.Brand id="logo">
           <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
@@ -90,7 +80,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
             <Link id="nav-button" to="/" className="nav-link m-2" aria-current="page">Home</Link>
 
             {isLoggedIn
-              ? <Link id="nav-button" to="profile_page" state={{ currentUser: currentUser, user: currentUser.username }} className="nav-link m-2" aria-current="page">My Profile</Link>
+              ? <Link id="nav-button" to="profile_page" state={{ currentUser, user: currentUser.username }} className="nav-link m-2" aria-current="page">My Profile</Link>
               : null}
 
             <Stack direction="horizontal">
@@ -110,7 +100,8 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
                   <>
                     <Navbar.Text id="nav-search-result" className="m-2">
                       Results:&nbsp;
-                      {videoData.length}&nbsp;
+                      {videoData.length}
+                      &nbsp;
                       {videoData.length === 1 ? 'video' : 'videos'}
                     </Navbar.Text>
                     <div className="vr" />
@@ -134,7 +125,7 @@ function AppNavbar({ setModalShow, isLoggedIn, videoData, setVideoData, currentU
             : <Button size="lg" id="whiteButton" className="m-2" type="button" onClick={signInWithGoogle}>Login</Button>}
         </Navbar.Collapse>
       </Container>
-    </Navbar >
+    </Navbar>
   )
 }
 

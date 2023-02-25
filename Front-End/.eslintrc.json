@@ -3,6 +3,10 @@
     "react",
     "jsx-a11y"
   ],
+  "env": {
+    "browser": true,
+    "es2021": true
+},
   "extends": [
     "airbnb",
     "airbnb/hooks",
@@ -12,6 +16,8 @@
     "plugin:react/jsx-runtime"
 ],
   "rules": {
-    "eslint-disable": "false"
+    "no-console": "off",
+    "semi": [ "error", "never" ],
+    "react/prop-types": 0
   }
 }

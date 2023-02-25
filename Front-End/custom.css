@@ -5,20 +5,32 @@ html body {
   scroll-behavior: smooth;
 }
 
-.skip-link {
-  background: #F0B507;
-  color: #fff;
+.btn.skip-link {
+  background: #F0B507 !important;
+  border: #FFF !important;
   font-weight: 700;
   left: .2%;
   padding: 4px;
   position: absolute;
   transform: translateY(-100%);
   transition: transform 0.3s;
-  z-index: 1;
+  z-index: 100;
 }
 
-.skip-link:focus {
+.btn.skip-link:focus {
   transform: translateY(10%);
+}
+
+.btn.main-content-start {
+  background-color: #E3D2D2 !important;
+  border: #E3D2D2 !important;
+  color: #E3D2D2 !important;
+  margin: 1%;
+}
+
+.btn-primary.main-content-start:focus {
+  box-shadow:rgba(148, 0, 33, .5) 2px 2px !important;
+  color: #FFF  !important;
 }
 
 #unfavorited.bg-warning {
