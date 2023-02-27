@@ -1,12 +1,15 @@
-# Old-School
+# Old School
+
+<p align="center"><img width="900" alt="fullscreen view of home page" src="https://user-images.githubusercontent.com/104800030/221330600-31be2804-23ca-4bde-8e6f-25963caf0d4a.png"></p>
 
 ## Introduction
 Old School is an online content-sharing platform for senior citizens where they can share videos, blogs, and their biographies. The minimum viable product (MVP) was completed in eight days for the client, Mr. L. Derly.
-Taking into account the target audience, accessibility was at the forefront of all design and functionality decisions.
 
-Users authenticate with their Google account so they won't have to memorize yet a new set of credentials. The site is screen-reader friendly, with a 'Skip to Main Content' button for users with visual and/or fine-motor impairments. The color scheme uses warm tones that are easy on the eyes and all elements have a high contrast to aid visibility. Large text and buttons were uses throughout for easy reading and navigation.
-
-<p align="center"><img width="800" alt="fullscreen view of home page" src="https://user-images.githubusercontent.com/104800030/213286200-b640f118-e4ee-4be2-b72c-7f0a6e24095c.png"></p>
+Taking into account the target audience, accessibility was at the forefront of all design and functionality decisions: 
+- Users authenticate with their Google account so they won't have to memorize yet a new set of credentials.
+- The site is screen-reader friendly with a 'Skip to Main Content' button that enhances the site navigation user experience for users with visual and/or fine-motor impairments.
+- The color scheme uses warm tones that are easy on the eyes and all elements have a high contrast to aid visibility.
+- Large text and buttons were used throughout for easy reading and navigation.
 
 ## Tech Stack
 #### Front End:
@@ -34,36 +37,31 @@ Users authenticate with their Google account so they won't have to memorize yet 
 ![AWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![NGINX](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
 
-
 ## Contributors
-- UI Owner - [Alice Blank](https://github.com/AllEyesBlank)
-- Product Manager - [Kevin Moyer](https://github.com/kjmoyer)
-- Architecture Owner - [Melissa Gil](https://github.com/melissa-gv)
-- QA and Accessibility Lead - [Vicki Wong](https://github.com/vickiwong85)
+- UI Owner & Profile Page - [Alice Blank](https://github.com/AllEyesBlank)
+- Product Manager & Video Page- [Kevin Moyer](https://github.com/kjmoyer)
+- Architecture Owner & Navigation Bar - [Melissa Gil](https://github.com/melissa-gv)
+- QA and Accessibility Lead & Modals - [Vicki Wong](https://github.com/vickiwong85)
 - Deployment Manager - [Zachary Vallow](https://github.com/Zachariah1618)
-- Accountability and Encouragement Lead - [Adam Blomberg](https://github.com/AdamABlomberg)
+- Accountability and Encouragement Lead & Landing Page - [Adam Blomberg](https://github.com/AdamABlomberg)
 
-
-## Video Demo
+## Demo
 #### Login using Firebase Authentication
-![gif](https://media.giphy.com/media/eX9JBf8ld6DCTuXKqK/giphy.gif)
-
+<p align="center"><img width="500" alt="Login using Firebase Authentication" src="https://media.giphy.com/media/eX9JBf8ld6DCTuXKqK/giphy.gif"></p>
 
 #### Landing Page Carousel & Video Filter
-![gif](https://media.giphy.com/media/MGg7l0zWCzmRAgr6vn/giphy.gif)
-
+<p align="center"><img width="500" alt="Landing Page Carousel & Video Filter" src="https://media.giphy.com/media/MGg7l0zWCzmRAgr6vn/giphy.gif"></p>
 
 #### Video Page
-![gif](https://media.giphy.com/media/3HhjgZkK6aT8QAN08u/giphy.gif)
-
+<p align="center"><img width="500" alt="Video Page" src="https://media.giphy.com/media/3HhjgZkK6aT8QAN08u/giphy.gif"></p>
 
 #### Profile Page
-![gif](https://media.giphy.com/media/9dRubOlKhQZkNlIr5s/giphy.gif)
-
+<p align="center"><img width="500" alt="Profile Page" src="https://media.giphy.com/media/9dRubOlKhQZkNlIr5s/giphy.gif"></p>
 
 #### Upload Video
-![gif](https://media.giphy.com/media/NuYHZZrJZX9DqH6iIX/giphy.gif)
-
+<p align="center"><img width="500" alt="Upload Video" src="https://media.giphy.com/media/NuYHZZrJZX9DqH6iIX/giphy.gif"></p>
 
 #### Search for a Video
-![gif](https://media.giphy.com/media/Tx77eeyl2VkUx1eb4Z/giphy.gif)
+<p align="center"><img width="500" alt="Search for a Video" src="https://media.giphy.com/media/Tx77eeyl2VkUx1eb4Z/giphy.gif"></p>
+
+
