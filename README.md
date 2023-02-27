@@ -49,7 +49,7 @@ Taking into account the target audience, accessibility was at the forefront of a
 #### Login using Firebase Authentication
 <p align="center"><img width="500" alt="Login using Firebase Authentication" src="https://user-images.githubusercontent.com/104800030/221649571-0423f813-8420-484d-9f7c-e6e0cc0d1db1.gif"></p>
 
-#### Navigation Bar 'Skip to Main Content' & Search Functionality
+#### Navigation Bar- 'Skip to Main Content' & Search Functionality
 <p align="center"><img width="500" alt="Navigation bar functinality" src="Front-End/src/assets/BO-nav-4x.gif"></p>
 
 #### Landing Page Carousel & Video Filter
