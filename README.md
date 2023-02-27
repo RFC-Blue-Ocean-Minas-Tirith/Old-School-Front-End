@@ -47,7 +47,10 @@ Taking into account the target audience, accessibility was at the forefront of a
 
 ## Demo
 #### Login using Firebase Authentication
-<p align="center"><img width="500" alt="Login using Firebase Authentication" src="https://media.giphy.com/media/eX9JBf8ld6DCTuXKqK/giphy.gif"></p>
+<p align="center"><img width="500" alt="Login using Firebase Authentication" src="https://user-images.githubusercontent.com/104800030/221649571-0423f813-8420-484d-9f7c-e6e0cc0d1db1.gif"></p>
+
+#### Navigation Bar 'Skip to Main Content' & Search Functionality
+<p align="center"><img width="500" alt="Search for a Video" src="https://user-images.githubusercontent.com/104800030/221649669-ca495261-e837-4bd7-9b29-2c539b7d2bb9.gif"></p>
 
 #### Landing Page Carousel & Video Filter
 <p align="center"><img width="500" alt="Landing Page Carousel & Video Filter" src="https://media.giphy.com/media/MGg7l0zWCzmRAgr6vn/giphy.gif"></p>
@@ -60,8 +63,5 @@ Taking into account the target audience, accessibility was at the forefront of a
 
 #### Upload Video
 <p align="center"><img width="500" alt="Upload Video" src="https://media.giphy.com/media/NuYHZZrJZX9DqH6iIX/giphy.gif"></p>
-
-#### Search for a Video
-<p align="center"><img width="500" alt="Search for a Video" src="https://media.giphy.com/media/Tx77eeyl2VkUx1eb4Z/giphy.gif"></p>
 
 
