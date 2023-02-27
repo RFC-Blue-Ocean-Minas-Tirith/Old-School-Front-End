@@ -12,6 +12,10 @@ const app = initializeApp(firebaseConfig);
 // eslint-disable-next-line import/prefer-default-export
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider(app);
+provider.setCustomParameters({
+  prompt: 'select_account',
+  auth_type: 'reauthenticate',
+});
 
 export const signInWithGoogle = () => {
   signInWithPopup(auth, provider)
